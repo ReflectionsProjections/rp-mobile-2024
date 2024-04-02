@@ -10,7 +10,10 @@ export default function App() {
 		<GluestackUIProvider config={config}>
 			<SafeAreaProvider>
 				<NavigationContainer>
-					<Navigation></Navigation>
+				{/* <Text>
+					Hello!
+				</Text> */}
+				<Navigation></Navigation>
 				</NavigationContainer>
 			</SafeAreaProvider>
 		</GluestackUIProvider>
