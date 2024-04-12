@@ -7,6 +7,7 @@ export const config = createConfig({
     rounded: 'borderRadius',
     h: 'height',
     w: 'width',
+    mt: 'marginTop'
   },
   tokens: {
     colors: {
@@ -16,6 +17,7 @@ export const config = createConfig({
       primary600: '#9333ea',
     },
     space: {
+      3: 12,
       4: 16,
       5: 20,
       6: 24,
@@ -23,6 +25,7 @@ export const config = createConfig({
     radii: {
       sm: 4,
       md: 6,
+      lg: 30
     },
     letterSpacings: {
       md: 0,

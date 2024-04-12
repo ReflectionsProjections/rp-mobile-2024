@@ -1,5 +1,6 @@
 import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
-import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
+import { config } from "@gluestack-ui/config";
+import { StyledProvider } from "@gluestack-style/react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";

@@ -1,32 +1,36 @@
 import React from "react";
-import { styled, StyledProvider } from "@gluestack-style/react"
+import { StyledProvider } from "@gluestack-style/react"
 import { config } from "@gluestack-ui/config";
 import { GluestackUIProvider, Text, Box, View } from "@gluestack-ui/themed";
-import { Button, ButtonText } from "@gluestack-ui/themed";
-import { Logo } from "../Components/Images";
+import { ButtonText } from "@gluestack-ui/themed";
+import { Images } from "../Components/Images";
+import { StyledButton } from "../Components/Buttons";
 
 
 function Login({navigation}) {
     return (
-        <GluestackUIProvider config={config}>
-            <Box width="100%" height="100%" justifyContent="center" alignItems="center">
-            <Logo source="https://images.app.goo.gl/iMCNzt6VnCY5Arw49" alt="logo"/>
-            <Text>Other stuff will go here...</Text>
-            <Button
-                size="md"
-                variant="solid"
-                action="primary"
-                isDisabled={false}
-                isFocusVisible={false}
-                onPress={() => {
-                    console.log("logged in!");
-                    navigation.navigate('Main');
-                }}
-            >
-                <ButtonText>Login</ButtonText>
-            </Button>
+        <StyledProvider config={config}>
+            
+            <Box width="100%" height="100%" justifyContent="space-between" alignItems="center" paddingVertical={100} flex={1}>
+                <Images
+                    variant="loginLogo" 
+                    source={{uri: "https://i.pinimg.com/originals/2e/60/07/2e60079f1e36b5c7681f0996a79e8af4.jpg"}}
+                    alt="RP Logo"
+                />
+                <StyledButton
+                    styleVariant="login"
+                    action="primary"
+                    isDisabled={false}
+                    isFocusVisible={false}
+                    onPress={() => {
+                        console.log("logged in!");
+                        navigation.navigate('Main');
+                    }}
+                >
+                    <ButtonText color={"$black"}>LOGIN</ButtonText>
+                </StyledButton>
             </Box>
-        </GluestackUIProvider>    
+        </StyledProvider>    
     )
 }
 

@@ -1,9 +1,20 @@
 import React from "react";
 import { Image } from "@gluestack-ui/themed";
-import { styled, StyledProvider } from "@gluestack-style/react"
+import { styled } from "@gluestack-style/react";
 
-const Logo = styled(Image, 
-    h: '$6',
-    w: '$6',
+const Images = styled(Image, 
+    {
+        variants: {
+            variant: {
+                loginLogo: {
+                    height: 300,
+                    width: 300, 
+                    borderRadius: "$xl",
+                    marginTop: "$5",
+                }
+            }
+        }
+    }
+);
 
-)
+export { Images };
