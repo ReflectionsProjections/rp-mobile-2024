@@ -55,6 +55,3 @@ export default function App() {
   );
 }
 
-{/* <Box width="100%" height="100%" justifyContent="center" alignItems="center">
-		<Text>{data ? JSON.stringify(data) : "App not opened from link"}</Text>
-		</Box> */}
