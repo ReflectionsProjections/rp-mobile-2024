@@ -31,7 +31,6 @@ export default function App() {
   };
 
   useEffect(() => {
-
 	async function getInitialURL() {
 		const initialURL = await Linking.getInitialURL();
 		if (initialURL) setData(Linking.parse(initialURL));
