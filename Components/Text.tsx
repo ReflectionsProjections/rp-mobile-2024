@@ -20,6 +20,12 @@ const StyledText = styled(Text,
                     fontSize: "$md",
                     fontWeight: "$normal",
                     textAlign: 'center'
+                },
+                medium: {
+                    fontSize: 30,
+                    fontWeight: "$semibold",
+                    textAlign: "center",
+                    color: "$black"
                 }
             },
         },
