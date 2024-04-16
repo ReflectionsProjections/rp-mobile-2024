@@ -41,6 +41,7 @@ export const config = createConfig({
     fontSizes: {
       sm: 14,
       md: 16,
+      xl: 40,
     },
     mediaQueries: {
       sm: '@media (min-width: 480px)',
