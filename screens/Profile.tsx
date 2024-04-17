@@ -17,7 +17,7 @@ const Profile: React.FC = () => {
         />
         <StyledText variant="bigText" marginTop={50}>FirstName LastName</StyledText>
         <StyledBox variant='foodWave' marginTop={15} justifyContent='center'>
-          <StyledText variant="medium">170400
+          <StyledText variant="medium">
             Food Wave: #
           </StyledText>
         </StyledBox>
