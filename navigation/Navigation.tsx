@@ -10,6 +10,8 @@ import Camera from "../screens/Camera";
 import Shop from "../screens/Shop";
 import Profile from "../screens/Profile";
 
+import EventDaysNavigator from "./EventDaysNavigator"; // Adjust path as necessary
+
 const ACTIVE_COLOR = "black";
 const INACTIVE_COLOR = "gray";
 
@@ -84,7 +86,7 @@ const AppNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="Events"
-        component={Events}
+        component={EventDaysNavigator}
         options={{ tabBarLabel: () => null }}
       />
       <Tab.Screen
