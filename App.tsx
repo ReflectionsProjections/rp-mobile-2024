@@ -5,9 +5,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigation from "./navigation/Navigation";
 import * as Linking from "expo-linking";
-import { LinkingEvent } from "expo-linking" // Import LinkingEvent
+// { LinkingEvent } from "expo-linking" // Import LinkingEvent
+import Login from "./screens/Login";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const prefix = Linking.createURL("/");
+const Stack = createStackNavigator();
 
 export default function App() {
   const [data, setData] = useState(null);
@@ -25,7 +28,7 @@ export default function App() {
 	}
   }
 
-  const handleDeepLink = (event: LinkingEvent) => {
+  const handleDeepLink = (event: { url: string; }) => {
     let parsedData = Linking.parse(event.url);
     setData(parsedData);
   };
@@ -47,7 +50,10 @@ export default function App() {
     <GluestackUIProvider config={config}>
       <SafeAreaProvider>
         <NavigationContainer linking={linking}>
-          <Navigation></Navigation>
+          <Stack.Navigator screenOptions={{ headerShown: false}}>
+            <Stack.Screen name="Login" component={Login}/>
+            <Stack.Screen name="Main" component={Navigation}/>
+          </Stack.Navigator>
         </NavigationContainer> 
       </SafeAreaProvider>
     </GluestackUIProvider>
