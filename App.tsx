@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigation from "./navigation/Navigation";
 import * as Linking from "expo-linking";
-import { LinkingEvent } from "expo-linking"; // Import LinkingEvent
+import { LinkingEvent } from "expo-linking" // Import LinkingEvent
 
 const prefix = Linking.createURL("/");
 
