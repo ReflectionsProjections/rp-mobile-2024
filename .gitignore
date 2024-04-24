@@ -36,6 +36,3 @@ yarn-error.*
 
 #intellij
 .idea/
-
-#vscode
-.vscode/
