@@ -29,7 +29,11 @@ function Login() {
                     isFocusVisible={false}
                     onPress={() => {
                         console.log("logged in!");
-                        navigation.navigate('Main');
+                        Linking.openURL(authUrl)
+                            .catch(err => {
+                                console.error("Failed to open URL:", err.message);
+                                alert("Failed to open URL")
+                        })
                     }}
                 >
                     <ButtonText color={"$black"}>LOGIN</ButtonText>
