@@ -6,9 +6,10 @@ import { ButtonText } from "@gluestack-ui/themed";
 import { Images } from "../Components/Images";
 import { StyledButton } from "../Components/Buttons";
 import { StyledText } from "../Components/Text";
+import * as Linking from "expo-linking";
 
-
-function Login({navigation}) {
+function Login() {
+    const authUrl = "https://api.reflectionsprojections.org/auth/login/web"; //need to change this to ~/mobile
     return (
         <StyledProvider config={config}>
             

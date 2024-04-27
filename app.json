@@ -1,11 +1,21 @@
 {
   "expo": {
+    "scheme": "myapp",
     "name": "rp-mobile-2024",
     "slug": "rp-mobile-2024",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow R|P 2024 to access your camera",
+          "recordAudioAndroid": false
+        }
+      ]
+    ],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
