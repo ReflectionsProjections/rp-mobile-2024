@@ -1,17 +1,13 @@
 import React from "react";
-import { styled, StyledProvider } from "@gluestack-style/react"
-import { config } from "@gluestack-ui/config";
-import { GluestackUIProvider, Text, Box, View } from "@gluestack-ui/themed";
-import { Button, ButtonText } from "@gluestack-ui/themed";
-import { Logo } from "../Components/Images";
+import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
+import { Button, ButtonText, ButtonIcon, AddIcon } from "@gluestack-ui/themed";
+import * as Linking from "expo-linking";
 
-
-function Login({navigation}) {
+function Login() {
+    const authUrl = "https://api.reflectionsprojections.org/auth/login/web"; //need to change this to ~/mobile
     return (
-        <GluestackUIProvider config={config}>
-            <Box width="100%" height="100%" justifyContent="center" alignItems="center">
-            <Logo source="https://images.app.goo.gl/iMCNzt6VnCY5Arw49" alt="logo"/>
-            <Text>Other stuff will go here...</Text>
+        <Box width="100%" height="100%" justifyContent="center" alignItems="center">
+            <Text>Login to R|P!</Text>
             <Button
                 size="md"
                 variant="solid"
@@ -19,14 +15,17 @@ function Login({navigation}) {
                 isDisabled={false}
                 isFocusVisible={false}
                 onPress={() => {
-                    console.log("logged in!");
-                    navigation.navigate('Main');
+                    console.log("pressed!");
+                    Linking.openURL(authUrl)
+                        .catch(err => {
+                            console.error("Failed to open URL:", err.message);
+                            alert("Failed to open URL")
+                        })
                 }}
             >
-                <ButtonText>Login</ButtonText>
+                <ButtonText>LOGIN </ButtonText>
             </Button>
-            </Box>
-        </GluestackUIProvider>    
+        </Box>    
     )
 }
 
