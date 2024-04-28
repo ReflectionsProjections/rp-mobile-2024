@@ -4,7 +4,7 @@ import { Button, ButtonText, ButtonIcon, AddIcon } from "@gluestack-ui/themed";
 import * as Linking from "expo-linking";
 
 function Login() {
-    const authUrl = "https://api.reflectionsprojections.org/auth/login/web"; //need to change this to ~/mobile
+    const authUrl = "https://api.reflectionsprojections.org/auth/login/mobile";
     return (
         <Box width="100%" height="100%" justifyContent="center" alignItems="center">
             <Text>Login to R|P!</Text>
