@@ -16,6 +16,8 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
         run: yarn
+      - name: Install eas-cli
+        run: npm install -g eas-cli
       - name: Create preview
         uses: expo/expo-github-action/preview@v8
         with:
