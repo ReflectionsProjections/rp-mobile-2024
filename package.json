@@ -21,6 +21,7 @@
     "@react-navigation/native-stack": "^6.9.26",
     "@react-navigation/stack": "^6.3.29",
     "@types/react": "~18.2.79",
+    "babel-preset-fbjs": "^3.4.0",
     "eas": "^0.1.0",
     "eas-cli": "^8.0.0",
     "expo": "^51.0.8",
@@ -51,6 +52,9 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6"
+  },
+  "resolutions": {
+    "string-width": "4.2.3"
   },
   "private": true
 }
