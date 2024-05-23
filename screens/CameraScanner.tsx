@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {
 	Box, Button, ButtonText, ButtonIcon, View, ExternalLinkIcon
 } from "@gluestack-ui/themed";
-import {CameraView, useCameraPermissions} from "expo-camera/next";
+import {CameraView, useCameraPermissions} from "expo-camera";
 import {useIsFocused} from "@react-navigation/native";
 import {Linking} from "react-native";
 
