@@ -1,12 +1,11 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome } from "@expo/vector-icons";
 import { View } from "react-native";
 import Home from "../screens/Home";
 import Events from "../screens/Events";
-import Camera from "../screens/Camera";
+import CameraScanner from "../screens/CameraScanner";
 import Shop from "../screens/Shop";
 import Profile from "../screens/Profile";
 
@@ -89,7 +88,7 @@ const AppNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="Camera"
-        component={Camera}
+        component={CameraScanner}
         options={{ tabBarLabel: () => null }}
       />
       <Tab.Screen
