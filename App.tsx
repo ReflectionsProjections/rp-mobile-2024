@@ -5,8 +5,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Linking from "expo-linking";
-import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
-import { config } from "@gluestack-ui/config";
 import Login from "./screens/Login";
 import Navigation from "./navigation/Navigation";
 
