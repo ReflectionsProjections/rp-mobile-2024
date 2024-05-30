@@ -3,46 +3,49 @@ import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
 import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import Navigation from "./navigation/Navigation";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Linking from "expo-linking";
-// { LinkingEvent } from "expo-linking" // Import LinkingEvent
 import Login from "./screens/Login";
-import { createStackNavigator } from "@react-navigation/stack";
+import Navigation from "./navigation/Navigation";
 
 const prefix = Linking.createURL("/");
-const Stack = createStackNavigator();
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [data, setData] = useState(null);
 
   const linking = {
-	prefixes:[prefix],
-	config:{
-		screens: {
-			Home: "home",
-			Camera: "camera",
-			Events: "events",
-			Profile: "profile",
-			Shop: "shop"
-		}
-	}
-  }
+    prefixes: [prefix],
+    config: {
+      screens: {
+        login: "login",
+        Main: {
+          screens: {
+            Home: "home",
+            // Add other screens in your Navigation.tsx here
+          },
+        },
+      },
+    },
+  };
 
-  const handleDeepLink = (event: { url: string; }) => {
+  const handleDeepLink = (event: LinkingEvent) => {
     let parsedData = Linking.parse(event.url);
     setData(parsedData);
+    // console.log(data);
   };
 
   useEffect(() => {
-	async function getInitialURL() {
-		const initialURL = await Linking.getInitialURL();
-		if (initialURL) setData(Linking.parse(initialURL));
-	}
+    async function getInitialURL() {
+      const initialURL = await Linking.getInitialURL();
+      if (initialURL) setData(Linking.parse(initialURL));
+    }
 
     const listener = Linking.addEventListener("url", handleDeepLink);
-	if (!data) {
-		getInitialURL();
-	}
+    if (!data) {
+      getInitialURL();
+    }
     return () => listener.remove();
   }, []);
 
@@ -50,11 +53,11 @@ export default function App() {
     <GluestackUIProvider config={config}>
       <SafeAreaProvider>
         <NavigationContainer linking={linking}>
-          <Stack.Navigator screenOptions={{ headerShown: false}}>
-            <Stack.Screen name="Login" component={Login}/>
-            <Stack.Screen name="Main" component={Navigation}/>
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="login" component={Login} />
+            <Stack.Screen name="Main" component={Navigation} />
           </Stack.Navigator>
-        </NavigationContainer> 
+        </NavigationContainer>
       </SafeAreaProvider>
     </GluestackUIProvider>
   );
