@@ -22,7 +22,7 @@ const AppNavigator: React.FC = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        // headerShown: false,
+        headerShown: false,
         tabBarActiveTintColor: ACTIVE_COLOR,
         tabBarInactiveTintColor: INACTIVE_COLOR,
         tabBarIcon: ({ focused }) => {
@@ -86,7 +86,7 @@ const AppNavigator: React.FC = () => {
       />
       <Tab.Screen
         name="Events"
-        component={EventDaysNavigator}
+        component={Events}
         options={{ tabBarLabel: () => null }}
       />
       <Tab.Screen

@@ -1,16 +1,16 @@
 import React from "react";
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, StyleSheet } from "react-native";
 import EventCard from "../components/EventCard";
+import GPTCard from "../components/GPTCard";
 
 const DayEvent = ({ day, events }) => (
-  <View style={{ flex: 1, alignItems: "center" }}>
-    <Text style={{ fontSize: 24, marginVertical: 10 }}>{day}'s Events</Text>
+  <View style={styles.container}>
     <ScrollView
-      style={{ width: "100%" }}
-      contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}
+      style={styles.scrollView}
+      contentContainerStyle={styles.contentContainer}
     >
       {events.map((event) => (
-        <EventCard
+        <GPTCard
           key={event.id}
           name={event.name}
           time={event.time}
@@ -23,5 +23,21 @@ const DayEvent = ({ day, events }) => (
     </ScrollView>
   </View>
 );
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: '#111129', // Dark Blue Background
+  },
+  scrollView: {
+    width: "100%",
+  },
+  contentContainer: {
+    flexGrow: 1,
+    alignItems: "center",
+    backgroundColor: '#111129', // Dark Blue Background
+  },
+});
 
 export default DayEvent;

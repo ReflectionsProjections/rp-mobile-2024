@@ -22,6 +22,9 @@ import {
 } from "@gluestack-ui/themed";
 import { FontAwesome, Feather } from "@expo/vector-icons";
 
+import Entypo from "@expo/vector-icons/Entypo";
+import EvilIcons from "@expo/vector-icons/EvilIcons";
+
 export type EventCardProps = {
   name: string;
   time: string;
@@ -53,18 +56,18 @@ const EventCard: React.FC<EventCardProps> = ({
           <Text style={styles.person}>{person}</Text>
           <Text style={styles.description}>{description}</Text>
         </Box> */}
-        <Card size="md" variant="elevated" m="$3">
-          <HStack space="lg">
-            <Heading mb="$1" size="lg">
-              {name}
-            </Heading>
+        <Card size="lg" variant="elevated" m="$3">
+          <Heading mb="$1" size="lg">
+            {name}
+          </Heading>
+          <HStack>
+            <EvilIcons name="location" size={26} color="black" />
+            <Text size="md">{location}</Text>
+            <EvilIcons name="clock" size={26} color="black" />
+            <Text size="md">{time}</Text>
             <Badge size="sm" variant="solid" borderRadius="$full" action="info">
               <BadgeText>10 points</BadgeText>
             </Badge>
-          </HStack>
-          <HStack>
-            <Text size="md">{location} @ </Text>
-            <Text size="md">{time}</Text>
           </HStack>
           <Text size="sm">{description}</Text>
         </Card>

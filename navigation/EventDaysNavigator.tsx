@@ -1,7 +1,7 @@
 import React from "react";
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import DayEvent from './DayEvent';
-// import { eventsData } from "../data/events"; // Assuming you have a centralized place for events data
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import DayEvent from "./DayEvent";
+import Colors from "../constants/colors";
 
 const eventsData = [
   {
@@ -52,22 +52,53 @@ const ACTIVE_COLOR = "black";
 const INACTIVE_COLOR = "gray";
 
 const filterEventsByDay = (day) => {
-  return eventsData.filter(event => event.day === day);
+  return eventsData.filter((event) => event.day === day);
 };
 
 const EventDaysNavigator = () => {
   return (
     <WeekTab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: ACTIVE_COLOR,
+        tabBarActiveTintColor: Colors.WHITE,
         tabBarInactiveTintColor: INACTIVE_COLOR,
+        tabBarStyle: {
+          backgroundColor: Colors.DARK_BLUE, // Set the tab bar background color to red
+        },
+        tabBarIndicatorStyle: {
+          backgroundColor: Colors.WHITE, // Set the indicator color to match active color
+        },
       }}
     >
-<WeekTab.Screen name="WED" component={() => <DayEvent day="Wednesday" events={filterEventsByDay("Wednesday")} />} />
-<WeekTab.Screen name="THUR" component={() => <DayEvent day="Thursday" events={filterEventsByDay("Thursday")} />} />
-<WeekTab.Screen name="FRI" component={() => <DayEvent day="Friday" events={filterEventsByDay("Friday")} />} />
-<WeekTab.Screen name="SAT" component={() => <DayEvent day="Saturday" events={filterEventsByDay("Saturday")} />} />
-<WeekTab.Screen name="SUN" component={() => <DayEvent day="Sunday" events={filterEventsByDay("Sunday")} />} />
+      <WeekTab.Screen
+        name="WED"
+        component={() => (
+          <DayEvent day="Wednesday" events={filterEventsByDay("Wednesday")} />
+        )}
+      />
+      <WeekTab.Screen
+        name="THUR"
+        component={() => (
+          <DayEvent day="Thursday" events={filterEventsByDay("Thursday")} />
+        )}
+      />
+      <WeekTab.Screen
+        name="FRI"
+        component={() => (
+          <DayEvent day="Friday" events={filterEventsByDay("Friday")} />
+        )}
+      />
+      <WeekTab.Screen
+        name="SAT"
+        component={() => (
+          <DayEvent day="Saturday" events={filterEventsByDay("Saturday")} />
+        )}
+      />
+      <WeekTab.Screen
+        name="SUN"
+        component={() => (
+          <DayEvent day="Sunday" events={filterEventsByDay("Sunday")} />
+        )}
+      />
     </WeekTab.Navigator>
   );
 };
