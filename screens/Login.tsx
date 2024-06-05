@@ -9,7 +9,7 @@ import { StyledText } from "../Components/Text";
 import * as Linking from "expo-linking";
 
 function Login() {
-    const authUrl = "https://api.reflectionsprojections.org/auth/login/web"; //need to change this to ~/mobile
+    const authUrl = "https://api.reflectionsprojections.org/auth/login/mobile";
     return (
         <StyledProvider config={config}>
             
