@@ -3,6 +3,11 @@ export const setToken = (token) => ({
     payload: token,
 });
 
+export const setAttendee = (attendee) => ({
+    type: 'SET_ATTENDEE',
+    payload: attendee
+})
+
 export const logout = () => ({
     type: 'LOGOUT',
 });

@@ -1,10 +1,13 @@
-const initalState = {
+import { State } from './types';
+
+const initalState: State = {
   user_id: null,
   token: null,
+  attendee: null,
   isAuthenticated: false,
 };
 
-function stateReducer(state = initalState, action) {
+function stateReducer(state = initalState, action): State {
   switch(action.type) {
     case 'user/set_identity':
       return {
@@ -16,6 +19,11 @@ function stateReducer(state = initalState, action) {
         ...state,
         token: action.payload,
         isAuthenticated: true,
+      }
+    case 'SET_ATTENDEE':
+      return {
+        ...state,
+        attendee: action.payload
       }
     case 'LOGOUT':
       return {

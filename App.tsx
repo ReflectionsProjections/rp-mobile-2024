@@ -14,10 +14,9 @@ import { setToken } from "./redux/actions";
 const prefix = Linking.createURL("/");
 const Stack = createStackNavigator();
 
-export default function App() {
+const App = () => {
   const [data, setData] = useState(null);
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   const linking = {
     prefixes:[prefix],
@@ -56,7 +55,6 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <Provider store={store}>
       <GluestackUIProvider config={config}>
         <SafeAreaProvider>
           <NavigationContainer linking={linking}>
@@ -67,6 +65,13 @@ export default function App() {
           </NavigationContainer> 
         </SafeAreaProvider>
       </GluestackUIProvider>
-    </Provider>
   );
+}
+
+export default function AppWrapper() {
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
 }
