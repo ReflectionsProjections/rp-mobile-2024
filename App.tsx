@@ -14,59 +14,64 @@ import { setToken } from "./redux/actions";
 const prefix = Linking.createURL("/");
 const Stack = createStackNavigator();
 
-export default function App() {
-  const [data, setData] = useState(null);
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-
-  const linking = {
-    prefixes:[prefix],
-    config:{
-      screens: {
-        Home: "home",
-        Camera: "camera",
-        Events: "events",
-        Profile: "profile",
-        Shop: "shop"
+const App = () => {
+    const [data, setData] = useState(null);
+    const dispatch = useDispatch();
+  
+    const linking = {
+      prefixes:[prefix],
+      config:{
+        screens: {
+          Home: "home",
+          Camera: "camera",
+          Events: "events",
+          Profile: "profile",
+          Shop: "shop"
+        }
       }
     }
+  
+    useEffect(() => {
+      const handleDeepLink = (event: { url: string; }) => {
+        const { path, queryParams } = Linking.parse(event.url);
+        if (queryParams.token) {
+          dispatch(setToken(queryParams.token));
+          setData({ path, queryParams });
+        } 
+      };
+  
+      async function getInitialURL() {
+        const initialURL = await Linking.getInitialURL();
+        if (initialURL) handleDeepLink({url: initialURL});
+        }
+  
+      const listener = Linking.addEventListener("url", handleDeepLink);
+      
+      if (!data) {
+        getInitialURL();
+      }
+      
+      return () => listener.remove();
+    }, [dispatch]);
+  
+    return (
+        <GluestackUIProvider config={config}>
+          <SafeAreaProvider>
+            <NavigationContainer linking={linking}>
+              <Stack.Navigator screenOptions={{ headerShown: false}}>
+                <Stack.Screen name="Login" component={Login}/>
+                <Stack.Screen name="Main" component={Navigation}/>
+              </Stack.Navigator>
+            </NavigationContainer> 
+          </SafeAreaProvider>
+        </GluestackUIProvider>
+    );
   }
-
-  useEffect(() => {
-    const handleDeepLink = (event: { url: string; }) => {
-      const { path, queryParams } = Linking.parse(event.url);
-      if (queryParams.token) {
-        dispatch(setToken(queryParams.token));
-        setData({ path, queryParams });
-      } 
-    };
-
-    async function getInitialURL() {
-      const initialURL = await Linking.getInitialURL();
-      if (initialURL) handleDeepLink({url: initialURL});
-	  }
-
-    const listener = Linking.addEventListener("url", handleDeepLink);
-    
-    if (!data) {
-      getInitialURL();
-    }
-    
-    return () => listener.remove();
-  }, [dispatch]);
-
-  return (
-    <Provider store={store}>
-      <GluestackUIProvider config={config}>
-        <SafeAreaProvider>
-          <NavigationContainer linking={linking}>
-            <Stack.Navigator screenOptions={{ headerShown: false}}>
-              <Stack.Screen name="Login" component={Login}/>
-              <Stack.Screen name="Main" component={Navigation}/>
-            </Stack.Navigator>
-          </NavigationContainer> 
-        </SafeAreaProvider>
-      </GluestackUIProvider>
-    </Provider>
-  );
-}
+  
+  export default function AppWrapper() {
+      return (
+        <Provider store={store}>
+          <App />
+        </Provider>
+      );
+  }
