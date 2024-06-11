@@ -1,0 +1,28 @@
+import { setQRCode } from "../redux/actions";
+
+export const getQRCode = (token: string) => {
+    return async (dispatch: any) => {
+        try {
+          const response = await fetch('/attendee/qr/', {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+          });
+          const data = await response.json();
+          dispatch(setQRCode(data));
+
+          // Refresh the QR Code every 20 seconds
+          setInterval(async () => {
+            const refreshResponse = await fetch('/attendee/qr/', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                },
+            });
+            const refreshData = await refreshResponse.json();
+            dispatch(setQRCode(refreshData));
+          }, 20000)
+        } catch (error) {
+          console.error('Error fetching attendee:', error);
+        }
+    };
+};

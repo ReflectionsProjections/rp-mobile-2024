@@ -3,6 +3,7 @@ export interface State {
     token: string | null;
     isAuthenticated: boolean;
     attendee: Attendee | null;
+    qrCodeURL: string | null
 }
 
 export interface Attendee {

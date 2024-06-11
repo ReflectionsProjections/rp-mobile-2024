@@ -4,6 +4,7 @@ const initalState: State = {
   user_id: null,
   token: null,
   attendee: null,
+  qrCodeURL: null,
   isAuthenticated: false,
 };
 
@@ -24,6 +25,11 @@ function stateReducer(state = initalState, action): State {
       return {
         ...state,
         attendee: action.payload
+      }
+    case 'SET_QRCODE':
+      return {
+        ...state,
+        qrCodeURL: action.payload
       }
     case 'LOGOUT':
       return {

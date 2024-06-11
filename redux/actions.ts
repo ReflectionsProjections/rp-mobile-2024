@@ -8,6 +8,11 @@ export const setAttendee = (attendee) => ({
     payload: attendee
 })
 
+export const setQRCode = (qrcode) => ({
+    type: 'SET_QRCODE',
+    payload: qrcode
+})
+
 export const logout = () => ({
     type: 'LOGOUT',
 });
