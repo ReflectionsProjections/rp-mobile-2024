@@ -10,7 +10,7 @@ import {
 import Colors from "../constants/Colors";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 
-const EventModal = ({ visible, onClose, title, children }) => {
+const EventModal = ({ title, location, time, points, description }) => {
   return (
     <View style={styles.card}>
       <ImageBackground
@@ -20,25 +20,23 @@ const EventModal = ({ visible, onClose, title, children }) => {
       >
         <View style={styles.overlay}>
           <View style={styles.header}>
-            <Text style={styles.title}>{"Learning about LLMs"}</Text>
+            <Text style={styles.title}>{title}</Text>
           </View>
           <View style={styles.info}>
             <View style={styles.infoItem}>
               <EvilIcons name="location" size={26} color={Colors.DARK_BLUE} />
-              <Text style={styles.infoText}>{"Siebel 1403"}</Text>
+              <Text style={styles.infoText}>{location}</Text>
             </View>
             <View style={styles.infoItem}>
               <EvilIcons name="clock" size={26} color={Colors.DARK_BLUE} />
-              <Text style={styles.infoText}>{"12:45 PM"}</Text>
+              <Text style={styles.infoText}>{time}</Text>
             </View>
           </View>
           <View style={styles.badge}>
-            <Text style={styles.badgeText}>10 pts</Text>
+            <Text style={styles.badgeText}>{points} pts</Text>
           </View>
           <Text style={styles.description} numberOfLines={12}>
-            {
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-            }
+            {description}
           </Text>
         </View>
       </ImageBackground>

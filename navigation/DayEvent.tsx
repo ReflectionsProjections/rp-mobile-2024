@@ -15,9 +15,8 @@ const DayEvent = ({ day, events }) => (
           name={event.name}
           time={event.time}
           location={event.location}
-          person={event.person}
-          graphic={event.graphic}
           description={event.description}
+          points={event.points}
         />
       ))}
     </ScrollView>

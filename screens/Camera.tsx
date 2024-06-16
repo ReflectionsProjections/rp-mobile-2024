@@ -17,9 +17,13 @@ const Camera: React.FC = () => {
     //   graphic={"event.graphic"}
     //   description={"Lets learn"}
     // />
-    <EventModal>
-      
-    </EventModal>
+    <EventModal
+            title={"title"}
+            location={"location"}
+            time={"time"}
+            points={"points"}
+            description={"description"}
+          />
     );
   };
   

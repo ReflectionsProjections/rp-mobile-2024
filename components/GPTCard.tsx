@@ -2,34 +2,13 @@ import React, { useState } from "react";
 import { View, StyleSheet, ImageBackground, Text, Pressable } from "react-native";
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 import { useFonts, Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic } from "@expo-google-fonts/kufam";
-import { FontAwesome, Feather } from "@expo/vector-icons";
 import CustomModal from "./CustomModal"; // Import the custom modal
 
 import AppLoading from "expo-app-loading";
-import {
-  Box,
-  Modal,
-  ButtonText,
-  ModalBackdrop,
-  ModalContent,
-  ModalHeader,
-  Heading,
-  ModalCloseButton,
-  Icon,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Card,
-  HStack,
-  Badge,
-  BadgeText,
-  BadgeIcon,
-} from "@gluestack-ui/themed";
 import Colors from "../constants/Colors";
 
-const GPTCard = ({ name, time, location, description }) => {
+const GPTCard = ({ name, time, location, description, points }) => {
   const [showModal, setShowModal] = useState(false);
-  const ref = React.useRef(null);
 
   let [fontsLoaded] = useFonts({
     Kufam_400Regular,
@@ -63,7 +42,7 @@ const GPTCard = ({ name, time, location, description }) => {
                 <Text style={styles.infoText}>{time}</Text>
               </View>
               <View style={styles.badge}>
-                <Text style={styles.badgeText}>10 pts</Text>
+                <Text style={styles.badgeText}>{points} pts</Text>
               </View>
             </View>
             <Text style={styles.description}>{description}</Text>
@@ -74,11 +53,11 @@ const GPTCard = ({ name, time, location, description }) => {
         visible={showModal}
         onClose={() => setShowModal(false)}
         title={name}
-      >
-        <Text>Time: {time}</Text>
-        <Text>Location: {location}</Text>
-        <Text>{description}</Text>
-      </CustomModal>
+        location={location}
+        time={time}
+        points={points}
+        description={description}
+      />
     </View>
   );
 };
@@ -86,8 +65,8 @@ const GPTCard = ({ name, time, location, description }) => {
 const styles = StyleSheet.create({
   card: {
     width: "90%",
-    height: 140, 
-    marginTop: 20, 
+    height: 140,
+    marginTop: 20,
     alignSelf: 'center', // Center the card
   },
   pressable: {

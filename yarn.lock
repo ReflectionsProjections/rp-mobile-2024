@@ -1494,6 +1494,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@expo-google-fonts/inter@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@expo-google-fonts/inter@npm:0.2.3"
+  checksum: eb6e971e250657df329708e91d32baebbd28e7da39d013fc71920c30d2fb91db4365a6055f57a93d7373c2f8332d7f1c48b3e0e7e82f349ed8b4de8dcb210b46
+  languageName: node
+  linkType: hard
+
 "@expo-google-fonts/kufam@npm:^0.2.3":
   version: 0.2.3
   resolution: "@expo-google-fonts/kufam@npm:0.2.3"
@@ -10737,6 +10744,7 @@ __metadata:
   resolution: "rp-mobile-2024@workspace:."
   dependencies:
     "@babel/core": ^7.20.0
+    "@expo-google-fonts/inter": ^0.2.3
     "@expo-google-fonts/kufam": ^0.2.3
     "@expo/ngrok": ^4.1.0
     "@gluestack-style/react": ^1.0.52
