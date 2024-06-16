@@ -10,6 +10,7 @@
     "lint": "pwd; yarn eslint . --ext .ts,.tsx,.js,.jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
+    "@expo-google-fonts/kufam": "^0.2.3",
     "@gluestack-style/react": "^1.0.52",
     "@gluestack-ui/config": "^1.1.18",
     "@gluestack-ui/themed": "^1.1.22",
@@ -21,6 +22,8 @@
     "@react-navigation/stack": "^6.3.29",
     "@types/react": "~18.2.79",
     "expo": "^51.0.9",
+    "expo-app-loading": "^2.1.1",
+    "expo-font": "~12.0.7",
     "expo-status-bar": "~1.12.1",
     "install": "^0.13.0",
     "lucide-react-native": "^0.381.0",
@@ -46,5 +49,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6"
   },
-  "private": true
+  "private": true,
+  "packageManager": "yarn@3.6.4"
 }

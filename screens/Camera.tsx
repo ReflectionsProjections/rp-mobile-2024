@@ -2,12 +2,24 @@ import React from "react";
 import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
 // import { Button, ButtonText, ButtonIcon, AddIcon } from "@gluestack-ui/themed";
 import { Heading, Center } from "@gluestack-ui/themed"
+import GPTCard from "../components/GPTCard";
+import EventModal from "../components/EventModal";
+
 
 const Camera: React.FC = () => {
     return (
-    <Box width="100%" height="100%" justifyContent="center" alignItems="center">
-        <Heading>This is the Camera page.</Heading>
-    </Box>
+    //   <GPTCard
+    //   key={1}
+    //   name={"Learning about LLMs"}
+    //   time={"3:00PM"}
+    //   location={"Siebel 1404"}
+    //   person={"Prof wade"}
+    //   graphic={"event.graphic"}
+    //   description={"Lets learn"}
+    // />
+    <EventModal>
+      
+    </EventModal>
     );
   };
   

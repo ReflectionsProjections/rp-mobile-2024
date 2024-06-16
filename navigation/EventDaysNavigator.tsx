@@ -1,7 +1,7 @@
 import React from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import DayEvent from "./DayEvent";
-import Colors from "../constants/colors";
+import Colors from "../constants/Colors";
 
 const eventsData = [
   {
@@ -19,7 +19,7 @@ const eventsData = [
     name: "AI Ethics",
     time: "11:00am",
     day: "Wednesday",
-    location: "Beckman 1001",
+    location: "CIF 1001",
     person: "Dr. Alice",
     graphic: "ethics.logo",
     description: "Discussion on ethics in AI",
@@ -29,7 +29,7 @@ const eventsData = [
     name: "Robotics Workshop",
     time: "2:00pm",
     day: "Thursday",
-    location: "Engineering Hall 2003",
+    location: "CIF 2003",
     person: "Eng. Bob",
     graphic: "robotics.logo",
     description: "Hands-on robotics assembly",
@@ -39,7 +39,7 @@ const eventsData = [
     name: "How to get SWE internship",
     time: "4:00pm",
     day: "Friday",
-    location: "Engineering Hall 2003",
+    location: "Siebel 2003",
     person: "Eng. Bob",
     graphic: "robotics.logo",
     description: "Hands-on robotics assembly",
