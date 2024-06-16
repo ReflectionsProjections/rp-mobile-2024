@@ -15,3 +15,5 @@ export const getAttendee = (token: string) => {
         }
     };
 };
+
+//potentially optimize

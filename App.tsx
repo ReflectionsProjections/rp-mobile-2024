@@ -58,7 +58,7 @@ const App = () => {
       <GluestackUIProvider config={config}>
         <SafeAreaProvider>
           <NavigationContainer linking={linking}>
-            <Stack.Navigator screenOptions={{ headerShown: false}}>
+            <Stack.Navigator screenOptions={{ headerShown: false}} initialRouteName="Login">
               <Stack.Screen name="Login" component={Login}/>
               <Stack.Screen name="Main" component={Navigation}/>
             </Stack.Navigator>
