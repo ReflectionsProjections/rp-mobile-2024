@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, ScrollView, StyleSheet } from "react-native";
-import EventCard from "../components/EventCard";
-import GPTCard from "../components/GPTCard";
+import EventCard from "../Components/EventCard";
+import GPTCard from "../Components/GPTCard";
 
 const DayEvent = ({ day, events }) => (
   <View style={styles.container}>
