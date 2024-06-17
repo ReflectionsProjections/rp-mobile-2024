@@ -7,23 +7,10 @@ import EventModal from "../components/EventModal";
 
 
 const Camera: React.FC = () => {
-    return (
-    //   <GPTCard
-    //   key={1}
-    //   name={"Learning about LLMs"}
-    //   time={"3:00PM"}
-    //   location={"Siebel 1404"}
-    //   person={"Prof wade"}
-    //   graphic={"event.graphic"}
-    //   description={"Lets learn"}
-    // />
-    <EventModal
-            title={"title"}
-            location={"location"}
-            time={"time"}
-            points={"points"}
-            description={"description"}
-          />
+  return (
+    <Box width="100%" height="100%" justifyContent="center" alignItems="center">
+        <Heading>This is the Camera page.</Heading>
+    </Box>
     );
   };
   
