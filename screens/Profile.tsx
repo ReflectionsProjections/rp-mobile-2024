@@ -15,8 +15,10 @@ const Profile: React.FC = () => {
 
   const dispatch = useAppDispatch();
   const token = useAppSelector((state: RootState) => state.token);
+  console.log("profile token:", token);
   const attendee = useAppSelector((state: RootState) => state.attendee);
   const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
+  console.log(qrcode);
 
   useEffect(() => {
     if (token && !attendee) {
@@ -35,10 +37,10 @@ const Profile: React.FC = () => {
           source={{uri: qrcode}}
           alt="QR Code"
         />
-        <StyledText variant="bigText" marginTop={50}>{attendee.name}</StyledText>
+        <StyledText variant="bigText" marginTop={50}>{"attendee.name"}</StyledText>
         <StyledBox variant='foodWave' marginTop={15} justifyContent='center'>
           <StyledText variant="medium">
-            Food Wave: 1
+            Food Wave: {"attendee.foodWave"}
           </StyledText>
         </StyledBox>
       </View>  

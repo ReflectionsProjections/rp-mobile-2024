@@ -13,19 +13,19 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { RootState } from "../redux/store";
 
 const authUrl = "https://api.reflectionsprojections.org/auth/login/mobile/";
-const redirectURL = "myapp://main";
+const redirectURL = "reflectionsprojections://Main";
 interface LoginProps {
     navigation: NavigationProp<ParamListBase>;
 }
 const Login: React.FC<LoginProps> = ({navigation}) => {
-    const token = useAppSelector((state: RootState) => state.token);
+    /* const token = useAppSelector((state: RootState) => state.token);
 
     useEffect(() => {
         if (token) {
             console.log("using token");
             navigation.navigate('Main');
         }
-    }, [token, navigation]);
+    }, [token, navigation]); */
 
     return (
         <StyledProvider config={config}>
@@ -46,9 +46,13 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
                     isFocusVisible={false}
                     onPress={() => {
                         console.log("logged in!");
+                        //navigation.navigate('Main');
+                        //console.log({token});
                         WebBrowser.openAuthSessionAsync(`${authUrl}?redirect_uri=${redirectURL}`, redirectURL)
                             .then(result => {
                                 if (result.type === 'success') {
+                                    console.log(result.url);
+                                    console.log("handling redirection globally...");
                                     Linking.openURL(result.url);
                                 }
                             })
