@@ -37,21 +37,13 @@ const App = () => {
   useEffect(() => {
     const handleDeepLink = (event: { url: string; }) => {
       console.log("handling deep link:", event.url);
-      const { path, queryParams } = Linking.parse(event.url);
-      const token = queryParams.token;
+      const searchParams = new URL(event.url).searchParams;
+      const token = searchParams.get('token');
+      console.log("TOKEN", token);
+      dispatch(setToken(token))
+    }
 
-      if (typeof token === 'string') {
-        dispatch(setToken(token));
-      } else if (Array.isArray(token) && token.length > 0) {
-        dispatch(setToken(token[0])); // Take the first element if token is an array
-      } else {
-        console.error('Invalid token format:', token);
-      }
-
-    };
-
-    async function getInitialURL() {
-      
+    async function getInitialURL() {      
       const initialURL = await Linking.getInitialURL();
       console.log("getting initial URL:", initialURL);
       if (initialURL) handleDeepLink({url: initialURL});
@@ -70,7 +62,6 @@ const App = () => {
             <Stack.Navigator screenOptions={{ headerShown: false}} initialRouteName="Login">
               <Stack.Screen name="Login" component={Login}/>
               <Stack.Screen name="Main" component={Navigation}/>
-              <Stack.Screen name = "Home" component={Home} />
             </Stack.Navigator>
           </NavigationContainer> 
         </SafeAreaProvider>
