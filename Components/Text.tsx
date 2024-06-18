@@ -12,9 +12,10 @@ const StyledText = styled(Text,
                     textAlign: 'center'
                 }, 
                 bigText: {
-                    fontSize: 40,
+                    fontSize: 60,
                     fontWeight: "$bold",
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    fontFamily: "Kufam_700Bold_Italic"
                 },
                 basic: {
                     fontSize: "$md",
@@ -25,7 +26,8 @@ const StyledText = styled(Text,
                     fontSize: 30,
                     fontWeight: "$semibold",
                     textAlign: "center",
-                    color: "$black"
+                    color: "$black",
+                    fontFamily: "Kufam_700Bold_Italic"
                 }
             },
         },

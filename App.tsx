@@ -33,7 +33,7 @@ const App = () => {
       }
     }
   }
-  
+    
   useEffect(() => {
     const handleDeepLink = (event: { url: string; }) => {
       console.log("handling deep link:", event.url);
