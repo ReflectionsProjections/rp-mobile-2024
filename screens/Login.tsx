@@ -1,19 +1,32 @@
 import React from "react";
 import { ImageBackground, StyleSheet, TouchableOpacity } from "react-native";
 import { StyledProvider } from "@gluestack-style/react";
+
 import { config } from "@gluestack-ui/config";
 import { Box, View } from "@gluestack-ui/themed";
 import { Images } from "../Components/Images";
 import { StyledButton } from "../Components/Buttons";
 import { StyledText } from "../Components/Text";
 import * as Linking from "expo-linking";
+import * as WebBrowser from "expo-web-browser"
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { RootState } from "../redux/store";
 
-function Login() {
-  const authUrl = "https://api.reflectionsprojections.org/auth/login/mobile";
-  const handleBoxPress = () => {
-    // Handle box press action here
-    Linking.openURL(authUrl); // Example: open a URL
-  };
+const authUrl = "https://api.reflectionsprojections.org/auth/login/mobile/";
+const redirectURL = "reflectionsprojections://Main";
+interface LoginProps {
+    navigation: NavigationProp<ParamListBase>;
+}
+const Login: React.FC<LoginProps> = ({navigation}) => {
+    /* const token = useAppSelector((state: RootState) => state.token);
+
+    useEffect(() => {
+        if (token) {
+            console.log("using token");
+            navigation.navigate('Main');
+        }
+    }, [token, navigation]); */
 
   return (
     <StyledProvider config={config}>
@@ -29,10 +42,18 @@ function Login() {
             isFocusVisible={false} 
             onPress={() => {
               console.log("logged in!");
-              Linking.openURL(authUrl).catch((err) => {
-                console.error("Failed to open URL:", err.message);
-                alert("Failed to open URL");
-              });
+              WebBrowser.openAuthSessionAsync(`${authUrl}?redirect_uri=${redirectURL}`, redirectURL)
+                            .then(result => {
+                                if (result.type === 'success') {
+                                    console.log(result.url);
+                                    console.log("handling redirection globally...");
+                                    Linking.openURL(result.url);
+                                }
+                            })
+                            .catch(err => {
+                                console.error("Failed to open URL:", err.message);
+                                alert("Failed to open URL");
+                            });
             }}
           >
             {/* Content inside the red box */}

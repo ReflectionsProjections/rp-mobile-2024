@@ -4,74 +4,75 @@ import { config } from "@gluestack-ui/config"; // Optional if you want to use de
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigation from "./navigation/Navigation";
+import Home from "./screens/Home";
 import * as Linking from "expo-linking";
 import Login from "./screens/Login";
 import { createStackNavigator } from "@react-navigation/stack";
 import store from "./redux/store";
 import { Provider, useDispatch } from 'react-redux';
-import { setToken } from "./redux/actions";
+import { setToken, clearTokens, AuthActionTypes } from './redux/actions';
+import { Dispatch } from "@reduxjs/toolkit";
 
 const prefix = Linking.createURL("/");
+console.log(prefix);
 const Stack = createStackNavigator();
 
 const App = () => {
-    const [data, setData] = useState(null);
-    const dispatch = useDispatch();
-  
-    const linking = {
-      prefixes:[prefix],
-      config:{
-        screens: {
-          Home: "home",
-          Camera: "camera",
-          Events: "events",
-          Profile: "profile",
-          Shop: "shop"
-        }
+  const [data, setData] = useState(null);
+  const dispatch = useDispatch<Dispatch<AuthActionTypes>>();
+  const linking = {
+    prefixes:[prefix],
+    config:{
+      screens: {
+        Main: "Main",
+        Home: "home",
+        Camera: "camera",
+        Events: "events",
+        Profile: "profile",
+        Shop: "shop"
       }
     }
-  
-    useEffect(() => {
-      const handleDeepLink = (event: { url: string; }) => {
-        const { path, queryParams } = Linking.parse(event.url);
-        if (queryParams.token) {
-          dispatch(setToken(queryParams.token));
-          setData({ path, queryParams });
-        } 
-      };
-  
-      async function getInitialURL() {
-        const initialURL = await Linking.getInitialURL();
-        if (initialURL) handleDeepLink({url: initialURL});
-        }
-  
-      const listener = Linking.addEventListener("url", handleDeepLink);
-      
-      if (!data) {
-        getInitialURL();
-      }
-      
-      return () => listener.remove();
-    }, [dispatch]);
-  
+  }
+    
+  useEffect(() => {
+    const handleDeepLink = (event: { url: string; }) => {
+      console.log("handling deep link:", event.url);
+      const searchParams = new URL(event.url).searchParams;
+      const token = searchParams.get('token');
+      console.log("TOKEN", token);
+      dispatch(setToken(token))
+    }
+
+    async function getInitialURL() {      
+      const initialURL = await Linking.getInitialURL();
+      console.log("getting initial URL:", initialURL);
+      if (initialURL) handleDeepLink({url: initialURL});
+	  }
+
+    getInitialURL();
+    const listener = Linking.addEventListener("url", handleDeepLink);
+
+    return () => listener.remove();
+  }, [dispatch]);
+
+  return (
+      <GluestackUIProvider config={config}>
+        <SafeAreaProvider>
+          <NavigationContainer linking={linking}>
+            <Stack.Navigator screenOptions={{ headerShown: false}} initialRouteName="Login">
+              <Stack.Screen name="Login" component={Login}/>
+              <Stack.Screen name="Main" component={Navigation}/>
+            </Stack.Navigator>
+          </NavigationContainer> 
+        </SafeAreaProvider>
+      </GluestackUIProvider>
+  );
+}
+
+export default function AppWrapper() {
     return (
-        <GluestackUIProvider config={config}>
-          <SafeAreaProvider>
-            <NavigationContainer linking={linking}>
-              <Stack.Navigator screenOptions={{ headerShown: false}}>
-                <Stack.Screen name="Login" component={Login}/>
-                <Stack.Screen name="Main" component={Navigation}/>
-              </Stack.Navigator>
-            </NavigationContainer> 
-          </SafeAreaProvider>
-        </GluestackUIProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
     );
-  }
-  
-  export default function AppWrapper() {
-      return (
-        <Provider store={store}>
-          <App />
-        </Provider>
-      );
-  }
+}

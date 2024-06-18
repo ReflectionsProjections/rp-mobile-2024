@@ -6,6 +6,12 @@ const Images = styled(Image,
     {
         variants: {
             variant: {
+                qrCode: {
+                    height: 300,
+                    width: 300, 
+                    borderRadius: "$xl",
+                    marginTop: "$5",
+                },
                 loginLogo: {
                     height: 300,
                     width: 300, 

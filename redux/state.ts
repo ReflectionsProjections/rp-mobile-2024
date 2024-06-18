@@ -1,31 +1,44 @@
-const initalState = {
+import { State } from './types';
+import { AuthActionTypes, SET_TOKEN, SET_ATTENDEE, SET_QRCODE, LOGOUT } from './actions';
+
+const initialState: State = {
   user_id: null,
   token: null,
+  attendee: null,
+  qrCodeURL: null,
   isAuthenticated: false,
 };
 
-function stateReducer(state = initalState, action) {
-  switch(action.type) {
-    case 'user/set_identity':
-      return {
-        ...state,
-        user_id: action.payload,
-      };
-    case 'SET_TOKEN':
+function stateReducer(state = initialState, action: AuthActionTypes): State {
+  switch (action.type) {
+    case SET_TOKEN:
       return {
         ...state,
         token: action.payload,
         isAuthenticated: true,
-      }
-    case 'LOGOUT':
+      };
+    case SET_ATTENDEE:
+      return {
+        ...state,
+        attendee: action.payload,
+      };
+    case SET_QRCODE:
+      return {
+        ...state,
+        qrCodeURL: action.payload,
+      };
+    case LOGOUT:
       return {
         ...state,
         token: null,
+        attendee: null,
+        qrCodeURL: null,
+        user_id: null,
         isAuthenticated: false,
-      }
+      };
+    default:
+      return state;
   }
-
-  return state;
 }
 
 export default stateReducer;
