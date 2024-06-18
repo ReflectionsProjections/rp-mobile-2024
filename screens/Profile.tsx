@@ -63,7 +63,7 @@ const Profile: React.FC = () => {
         <StyledText variant="bigText" marginTop={50}>{attendee.name}</StyledText>
         <StyledBox variant='foodWave' marginTop={15} justifyContent='center'>
           <StyledText variant="medium">
-            Food Wave: {attendee.foodWave}
+            {`Food Wave: ${attendee.foodWave}`}
           </StyledText>
         </StyledBox>
       </View>}
