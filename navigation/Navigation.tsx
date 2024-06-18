@@ -8,9 +8,12 @@ import Events from "../screens/Events";
 import CameraScanner from "../screens/CameraScanner";
 import Shop from "../screens/Shop";
 import Profile from "../screens/Profile";
+import Colors from "../constants/Colors";
 
-const ACTIVE_COLOR = "black";
-const INACTIVE_COLOR = "gray";
+import EventDaysNavigator from "./EventDaysNavigator"; // Adjust path as necessary
+
+const ACTIVE_COLOR = Colors.YELLOW;
+const INACTIVE_COLOR = Colors.WHITE;
 
 const AppNavigator: React.FC = () => {
   // const Stack = createNativeStackNavigator();
@@ -19,9 +22,12 @@ const AppNavigator: React.FC = () => {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        // headerShown: false,
+        headerShown: false,
         tabBarActiveTintColor: ACTIVE_COLOR,
         tabBarInactiveTintColor: INACTIVE_COLOR,
+        tabBarStyle: {
+          backgroundColor: Colors.DARK_BLUE,
+        },
         tabBarIcon: ({ focused }) => {
           switch (route.name) {
             case "Home":
@@ -104,21 +110,5 @@ const AppNavigator: React.FC = () => {
     </Tab.Navigator>
   );
 };
-
-// const RootStack = createStackNavigator();
-
-// const Navigation = () => {
-//   return (
-//     <RootStack.Navigator
-//       screenOptions={{
-//         animationEnabled: true,
-//         gestureEnabled: true,
-//         headerShown: false,
-//       }}
-//     >
-//       <RootStack.Screen name="App" component={AppNavigator} />
-//     </RootStack.Navigator>
-//   );
-// };
 
 export default AppNavigator;
