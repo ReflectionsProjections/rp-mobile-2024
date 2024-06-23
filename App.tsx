@@ -10,7 +10,7 @@ import Login from "./screens/Login";
 import { createStackNavigator } from "@react-navigation/stack";
 import store from "./redux/store";
 import { Provider, useDispatch } from 'react-redux';
-import { setToken, clearTokens, AuthActionTypes } from './redux/actions';
+import { setToken, clearTokens, AuthActionTypes, setRole } from './redux/actions';
 import { Dispatch } from "@reduxjs/toolkit";
 
 const prefix = Linking.createURL("/");
@@ -39,7 +39,10 @@ const App = () => {
       console.log("handling deep link:", event.url);
       const searchParams = new URL(event.url).searchParams;
       const token = searchParams.get('token');
+      //const role = searchParams.get('role');
       console.log("TOKEN", token);
+      //console.log("ROLE:", role);
+      //dispatch(setRole(role));
       dispatch(setToken(token))
     }
 

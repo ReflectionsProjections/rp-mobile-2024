@@ -84,7 +84,7 @@ const Profile: React.FC = () => {
       {attendee && qrcode &&
       <View justifyContent="space-between" alignItems="center">
         <QRCode
-          value = {qrcode}
+          value = {{qrcode}}
           size = {300}
         />
         <StyledText variant="bigText" marginTop={50}>{attendee.name}</StyledText>

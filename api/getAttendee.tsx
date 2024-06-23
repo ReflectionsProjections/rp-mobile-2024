@@ -6,7 +6,7 @@ export const getAttendee = (token: string) => {
         try {
           const response = await fetch('https://api.reflectionsprojections.org/attendee/', {
             headers: {
-              'Authorization': `Bearer ${token}`,
+              Authorization: token
             },
           });
           

@@ -5,7 +5,7 @@ export const getQRCode = (token: string) => {
         try {
           const response = await fetch('https://api.reflectionsprojections.org/attendee/qr/', {
             headers: {
-              'Authorization': `${token}`,
+              Authorization: token,
               'Content-Type': 'application/json'
             },
           });
