@@ -8,10 +8,13 @@ import Home from "./screens/Home";
 import * as Linking from "expo-linking";
 import Login from "./screens/Login";
 import { createStackNavigator } from "@react-navigation/stack";
-import store from "./redux/store";
+import store, { RootState } from "./redux/store";
 import { Provider, useDispatch } from 'react-redux';
-import { setToken, clearTokens, AuthActionTypes, setRole } from './redux/actions';
+import { setToken, clearTokens, AuthActionTypes, setRoles } from './redux/actions';
 import { Dispatch } from "@reduxjs/toolkit";
+import { decodeToken } from "./api/decodeToken";
+import { useAppSelector } from "./redux/hooks";
+import { State } from "react-native-gesture-handler";
 
 const prefix = Linking.createURL("/");
 console.log(prefix);
@@ -39,11 +42,12 @@ const App = () => {
       console.log("handling deep link:", event.url);
       const searchParams = new URL(event.url).searchParams;
       const token = searchParams.get('token');
-      //const role = searchParams.get('role');
-      console.log("TOKEN", token);
-      //console.log("ROLE:", role);
-      //dispatch(setRole(role));
-      dispatch(setToken(token))
+      if (token) {
+        dispatch(setToken(token))
+        const decoded = decodeToken(token);
+        console.log(decoded.roles);
+        dispatch(setRoles(decoded.roles));
+      }
     }
 
     async function getInitialURL() {      
@@ -52,6 +56,7 @@ const App = () => {
       if (initialURL) handleDeepLink({url: initialURL});
 	  }
 
+    
     getInitialURL();
     const listener = Linking.addEventListener("url", handleDeepLink);
 

@@ -9,7 +9,7 @@ export const SET_TOKEN = 'SET_TOKEN';
 export const SET_ATTENDEE = 'SET_ATTENDEE';
 export const SET_QRCODE = 'SET_QRCODE';
 export const LOGOUT = 'LOGOUT';
-export const SET_ROLE = 'SET_ROLE'
+export const SET_ROLES = 'SET_ROLES'
 
 interface SetTokenAction {
   type: typeof SET_TOKEN;
@@ -17,8 +17,8 @@ interface SetTokenAction {
 }
 
 interface SetRoleAction {
-  type: typeof SET_ROLE;
-  payload: string;
+  type: typeof SET_ROLES;
+  payload: string[];
 }
 
 interface SetAttendeeAction {
@@ -43,9 +43,9 @@ export const setToken = (token: string): AuthActionTypes => ({
   payload: token,
 });
 
-export const setRole = (role: string): AuthActionTypes => ({
-  type: SET_ROLE,
-  payload: role,
+export const setRoles = (roles: string[]): AuthActionTypes => ({
+  type: SET_ROLES,
+  payload: roles,
 });
 
 export const setAttendee = (attendee: Attendee): AuthActionTypes => ({

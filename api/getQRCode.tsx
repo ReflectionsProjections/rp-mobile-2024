@@ -10,18 +10,7 @@ export const getQRCode = (token: string) => {
             },
           });
           const data = await response.json();
-          dispatch(setQRCode(data));
-
-          // Refresh the QR Code every 20 seconds
-          setInterval(async () => {
-            const refreshResponse = await fetch('https://api.reflectionsprojections.org/attendee/qr/', {
-                headers: {
-                    'Authorization': `${token}`,
-                },
-            });
-            const refreshData = await refreshResponse.json();
-            dispatch(setQRCode(refreshData));
-          }, 20000)
+          dispatch(setQRCode(data.qrCode));
         } catch (error) {
           console.error('Error fetching qrcode:', error);
         }

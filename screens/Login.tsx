@@ -36,7 +36,7 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
                     source={{uri: "https://i.pinimg.com/originals/2e/60/07/2e60079f1e36b5c7681f0996a79e8af4.jpg"}}
                     alt="RP Logo"
                 />
-                <StyledText variant='bigText' >Welcome to</StyledText>
+                <StyledText variant='profileText' >Welcome to</StyledText>
                 <StyledText variant='bigbold' marginTop={-30}>R|P 2024!</StyledText>
                 <StyledText variant='basic' marginTop={100} marginBottom={-10}>Powered by SPONSOR!!!</StyledText>
                 <StyledButton

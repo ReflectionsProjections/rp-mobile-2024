@@ -1,5 +1,6 @@
 import { styled } from "@gluestack-style/react";
 import { Text } from "@gluestack-ui/themed";
+import { useFonts } from "@expo-google-fonts/kufam";
 
 
 const StyledText = styled(Text, 
@@ -11,7 +12,7 @@ const StyledText = styled(Text,
                     fontWeight: "$bold",
                     textAlign: 'center'
                 }, 
-                bigText: {
+                profileText: {
                     fontSize: 60,
                     fontWeight: "$bold",
                     textAlign: 'center',

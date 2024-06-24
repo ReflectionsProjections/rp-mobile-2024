@@ -9,8 +9,11 @@ import CameraScanner from "../screens/CameraScanner";
 import Shop from "../screens/Shop";
 import Profile from "../screens/Profile";
 import Colors from "../constants/Colors";
+import { useAppSelector } from "../redux/hooks";
+import { RootState } from "../redux/store";
 
 import EventDaysNavigator from "./EventDaysNavigator"; // Adjust path as necessary
+import AdminScanner from "../screens/AdminScanner";
 
 const ACTIVE_COLOR = Colors.YELLOW;
 const INACTIVE_COLOR = Colors.WHITE;
@@ -18,6 +21,7 @@ const INACTIVE_COLOR = Colors.WHITE;
 const AppNavigator: React.FC = () => {
   // const Stack = createNativeStackNavigator();
   const Tab = createBottomTabNavigator();
+  const roles = useAppSelector((state: RootState) => state.roles);
 
   return (
     <Tab.Navigator
@@ -49,6 +53,15 @@ const AppNavigator: React.FC = () => {
                 />
               );
             case "Camera":
+              return (
+                <FontAwesome
+                  name="camera"
+                  color={focused ? ACTIVE_COLOR : INACTIVE_COLOR}
+                  size={35}
+                  solid
+                />
+              );
+            case "AdminScanner":
               return (
                 <FontAwesome
                   name="camera"
@@ -92,11 +105,19 @@ const AppNavigator: React.FC = () => {
         component={Events}
         options={{ tabBarLabel: () => null }}
       />
-      <Tab.Screen
+      {roles.includes('ADMIN') ? (
+        <Tab.Screen
+        name="AdminScanner"
+        component={AdminScanner}
+        options={{ tabBarLabel: () => null }}
+      />
+      ) : (
+        <Tab.Screen
         name="Camera"
         component={CameraScanner}
         options={{ tabBarLabel: () => null }}
       />
+      )}
       <Tab.Screen
         name="Shop"
         component={Shop}

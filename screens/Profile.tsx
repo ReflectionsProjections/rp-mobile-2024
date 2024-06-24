@@ -13,6 +13,7 @@ import { getQRCode } from "../api/getQRCode";
 import axios from "axios";
 import { Attendee } from "../redux/types";
 import Colors from "../constants/Colors";
+import { useFonts } from "@expo-google-fonts/kufam";
 
 const Profile: React.FC = () => {
   
@@ -21,6 +22,8 @@ const Profile: React.FC = () => {
   console.log("profile token:", token);
   const attendee = useAppSelector((state: RootState) => state.attendee);
   const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
+  console.log("qrcode string:", qrcode);
+
 
   useEffect(() => {
     if (token && !attendee) {
@@ -42,52 +45,19 @@ const Profile: React.FC = () => {
     return () => clearInterval(interval);
   }, [token, dispatch]);
   
-  /* const [attendee, setAttendee] = useState<Attendee>(null);
-  const [qrcode, setQRCode] = useState(null);
-  const [token, _] = useState(useAppSelector((state: RootState) => state.token));
-
-  useLayoutEffect(() => {
-    console.log("in use effect", token);
-    axios.get('https://api.reflectionsprojections.org/attendee/', {
-      headers: {
-        Authorization: token
-      }
-    }).then(attendeeData => {
-      console.log(attendeeData.data);
-      if (token) {
-        setAttendee(attendeeData.data);
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    console.log("in use effect", token);
-    const getQRCode = async () => {
-      const qrcode = await axios.get('https://api.reflectionsprojections.org/attendee/qr', {
-        headers: {
-          Authorization: token
-        }
-      });
-      console.log(qrcode.data);
-      if (token) {
-        setQRCode(qrcode.data);
-      }
-    };
-    
-    getQRCode();
-    const interval = setInterval(getQRCode, 20000);
-    return () => clearInterval(interval);
-  }, [token]); */
-
   return (
-    <Box width="100%" height="100%" paddingVertical={50} flex={1}>
+    <Box width="100%" height="100%" paddingVertical={150} flex={1} backgroundColor={Colors.DARK_BLUE}>
       {attendee && qrcode &&
       <View justifyContent="space-between" alignItems="center">
-        <QRCode
-          value = {{qrcode}}
-          size = {300}
-        />
-        <StyledText variant="bigText" marginTop={50}>{attendee.name}</StyledText>
+        <View style ={{
+          borderWidth: 10, borderColor: Colors.YELLOW, padding: 10, borderRadius: 5,
+        }}>
+          <QRCode
+            value = {qrcode}
+            size = {300}
+          />
+        </View>
+        <StyledText variant="profileText" fontFamily={"Kufam_700Bold_Italic"} marginTop={50} color={Colors.WHITE}>{attendee.name}</StyledText>
         <StyledBox variant='foodWave' marginTop={15} justifyContent='center'>
           <StyledText variant="medium">
             {`Food Wave: ${attendee.foodWave}`}

@@ -17,7 +17,6 @@ export const getAttendee = (token: string) => {
           }
 
           const data = await response.json();
-          console.log("attendee:", data);
           dispatch(setAttendee(data));
         } catch (error) {
           console.error('Error fetching attendee:', error);
