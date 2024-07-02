@@ -9,10 +9,16 @@ export const SET_TOKEN = 'SET_TOKEN';
 export const SET_ATTENDEE = 'SET_ATTENDEE';
 export const SET_QRCODE = 'SET_QRCODE';
 export const LOGOUT = 'LOGOUT';
+export const SET_ROLES = 'SET_ROLES'
 
 interface SetTokenAction {
   type: typeof SET_TOKEN;
   payload: string;
+}
+
+interface SetRoleAction {
+  type: typeof SET_ROLES;
+  payload: string[];
 }
 
 interface SetAttendeeAction {
@@ -29,12 +35,17 @@ interface LogoutAction {
   type: typeof LOGOUT;
 }
 
-export type AuthActionTypes = SetTokenAction | SetAttendeeAction | SetQRCodeAction | LogoutAction;
+export type AuthActionTypes = SetTokenAction | SetRoleAction | SetAttendeeAction | SetQRCodeAction | LogoutAction;
 
 // Action Creators
 export const setToken = (token: string): AuthActionTypes => ({
   type: SET_TOKEN,
   payload: token,
+});
+
+export const setRoles = (roles: string[]): AuthActionTypes => ({
+  type: SET_ROLES,
+  payload: roles,
 });
 
 export const setAttendee = (attendee: Attendee): AuthActionTypes => ({

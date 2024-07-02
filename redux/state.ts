@@ -1,9 +1,10 @@
 import { State } from './types';
-import { AuthActionTypes, SET_TOKEN, SET_ATTENDEE, SET_QRCODE, LOGOUT } from './actions';
+import { AuthActionTypes, SET_TOKEN, SET_ROLES, SET_ATTENDEE, SET_QRCODE, LOGOUT } from './actions';
 
 const initialState: State = {
   user_id: null,
   token: null,
+  roles: null,
   attendee: null,
   qrCodeURL: null,
   isAuthenticated: false,
@@ -16,6 +17,11 @@ function stateReducer(state = initialState, action: AuthActionTypes): State {
         ...state,
         token: action.payload,
         isAuthenticated: true,
+      };
+    case SET_ROLES:
+      return {
+        ...state,
+        roles: action.payload,
       };
     case SET_ATTENDEE:
       return {
