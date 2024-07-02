@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
       position: 'absolute',
       top: 20,
       right: 20,
-      zIndex: 1000, // Ensure it is above other components
+      zIndex: 1000
     },
   });
 
