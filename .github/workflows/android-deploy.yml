@@ -1,0 +1,36 @@
+name: Deploy Android Build
+on: 
+  push: 
+    branches:
+      - main
+jobs:
+  Deploy:
+    name: Build & Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+          cache: "yarn"
+
+      - name: Install EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Authenticate with EAS
+        run: eas login --token ${{ secrets.EAS_TOKEN }}
+
+      - name: Build Android APK
+        run: eas build --platform android --profile development --non-interactive
+
+      - name: Create service_account.json
+        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+
+      - name: Upload to Google Play Store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJson: service_account.json
+          packageName: 'com.package'
+          releaseFile: './builds/*.apk'
+          status: inProgress
+          inAppUpdatePriority: 3
