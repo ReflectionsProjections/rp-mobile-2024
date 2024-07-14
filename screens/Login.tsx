@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
-import { StyledProvider } from "@gluestack-style/react"
+import React from "react";
+import { ImageBackground, StyleSheet, TouchableOpacity } from "react-native";
+import { StyledProvider } from "@gluestack-style/react";
+
 import { config } from "@gluestack-ui/config";
-import { GluestackUIProvider, Text, Box, View } from "@gluestack-ui/themed";
-import { ButtonText } from "@gluestack-ui/themed";
+import { Box, View } from "@gluestack-ui/themed";
 import { Images } from "../Components/Images";
 import { StyledButton } from "../Components/Buttons";
 import { StyledText } from "../Components/Text";
@@ -27,28 +28,21 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
         }
     }, [token, navigation]); */
 
-    return (
-        <StyledProvider config={config}>
-            
-            <Box width="100%" height="100%" justifyContent="space-between" alignItems="center" paddingVertical={100} flex={1}>
-                <Images
-                    variant="loginLogo" 
-                    source={{uri: "https://i.pinimg.com/originals/2e/60/07/2e60079f1e36b5c7681f0996a79e8af4.jpg"}}
-                    alt="RP Logo"
-                />
-                <StyledText variant='profileText' >Welcome to</StyledText>
-                <StyledText variant='bigbold' marginTop={-30}>R|P 2024!</StyledText>
-                <StyledText variant='basic' marginTop={100} marginBottom={-10}>Powered by SPONSOR!!!</StyledText>
-                <StyledButton
-                    styleVariant="login"
-                    action="primary"
-                    isDisabled={false}
-                    isFocusVisible={false}
-                    onPress={() => {
-                        console.log("logged in!");
-                        //navigation.navigate('Main');
-                        //console.log({token});
-                        WebBrowser.openAuthSessionAsync(`${authUrl}?redirect_uri=${redirectURL}`, redirectURL)
+  return (
+    <StyledProvider config={config}>
+      <Box width="100%" height="100%">
+        <ImageBackground
+          source={require("../assets/Login Screen.png")}
+          style={{ flex: 1, justifyContent: "flex-end", alignItems: "center" }}
+          resizeMode="cover"
+        >
+          <TouchableOpacity
+            style={styles.redBox}
+            isDisabled={false}
+            isFocusVisible={false} 
+            onPress={() => {
+              console.log("logged in!");
+              WebBrowser.openAuthSessionAsync(`${authUrl}?redirect_uri=${redirectURL}`, redirectURL)
                             .then(result => {
                                 if (result.type === 'success') {
                                     console.log(result.url);
@@ -60,13 +54,24 @@ const Login: React.FC<LoginProps> = ({navigation}) => {
                                 console.error("Failed to open URL:", err.message);
                                 alert("Failed to open URL");
                             });
-                    }}
-                >
-                    <ButtonText color={"$black"}>LOGIN</ButtonText>
-                </StyledButton>
-            </Box>
-        </StyledProvider>    
-    )
+            }}
+          >
+            {/* Content inside the red box */}
+          </TouchableOpacity>
+        </ImageBackground>
+      </Box>
+    </StyledProvider>
+  );
 }
+
+const styles = StyleSheet.create({
+  redBox: {
+    width: "40%", // Adjust width as a percentage of the parent container
+    height: 65, // Adjust height as needed
+    borderRadius: 8, // Optional: Adjust border radius for rounded corners
+    marginBottom: 75, // Adjust margin from bottom as a percentage
+    marginLeft: 40,
+  },
+});
 
 export default Login;
