@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   StyleSheet,
   View,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import * as Linking from "expo-linking";
 import * as WebBrowser from "expo-web-browser";
@@ -29,7 +29,6 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
 
   useEffect(() => {
     if (token) {
-      console.log("using token");
       navigation.navigate("Main");
     }
   }, [token, navigation]);
@@ -41,8 +40,6 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
     )
       .then((result) => {
         if (result.type === "success") {
-          console.log(result.url);
-          console.log("handling redirection globally...");
           Linking.openURL(result.url);
         }
       })
@@ -55,9 +52,16 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
-        <ScreenImage width={width} height={height} style={styles.image} preserveAspectRatio="none"/>
-        <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
-        </TouchableOpacity>
+        <ScreenImage
+          width={width}
+          height={height}
+          style={styles.image}
+          preserveAspectRatio="none"
+        />
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleLoginPress}
+        ></TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -68,21 +72,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.DARK_BLUE
+    backgroundColor: Colors.DARK_BLUE,
   },
   imageContainer: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   image: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
   button: {
     position: "absolute",
-    width: '40%',
+    width: "40%",
     height: 100,
     bottom: 0,
     right: 90,
