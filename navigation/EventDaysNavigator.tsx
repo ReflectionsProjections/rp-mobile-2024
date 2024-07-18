@@ -7,7 +7,7 @@ import { useFonts, Inter_400Regular, Inter_500Medium, Inter_700Bold } from '@exp
 const eventsData = [
   {
     id: 1,
-    name: "LLMs",
+    name: "Let's learn about LLMs",
     time: "9:00am",
     day: "Wednesday",
     location: "Siebel 1404",

@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, ScrollView, StyleSheet } from "react-native";
 import EventCard from "../Components/EventCard";
 import GPTCard from "../Components/GPTCard";
+import Colors from "../constants/Colors";
 
 const DayEvent = ({ day, events }) => (
   <View style={styles.container}>
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: "center",
     // justifyContent: "center", // Center the content vertically
-    backgroundColor: 'red',
+    backgroundColor: Colors.DARK_BLUE,
   },
   scrollView: {
     width: "100%",
