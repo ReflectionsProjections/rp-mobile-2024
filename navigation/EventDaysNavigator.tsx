@@ -84,7 +84,7 @@ const EventDaysNavigator = () => {
           backgroundColor: Colors.YELLOW, // Set the indicator color to match active color
         },
         tabBarLabelStyle: {
-          fontSize: 17, // Change this to your desired font size
+          fontSize: 16, // Change this to your desired font size
           fontFamily: "Inter_500Medium", // Change this to your desired font family
           fontWeight: "bold", // Change this to your desired font weight
         },

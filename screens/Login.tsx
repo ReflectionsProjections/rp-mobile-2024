@@ -34,19 +34,20 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
   }, [token, navigation]);
 
   const handleLoginPress = () => {
-    WebBrowser.openAuthSessionAsync(
-      `${authUrl}?redirect_uri=${redirectURL}`,
-      redirectURL
-    )
-      .then((result) => {
-        if (result.type === "success") {
-          Linking.openURL(result.url);
-        }
-      })
-      .catch((err) => {
-        console.error("Failed to open URL:", err.message);
-        alert("Failed to open URL");
-      });
+    navigation.navigate("Main");
+    // WebBrowser.openAuthSessionAsync(
+    //   `${authUrl}?redirect_uri=${redirectURL}`,
+    //   redirectURL
+    // )
+    //   .then((result) => {
+    //     if (result.type === "success") {
+    //       Linking.openURL(result.url);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.error("Failed to open URL:", err.message);
+    //     alert("Failed to open URL");
+    //   });
   };
 
   return (

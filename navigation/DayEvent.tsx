@@ -26,16 +26,16 @@ const DayEvent = ({ day, events }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    backgroundColor: '#111129', // Dark Blue Background
+    // alignItems: "center",
+    // justifyContent: "center", // Center the content vertically
+    backgroundColor: 'red',
   },
   scrollView: {
     width: "100%",
   },
   contentContainer: {
-    flexGrow: 1,
-    alignItems: "center",
-    backgroundColor: '#111129', // Dark Blue Background
+    alignItems: "center", // Center the content horizontally
+    paddingVertical: 10, // Add some vertical padding
   },
 });
 
