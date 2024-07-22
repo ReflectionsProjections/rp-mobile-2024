@@ -13,7 +13,7 @@ import { getQRCode } from "../api/getQRCode";
 import axios from "axios";
 import { Attendee } from "../redux/types";
 import Colors from "../constants/Colors";
-import { useFonts } from "@expo-google-fonts/kufam";
+import { useFonts, Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic } from "@expo-google-fonts/kufam";
 import FoodWaveSVG from "../Components/FoodWaveSVG"
 
 import QRFrame from '../assets/SVGs/qrcode/qr_frame.svg'
@@ -49,20 +49,26 @@ const Profile: React.FC = () => {
   }, [token, dispatch]);
 
   return (
-    <Box width="100%" height="100%" paddingVertical={150} flex={1} backgroundColor={Colors.DARK_BLUE}>
+    <Box width="100%" height="100%" paddingVertical={275} flex={1} backgroundColor={Colors.DARK_BLUE}>
       {attendee && qrcode &&
       <View justifyContent="space-between" alignItems="center">
-        <View style ={{padding: 10}}>
+        <View style ={{padding: 10, position: 'relative', alignItems: 'center', justifyContent: 'center'}}>
           <QRFrame width={320} height={320}/>
-          <QRCode
-            value = {qrcode}
-            size = {300}
-          />
+          <View style={{
+            position: 'absolute',
+            width: 300,  // Match the QR code size
+            height: 300, // Match the QR code size
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <QRCode
+              value={qrcode}
+              size={290}
+            />
+          </View>
         </View>
         <StyledText variant="profileText" fontFamily={"Kufam_700Bold_Italic"} marginTop={50} color={Colors.WHITE}>{attendee.name}</StyledText>
-        <StyledBox variant='foodWave' marginTop={15} justifyContent='center'>
-          <FoodWaveSVG foodWave = {attendee.foodWave} />
-        </StyledBox>
+        <FoodWaveSVG foodWave = {attendee.foodWave}/>
       </View>}
     </Box>
   );

@@ -9,15 +9,17 @@ import EventDropdown from "../Components/EventDropdown";
 import { useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
 import { postCheckIn } from "../api/postCheckIn";
+import { StyledButton } from "../Components/Buttons";
 import axios from "axios";
+import Colors from "../constants/Colors";
 
 // import { Button, ButtonText, ButtonIcon, AddIcon } from "@gluestack-ui/themed";
 
 const AdminScanner: React.FC = () => {
 	const [status, requestPermission] = useCameraPermissions();
 	const [hasPermission, setHasPermission] = useState(false);
-	const [url, setUrl] = useState("");
     const [selectedEvent, setSelectedEvent] = useState(null);
+    const [scanned, setScanned] = useState(false);
 	const isFocused = useIsFocused();
     const token = useAppSelector((state: RootState) => state.token);
 
@@ -28,11 +30,8 @@ const AdminScanner: React.FC = () => {
 	}, []);
 
 	const handleBarCodeScanned = ({type, data}) => {
-		if (data != url) {
-			alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-			setUrl(data); // might not need this
-            postCheckIn(token, selectedEvent, data)
-		}
+        setScanned(true);
+		postCheckIn(token, selectedEvent, data)
 	};
 
 	// mute={true} is used to mute the camera so we dont need mic permissions
@@ -49,9 +48,18 @@ const AdminScanner: React.FC = () => {
                     )}
                     <CameraView 
                         mute={true} width="100%" height="100%" facing={"back"}
-                        onBarcodeScanned={handleBarCodeScanned}
+                        onBarcodeScanned={scanned ? undefined: handleBarCodeScanned}
                         barcodeScannerSettings={{barcodeTypes: ["qr"]}}
                     />
+                    <View style={styles.buttonContainer}>
+                        {scanned && 
+                            <StyledButton styleVariant="scan"
+                                onPress={() => setScanned(false)}
+                            >
+                                <ButtonText color={Colors.WHITE}>Tap to Scan Again </ButtonText>
+                            </StyledButton> 
+                        }
+                    </View>
                 </View>
             ) : (
             <View>
@@ -79,10 +87,19 @@ const styles = StyleSheet.create({
     },
     dropdownContainer: {
       position: 'absolute',
-      top: 20,
+      top: 35,
       right: 20,
       zIndex: 1000
     },
+    buttonContainer: {
+        position: 'absolute',
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignSelf: 'center',
+        bottom: 20,
+        zIndex: 1000,
+        width: '75%'
+    }
   });
 
 export default AdminScanner;

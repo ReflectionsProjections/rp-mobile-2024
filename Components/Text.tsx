@@ -1,7 +1,6 @@
 import { styled } from "@gluestack-style/react";
 import { Text } from "@gluestack-ui/themed";
-import { useFonts } from "@expo-google-fonts/kufam";
-
+import { useFonts, Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic } from "@expo-google-fonts/kufam";
 
 const StyledText = styled(Text, 
     {
