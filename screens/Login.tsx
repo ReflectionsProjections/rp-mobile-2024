@@ -13,7 +13,7 @@ import { useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
 import Colors from "../constants/Colors";
 
-import ScreenImage from "../assets/LoginScreen.svg";
+import ScreenImage from "../assets/SVGs/login/LoginScreen.svg";
 
 const authUrl = "https://api.reflectionsprojections.org/auth/login/mobile/";
 const redirectURL = "reflectionsprojections://Main";

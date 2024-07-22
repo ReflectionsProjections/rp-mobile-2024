@@ -14,6 +14,9 @@ import axios from "axios";
 import { Attendee } from "../redux/types";
 import Colors from "../constants/Colors";
 import { useFonts } from "@expo-google-fonts/kufam";
+import FoodWaveSVG from "../Components/FoodWaveSVG"
+
+import QRFrame from '../assets/SVGs/qrcode/qr_frame.svg'
 
 const Profile: React.FC = () => {
   
@@ -44,14 +47,13 @@ const Profile: React.FC = () => {
     const interval = setInterval(getQRCode, 20000);
     return () => clearInterval(interval);
   }, [token, dispatch]);
-  
+
   return (
     <Box width="100%" height="100%" paddingVertical={150} flex={1} backgroundColor={Colors.DARK_BLUE}>
       {attendee && qrcode &&
       <View justifyContent="space-between" alignItems="center">
-        <View style ={{
-          borderWidth: 10, borderColor: Colors.YELLOW, padding: 10, borderRadius: 5,
-        }}>
+        <View style ={{padding: 10}}>
+          <QRFrame width={320} height={320}/>
           <QRCode
             value = {qrcode}
             size = {300}
@@ -59,9 +61,7 @@ const Profile: React.FC = () => {
         </View>
         <StyledText variant="profileText" fontFamily={"Kufam_700Bold_Italic"} marginTop={50} color={Colors.WHITE}>{attendee.name}</StyledText>
         <StyledBox variant='foodWave' marginTop={15} justifyContent='center'>
-          <StyledText variant="medium">
-            {`Food Wave: ${attendee.foodWave}`}
-          </StyledText>
+          <FoodWaveSVG foodWave = {attendee.foodWave} />
         </StyledBox>
       </View>}
     </Box>
