@@ -8,6 +8,8 @@ import {Linking, StyleSheet} from "react-native";
 import EventDropdown from "../Components/EventDropdown";
 import { useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
+import { postCheckIn } from "../api/postCheckIn";
+import axios from "axios";
 
 // import { Button, ButtonText, ButtonIcon, AddIcon } from "@gluestack-ui/themed";
 
@@ -15,6 +17,7 @@ const AdminScanner: React.FC = () => {
 	const [status, requestPermission] = useCameraPermissions();
 	const [hasPermission, setHasPermission] = useState(false);
 	const [url, setUrl] = useState("");
+    const [selectedEvent, setSelectedEvent] = useState(null);
 	const isFocused = useIsFocused();
     const token = useAppSelector((state: RootState) => state.token);
 
@@ -27,7 +30,8 @@ const AdminScanner: React.FC = () => {
 	const handleBarCodeScanned = ({type, data}) => {
 		if (data != url) {
 			alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-			setUrl(data);
+			setUrl(data); // might not need this
+            postCheckIn(token, selectedEvent, data)
 		}
 	};
 
@@ -40,7 +44,7 @@ const AdminScanner: React.FC = () => {
                 <View style = {styles.cameraContainer}>
                     {token && (
                         <View style = {styles.dropdownContainer}>
-                            <EventDropdown token={token}/>
+                            <EventDropdown token={token} onEventSelect={setSelectedEvent}/>
                         </View>
                     )}
                     <CameraView 

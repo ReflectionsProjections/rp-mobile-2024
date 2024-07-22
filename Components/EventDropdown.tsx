@@ -11,9 +11,10 @@ interface Event {
 
 interface EventDropdownProps {
   token: string;
+  onEventSelect: (eventId: string | null) => void;
 }
 
-const EventDropdown: React.FC<EventDropdownProps> = ({ token }) => {
+const EventDropdown: React.FC<EventDropdownProps> = ({ token, onEventSelect }) => {
   const [events, setEvents] = useState<Event[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
 
@@ -33,7 +34,10 @@ const EventDropdown: React.FC<EventDropdownProps> = ({ token }) => {
   return (
     <View style={styles.container}>
       <RNPickerSelect
-        onValueChange={(value) => setSelectedEvent(value)}
+        onValueChange={(value) => {
+          setSelectedEvent(value);
+          onEventSelect(value);
+        }}
         items={events.map((event) => ({
           label: event.name,
           value: event.eventId,
