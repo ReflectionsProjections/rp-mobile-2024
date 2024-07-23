@@ -88,12 +88,12 @@ const EventDaysNavigator = () => {
     >
       <WeekTab.Screen name="WED">
         {() => (
-          <DayEvent day="Wednesday" events={filterEventsByDay("Monday")} />
+          <DayEvent day="Wednesday" events={filterEventsByDay("Wednesday")} />
         )}
       </WeekTab.Screen>
       <WeekTab.Screen name="THUR">
         {() => (
-          <DayEvent day="Thursday" events={filterEventsByDay("Tuesday")} />
+          <DayEvent day="Thursday" events={filterEventsByDay("Thursday")} />
         )}
       </WeekTab.Screen>
       <WeekTab.Screen name="FRI">
