@@ -13,9 +13,6 @@ const eventsURL = "https://api.reflectionsprojections.org/events/";
 
 const WeekTab = createMaterialTopTabNavigator();
 
-const ACTIVE_COLOR = "black";
-const INACTIVE_COLOR = "gray";
-
 const EventDaysNavigator = () => {
   const [eventsData, setEventsData] = useState([]);
 
@@ -40,7 +37,7 @@ const EventDaysNavigator = () => {
     return eventsData.filter((event) => {
       // Extract the startTime from the event object
       const startTime = new Date(event.startTime);
-      
+
       // Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
       const eventDayOfWeek = startTime.getDay();
 
@@ -57,7 +54,6 @@ const EventDaysNavigator = () => {
       const eventDayName = daysOfWeek[eventDayOfWeek];
 
       // Compare with the provided day parameter
-      console.log(eventsData);
       return eventDayName === day;
     });
   };

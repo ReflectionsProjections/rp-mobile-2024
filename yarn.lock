@@ -7080,6 +7080,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-splash-screen@npm:~0.27.5":
+  version: 0.27.5
+  resolution: "expo-splash-screen@npm:0.27.5"
+  dependencies:
+    "@expo/prebuild-config": 7.0.6
+  peerDependencies:
+    expo: "*"
+  checksum: db82996f2b6b40c566f16f51e3d4f68f6e9fba8f4923455b296a79ff68dd7746f3938714d02220687254d47512f928bc10b0dede2e890db652a37da98586f674
+  languageName: node
+  linkType: hard
+
 "expo-status-bar@npm:~1.12.1":
   version: 1.12.1
   resolution: "expo-status-bar@npm:1.12.1"
@@ -11373,6 +11384,7 @@ __metadata:
     expo-app-loading: ^2.1.1
     expo-camera: ^15.0.11
     expo-linking: ^6.3.1
+    expo-splash-screen: ~0.27.5
     expo-status-bar: ~1.12.1
     expo-web-browser: ^13.0.3
     install: ^0.13.0
