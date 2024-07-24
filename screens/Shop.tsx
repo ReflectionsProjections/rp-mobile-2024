@@ -1,11 +1,15 @@
-import React from 'react';
-import { SafeAreaView, View, Text, Image, StyleSheet } from 'react-native';
+import React from "react";
+import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
-import { useFonts, PressStart2P_400Regular } from '@expo-google-fonts/press-start-2p';
-import AppLoading from 'expo-app-loading';
+import {
+  useFonts,
+  PressStart2P_400Regular,
+} from "@expo-google-fonts/press-start-2p";
+import AppLoading from "expo-app-loading";
+
+import ProgressBar from "../assets/progressBar.svg";
 
 const Shop: React.FC = () => {
-
   let [fontsLoaded] = useFonts({
     PressStart2P_400Regular,
   });
@@ -21,34 +25,57 @@ const Shop: React.FC = () => {
           Attend events to earn points and unlock prizes!
         </Text>
         <View style={styles.pointsContainer}>
-          <Text style={styles.points}>
-            Your Points: 
-          </Text>
+          <Text style={styles.points}>Your Points:</Text>
           <Image
             source={require("../assets/token.png")}
             style={styles.tokenImage}
-          ></Image>
+          />
           <Text style={styles.points}>x{20}</Text>
         </View>
         <View style={styles.photoContainer}>
           <View style={styles.leftSide}>
-            <Image
-              source={{ uri: 'https://via.placeholder.com/150' }}
-              style={styles.smallPhoto}
-            />
-            <Image
-              source={{ uri: 'https://via.placeholder.com/150' }}
-              style={styles.smallPhoto}
-            />
-            <Image
-              source={{ uri: 'https://via.placeholder.com/150' }}
-              style={styles.smallPhoto}
+            <View style={styles.photoWithPoints}>
+              <Image
+                source={{ uri: "https://via.placeholder.com/150" }}
+                style={styles.smallPhoto}
+              />
+              <Image
+                source={require("../assets/token.png")}
+                style={styles.tokenImage}
+              />
+              <Text style={styles.points}>x{50}</Text>
+            </View>
+            <View style={styles.photoWithPoints}>
+              <Image
+                source={{ uri: "https://via.placeholder.com/150" }}
+                style={styles.smallPhoto}
+              />
+              <Image
+                source={require("../assets/token.png")}
+                style={styles.tokenImage}
+              />
+              <Text style={styles.points}>x{35}</Text>
+            </View>
+            <View style={styles.photoWithPoints}>
+              <Image
+                source={{ uri: "https://via.placeholder.com/150" }}
+                style={styles.smallPhoto}
+              />
+              <Image
+                source={require("../assets/token.png")}
+                style={styles.tokenImage}
+              />
+              <Text style={styles.points}>x{25}</Text>
+            </View>
+          </View>
+          <View style={styles.progressBarContainer}>
+            <ProgressBar
+              style={styles.progressBar}
+              preserveAspectRatio="none"
+              height={450}
+              width={100}
             />
           </View>
-          <Image
-            source={{ uri: 'https://via.placeholder.com/450x450' }}
-            style={styles.longPhoto}
-          />
         </View>
       </View>
     </SafeAreaView>
@@ -62,56 +89,59 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 20,
+    margin: 20,
   },
   description: {
     fontSize: 15,
     marginBottom: 10,
-    fontFamily: 'PressStart2P_400Regular',
-    color: Colors.YELLOW
+    fontFamily: "PressStart2P_400Regular",
+    color: Colors.YELLOW,
   },
   pointsContainer: {
-    // flex: 1,
-    // backgroundColor: 'red',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
   },
   points: {
     fontSize: 15,
     marginRight: 10,
-    fontFamily: 'PressStart2P_400Regular',
-    color: Colors.YELLOW
+    fontFamily: "PressStart2P_400Regular",
+    color: Colors.YELLOW,
   },
   tokenImage: {
-    width: 30, // Adjust the width as needed
-    height: 30, // Adjust the height as needed
-    marginRight: 5
+    width: 30,
+    height: 30,
+    marginRight: 5,
   },
   photoContainer: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   leftSide: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
+    marginLeft: 10
+  },
+  photoWithPoints: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 10,
   },
   smallPhoto: {
-    flex: 1,
-    width: '100%',
-    // height: undefined,
-    // aspectRatio: 1,  // Assuming the aspect ratio is 1:1 for the small photos
-    marginBottom: 10,
+    width: 100,
+    height: 100,
+    marginRight: 20,
   },
-  longPhoto: {
+  progressBarContainer: {
     flex: 1,
-    width: '100%',
-    // height: undefined,
-    // aspectRatio: 3 / 1,  // Adjust the aspect ratio as needed
-    marginLeft: 20,
-    marginBottom: 10,
+    alignItems: 'flex-end',
+    // paddingHorizontal: 10, // Add padding if needed
+  },
+  progressBar: {
+    flex: 1,
+    width: "100%",
   },
 });
 
