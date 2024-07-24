@@ -1,167 +1,143 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Pressable } from "react-native";
 import {
-  Box,
-  Modal,
-  ButtonText,
-  ModalBackdrop,
-  ModalContent,
-  ModalHeader,
-  Heading,
-  ModalCloseButton,
-  Icon,
-  ModalBody,
-  ModalFooter,
-  Button,
-  Card,
+  View,
+  StyleSheet,
   Text,
-  HStack,
-  Badge,
-  BadgeText,
-  BadgeIcon,
-} from "@gluestack-ui/themed";
-import { FontAwesome, Feather } from "@expo/vector-icons";
+  Pressable,
+  Dimensions,
+  Image,
+} from "react-native";
+import {
+  useFonts,
+  Kufam_400Regular,
+  Kufam_700Bold,
+  Kufam_700Bold_Italic,
+} from "@expo-google-fonts/kufam";
+import CustomModal from "./CustomModal"; // Import the custom modal
 
-import Entypo from "@expo/vector-icons/Entypo";
+import AppLoading from "expo-app-loading";
+import Colors from "../constants/Colors";
+
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 
-export type EventCardProps = {
-  name: string;
-  time: string;
-  location: string;
-  person: string;
-  graphic: string;
-  description: string;
-};
+import EventsCard from "../assets/eventsCard.svg";
+// import Token from "../assets/token.svg"
 
-const EventCard: React.FC<EventCardProps> = ({
-  name,
-  time,
-  location,
-  person,
-  graphic,
-  description,
-}) => {
+const EventCard = ({ name, time, location, description, points }) => {
   const [showModal, setShowModal] = useState(false);
-  const ref = React.useRef(null);
+
+  let [fontsLoaded] = useFonts({
+    Kufam_400Regular,
+    Kufam_700Bold,
+    Kufam_700Bold_Italic,
+  });
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Pressable onPress={() => setShowModal(true)}>
-        {/* <Box style={styles.card}>
-          <Text style={styles.name}>{name}</Text>
-          <View style={styles.timeLocationContainer}>
-            <Text style={styles.time}>{time}</Text>
-            <Text style={styles.location}>{location}</Text>
+    <View style={styles.card}>
+      <Pressable onPress={() => setShowModal(true)} style={styles.pressable}>
+        <View style={styles.imageContainer}>
+          <EventsCard></EventsCard>
+          <View style={styles.eventDetails}>
+            <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
+              {name}{" "}
+            </Text>
+            <View style={styles.info}>
+              <View style={styles.infoItem}>
+                <EvilIcons name="location" size={26} color={Colors.DARK_BLUE} />
+                <Text style={styles.infoText}>{location}</Text>
+              </View>
+              <View style={styles.infoItem}>
+                <EvilIcons name="clock" size={26} color={Colors.DARK_BLUE} />
+                <Text style={styles.infoText}>{time}</Text>
+              </View>
+              <View style={styles.infoItem}>
+                <Image
+                  source={require("../assets/token.png")}
+                  style={styles.tokenImage}
+                ></Image>
+                <Text style={styles.infoText}> x{points}</Text>
+              </View>
+            </View>
+            <Text
+              style={styles.description}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+            >
+              {description}
+            </Text>
           </View>
-          <Text style={styles.person}>{person}</Text>
-          <Text style={styles.description}>{description}</Text>
-        </Box> */}
-        <Card size="lg" variant="elevated" m="$3">
-          <Heading mb="$1" size="lg">
-            {name}
-          </Heading>
-          <HStack>
-            <EvilIcons name="location" size={26} color="black" />
-            <Text size="md">{location}</Text>
-            <EvilIcons name="clock" size={26} color="black" />
-            <Text size="md">{time}</Text>
-            <Badge size="sm" variant="solid" borderRadius="$full" action="info">
-              <BadgeText>10 points</BadgeText>
-            </Badge>
-          </HStack>
-          <Text size="sm">{description}</Text>
-        </Card>
+        </View>
       </Pressable>
-      <Modal
-        isOpen={showModal}
-        onClose={() => {
-          setShowModal(false);
-        }}
-        finalFocusRef={ref}
-      >
-        <ModalBackdrop />
-        <ModalContent>
-          <ModalHeader>
-            <Heading size="lg">{name}</Heading>
-            <ModalCloseButton>
-              <Feather name="x" size={24} color="black" />
-            </ModalCloseButton>
-          </ModalHeader>
-          <ModalBody>
-            <HStack>
-              <Text size="md">{location} @ </Text>
-              <Text size="md">{time}</Text>
-            </HStack>
-            <Text size="sm">{description}</Text>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              variant="outline"
-              size="sm"
-              action="secondary"
-              mr="$3"
-              onPress={() => {
-                setShowModal(false);
-              }}
-            >
-              <ButtonText>Cancel</ButtonText>
-            </Button>
-            <Button
-              size="sm"
-              action="positive"
-              borderWidth="$0"
-              onPress={() => {
-                setShowModal(false);
-              }}
-            >
-              <ButtonText>Explore</ButtonText>
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <CustomModal
+        visible={showModal}
+        onClose={() => setShowModal(false)}
+        title={name}
+        location={location}
+        time={time}
+        points={points}
+        description={description}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-  },
   card: {
-    backgroundColor: "#f0f0f0", // Light grey background
-    borderColor: "black", // Black border color
-    borderWidth: 1, // Border width
-    borderRadius: 10, // Rounded corners
-    padding: 10, // Padding inside the box
-    marginBottom: 10, // Margin bottom for spacing between cards
-    width: "90%", // Width of the card
-    alignSelf: "center", // Center card within its parent container
+    width: "100%",
+    marginBottom: 30,
+  },
+  pressable: {
+    flex: 1,
+    alignSelf: "center",
+  },
+  imageContainer: {
+    width: "100%",
+    height: 120,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // position: 'relative',
+  },
+  eventDetails: {
+    position: "absolute",
+    marginLeft: 15,
+    marginTop: 30,
+    maxWidth: Dimensions.get("window").width * 0.8,
   },
   name: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 5, // Margin bottom for spacing below the name
+    fontSize: 20,
+    color: "black",
+    fontFamily: "Kufam_700Bold",
   },
-  timeLocationContainer: {
+  info: {
     flexDirection: "row",
-    justifyContent: "space-between", // Spread time and location to each side
-    marginBottom: 5, // Margin bottom for spacing below the row
+    // justifyContent: "space-evenly",
   },
-  time: {
-    fontSize: 16,
-    color: "#555", // Darker grey for less emphasis
+  infoItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    // justifyContent: "space-evenly",
+    marginHorizontal: 8,
   },
-  location: {
+  infoText: {
+    // marginLeft: 4,
+    color: Colors.DARK_BLUE,
     fontSize: 16,
-    color: "#555", // Darker grey for less emphasis
+    fontWeight: "bold",
   },
-  person: {
-    fontSize: 16,
-    marginBottom: 5, // Margin bottom for spacing below the person name
+  tokenImage: {
+    width: 20, // Adjust the width as needed
+    height: 20, // Adjust the height as needed
   },
   description: {
     fontSize: 14,
-    color: "darkgrey", // Lighter text color for the description
+    color: "black",
+    fontFamily: "Kufam_400Regular",
+    marginTop: 10,
+    flexWrap: "wrap",
   },
 });
 
