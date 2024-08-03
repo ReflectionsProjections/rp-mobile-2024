@@ -3,12 +3,13 @@ import {
   View,
   Image,
   StyleSheet,
-  Dimensions,
   SafeAreaView,
 } from "react-native";
 import EventDaysNavigator from "../navigation/EventDaysNavigator";
 import Colors from "../constants/Colors";
-import { FontAwesome5 } from "@expo/vector-icons"; // assuming you're using expo icons
+
+import EventsBanner from "../assets/EventsBanner.svg";
+
 
 const Events: React.FC = () => {
   return (
@@ -19,10 +20,7 @@ const Events: React.FC = () => {
           style={styles.windowButtonsImage}
         />
       </View>
-      <Image
-        source={require("../assets/eventsBanner.png")} // Update the path to your image
-        style={styles.bannerImage}
-      />
+      <EventsBanner style={styles.bannerImage}></EventsBanner>
       <EventDaysNavigator />
     </SafeAreaView>
   );
@@ -43,7 +41,7 @@ const styles = StyleSheet.create({
   },
   bannerImage: {
     alignSelf: "center",
-    marginTop: 10,
+    marginTop: 15,
   },
   windowButtonsImage: {
   }
