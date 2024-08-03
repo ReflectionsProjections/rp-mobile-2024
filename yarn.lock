@@ -7080,6 +7080,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-splash-screen@npm:~0.27.5":
+  version: 0.27.5
+  resolution: "expo-splash-screen@npm:0.27.5"
+  dependencies:
+    "@expo/prebuild-config": 7.0.6
+  peerDependencies:
+    expo: "*"
+  checksum: db82996f2b6b40c566f16f51e3d4f68f6e9fba8f4923455b296a79ff68dd7746f3938714d02220687254d47512f928bc10b0dede2e890db652a37da98586f674
+  languageName: node
+  linkType: hard
+
 "expo-status-bar@npm:~1.12.1":
   version: 1.12.1
   resolution: "expo-status-bar@npm:1.12.1"
@@ -10742,13 +10753,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-pager-view@npm:^6.3.1":
-  version: 6.3.1
-  resolution: "react-native-pager-view@npm:6.3.1"
+"react-native-pager-view@npm:6.3.0":
+  version: 6.3.0
+  resolution: "react-native-pager-view@npm:6.3.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: ef83fb53350d7b4c262a8c4d4bf6fbee8f8941e56469135463a47d496ff8fd43f7efe52d02c3a583427800fc88c96a9bf8e601a45a6e671834d5fffe9541e3e4
+  checksum: 6a7224c191bf64a2a476627221cc7fcbcb9bbc735ec5f2215d5b888fb8d31c0fc2c769b298b9a21d68636bcef626ae8d1b266f0b414d469a9a8fb21b4357c45c
   languageName: node
   linkType: hard
 
@@ -10821,6 +10832,17 @@ __metadata:
     react-native: ">=0.59.0"
     react-native-svg: ">=12.0.0"
   checksum: 9f457ee91cce8f7644e712f0ad1b051533e61499cc816a03c416fd6482110b1caeb71e1cb3379de23953ffaa6cc2149fd10688b7fd8083efce804e0164ff6c40
+  languageName: node
+  linkType: hard
+
+"react-native-svg-uri@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "react-native-svg-uri@npm:1.2.3"
+  dependencies:
+    xmldom: ^0.1.22
+  peerDependencies:
+    react-native-svg: ^5.3.0
+  checksum: e82311633783303be339389bafc3a44423645c6a80e8f7d667c4b0cc4f5f660943d08d43f710d899bbaf4d581cf0fcd7dc2db7139baf77165a1d53feef9a7a7a
   languageName: node
   linkType: hard
 
@@ -11362,6 +11384,7 @@ __metadata:
     expo-app-loading: ^2.1.1
     expo-camera: ^15.0.11
     expo-linking: ^6.3.1
+    expo-splash-screen: ~0.27.5
     expo-status-bar: ~1.12.1
     expo-web-browser: ^13.0.3
     install: ^0.13.0
@@ -11370,13 +11393,14 @@ __metadata:
     react-native: 0.74.2
     react-native-gesture-handler: ^2.16.0
     react-native-modal: ^13.0.1
-    react-native-pager-view: ^6.3.1
+    react-native-pager-view: 6.3.0
     react-native-qrcode-svg: ^6.3.1
     react-native-reanimated: ~3.10.1
     react-native-safe-area-context: 4.10.1
     react-native-screens: 3.31.1
     react-native-svg: ^15.3.0
     react-native-svg-transformer: ^1.4.0
+    react-native-svg-uri: ^1.2.3
     react-native-tab-view: ^3.5.2
     react-navigation: ^5.0.0
     react-redux: ^9.1.2
@@ -13067,6 +13091,13 @@ __metadata:
   version: 11.0.1
   resolution: "xmlbuilder@npm:11.0.1"
   checksum: 7152695e16f1a9976658215abab27e55d08b1b97bca901d58b048d2b6e106b5af31efccbdecf9b07af37c8377d8e7e821b494af10b3a68b0ff4ae60331b415b0
+  languageName: node
+  linkType: hard
+
+"xmldom@npm:^0.1.22":
+  version: 0.1.31
+  resolution: "xmldom@npm:0.1.31"
+  checksum: 3073ca4a096892f86991ad0fce9aa1e874f16a974aa2c0911b1a218922d80fe3762b56aa3a2d9fe4a46d61416193c6dc0839776748b24e0cfb56197babf77a94
   languageName: node
   linkType: hard
 
