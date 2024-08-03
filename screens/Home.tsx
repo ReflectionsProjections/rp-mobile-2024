@@ -26,6 +26,7 @@ import Background from "../assets/SVGs/home/home_bg.svg"
 import Token from "../assets/SVGs/home/token.svg"
 
 import { getCurrentOrNext } from "../api/getCurrentNextEvent";
+import { getEvents } from "../api/getEvents";
 
 
 
@@ -50,29 +51,29 @@ const Home: React.FC = ({}) => {
     };
 
     fetchCurrNext();
-  }, []);
+  }, [token]);
 
   return (
     <SafeAreaView style = {{flex: 1, position: 'relative'}}>
       <Background width={width} height={height} style={{position: 'absolute'}}/>
       <View style={{position: 'relative', width:'100%', height:'100%'}}>
         <OngoingEvent style={{position: 'absolute', top:'25%', left:'10%'}} />
-        {1==1 ? (
+        {currNextEvent && token ? (
           <View style={styles.eventDataContainer}>
             <View style={styles.tabValue}>
               <Text style = {styles.tabText}>ONGOING</Text>
             </View>
             <View style={styles.header}>
-              <Text style={styles.title}>Event</Text>
+              <Text style={styles.title}>{currNextEvent.name}</Text>
             </View>
             <View style={styles.info}>
               <View style={styles.infoItem}>
                 <EvilIcons name="location" size={26} color={Colors.WHITE} />
-                <Text style={styles.infoText}>Location</Text>
+                <Text style={styles.infoText}>{currNextEvent.location}</Text>
               </View>
               <View style={styles.infoItem}>
                 <EvilIcons name="clock" size={26} color={Colors.WHITE} />
-                <Text style={styles.infoText}>Time</Text>
+                <Text style={styles.infoText}>{currNextEvent.time}</Text>
               </View>
               <View style={styles.infoItem}>
                 <Token width={30} height={30} style={{marginRight: 5, marginLeft: 40}}/>
