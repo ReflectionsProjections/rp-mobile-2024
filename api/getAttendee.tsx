@@ -6,7 +6,7 @@ export const getAttendee = (token: string) => {
         try {
           const response = await fetch('https://api.reflectionsprojections.org/attendee/', {
             headers: {
-              'Authorization': `Bearer ${token}`,
+              Authorization: token
             },
           });
           
@@ -17,7 +17,6 @@ export const getAttendee = (token: string) => {
           }
 
           const data = await response.json();
-          console.log("attendee:", data);
           dispatch(setAttendee(data));
         } catch (error) {
           console.error('Error fetching attendee:', error);

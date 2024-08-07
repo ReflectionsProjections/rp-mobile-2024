@@ -9,13 +9,13 @@ const Images = styled(Image,
                 qrCode: {
                     height: 300,
                     width: 300, 
-                    borderRadius: "$xl",
+                    borderRadius: "$lg",
                     marginTop: "$5",
                 },
                 loginLogo: {
                     height: 300,
                     width: 300, 
-                    borderRadius: "$xl",
+                    borderRadius: "$lg",
                     marginTop: "$5",
                 }
             }

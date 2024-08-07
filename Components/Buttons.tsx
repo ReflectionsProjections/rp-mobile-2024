@@ -2,6 +2,7 @@ import React from "react";
 import { Pressable } from "@gluestack-ui/themed";
 import { Button } from "@gluestack-ui/themed";
 import { styled } from "@gluestack-style/react";
+import Colors from "../constants/Colors";
 
 const StyledButton = styled(Button, 
     {
@@ -12,6 +13,9 @@ const StyledButton = styled(Button,
                     width: 250, 
                     marginBottom: "$3",
                     bg: "$lightgray",
+                }, 
+                scan: {
+                    bg: Colors.DARK_BLUE
                 }
             },
         },
