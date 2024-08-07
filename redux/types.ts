@@ -1,6 +1,7 @@
 export interface State {
     user_id: string | null;
     token: string | null;
+    roles: string[] | null;
     isAuthenticated: boolean;
     attendee: Attendee | null;
     qrCodeURL: string | null

@@ -13,64 +13,62 @@ import { getQRCode } from "../api/getQRCode";
 import axios from "axios";
 import { Attendee } from "../redux/types";
 import Colors from "../constants/Colors";
+import { useFonts, Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic } from "@expo-google-fonts/kufam";
+import FoodWaveSVG from "../Components/FoodWaveSVG"
+
+import QRFrame from '../assets/SVGs/qrcode/qr_frame.svg'
 
 const Profile: React.FC = () => {
+  
+  const dispatch = useAppDispatch();
+  const token = useAppSelector((state: RootState) => state.token);
+  console.log("profile token:", token);
+  const attendee = useAppSelector((state: RootState) => state.attendee);
+  const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
+  console.log("qrcode string:", qrcode);
 
-  const [attendee, setAttendee] = useState<Attendee>(null);
-  const [qrcode, setQRCode] = useState(null);
-  const [token, _] = useState(useAppSelector((state: RootState) => state.token));
-
-  useLayoutEffect(() => {
-    console.log("in use effect", token);
-    axios.get('https://api.reflectionsprojections.org/attendee/', {
-      headers: {
-        Authorization: token
-      }
-    }).then(attendeeData => {
-      console.log(attendeeData.data);
-      if (token) {
-        setAttendee(attendeeData.data);
-      }
-    });
-  }, []);
 
   useEffect(() => {
-    console.log("in use effect", token);
-    const getQRCode = async () => {
-      const qrcode = await axios.get('https://api.reflectionsprojections.org/attendee/qr', {
-        headers: {
-          Authorization: token
-        }
-      });
-      console.log(qrcode.data);
+    if (token && !attendee) {
+      dispatch(getAttendee(token));
+    }
+    if (token && !qrcode) {
+      dispatch(getQRCode(token));
+    }
+  }, [token, attendee, qrcode, dispatch]);
+
+  useEffect(() => {
+    const fetchQRCode = async() => {
       if (token) {
-        setQRCode(qrcode.data);
+        await(dispatch(getQRCode(token)));
       }
     };
-    
-    getQRCode();
+    fetchQRCode();
     const interval = setInterval(getQRCode, 20000);
     return () => clearInterval(interval);
-  }, [token]);
+  }, [token, dispatch]);
 
   return (
-    <Box width="100%" height="100%" paddingVertical={150} flex={1} backgroundColor={Colors.DARK_BLUE}>
+    <Box width="100%" height="100%" paddingVertical={275} flex={1} backgroundColor={Colors.DARK_BLUE}>
       {attendee && qrcode &&
       <View justifyContent="space-between" alignItems="center">
-        <View style ={{
-          borderWidth: 10, borderColor: Colors.YELLOW, padding: 10, borderRadius: 5,
-        }}>
-          <QRCode
-            value = {qrcode.data}
-            size = {300}
-          />
+        <View style ={{padding: 10, position: 'relative', alignItems: 'center', justifyContent: 'center'}}>
+          <QRFrame width={320} height={320}/>
+          <View style={{
+            position: 'absolute',
+            width: 300,  // Match the QR code size
+            height: 300, // Match the QR code size
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+            <QRCode
+              value={qrcode}
+              size={290}
+            />
+          </View>
         </View>
-        <StyledText variant="bigText" marginTop={50} color={Colors.WHITE}>{attendee.name}</StyledText>
-        <StyledBox variant='foodWave' marginTop={15} justifyContent='center'>
-          <StyledText variant="medium">
-            {`Food Wave: ${attendee.foodWave}`}
-          </StyledText>
-        </StyledBox>
+        <StyledText variant="profileText" fontFamily={"Kufam_700Bold_Italic"} marginTop={50} color={Colors.WHITE}>{attendee.name}</StyledText>
+        <FoodWaveSVG foodWave = {attendee.foodWave}/>
       </View>}
     </Box>
   );
