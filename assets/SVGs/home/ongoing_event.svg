@@ -1,0 +1,31 @@
+<svg width="353" height="170" viewBox="0 0 353 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 3H105V6H24V3Z" fill="#FFD668"/>
+<path d="M105 3H108V6H105V3Z" fill="#FFD668"/>
+<path d="M27 0H105V3H27V0Z" fill="#FFD668"/>
+<path d="M21 6H108V26H21V6Z" fill="#FFD668"/>
+<path d="M108 6H111V26H108V6Z" fill="#FFD668"/>
+<path d="M11 164H347V167H11V164Z" fill="#FFD668"/>
+<path d="M347 164H350V167H347V164Z" fill="#FFD668"/>
+<path d="M347 40H350V164H347V40Z" fill="#FFD668"/>
+<path d="M344 37H347V164H344V37Z" fill="#FFD668"/>
+<path d="M341 154H344V164H341V154Z" fill="#FFD668"/>
+<path d="M338 154H341V164H338V154Z" fill="#FFD668"/>
+<path d="M336 154H339V164H336V154Z" fill="#FFD668"/>
+<path d="M350 43H353V164H350V43Z" fill="#FFD668"/>
+<path d="M14 167H347V170H14V167Z" fill="#FFD668"/>
+<path d="M5 31H10V36H5V31Z" fill="#FF81D2"/>
+<path d="M5 154H10V159H5V154Z" fill="#FF81D2"/>
+<path d="M0 36H5V154H0V36Z" fill="#FF81D2"/>
+<path d="M341 36H346V154H341V36Z" fill="#FF81D2"/>
+<path d="M336 31H341V36H336V31Z" fill="#FF81D2"/>
+<path d="M336 149H341V159H336V149Z" fill="#FF81D2"/>
+<path d="M10 26H336V31H10V26Z" fill="#FF81D2"/>
+<path d="M10 159H336V164H10V159Z" fill="#FF81D2"/>
+<rect x="12" y="35" width="320" height="15.6614" rx="3" fill="url(#paint0_linear_2007_996)"/>
+<defs>
+<linearGradient id="paint0_linear_2007_996" x1="12" y1="42.8307" x2="332" y2="42.8307" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FE77DD"/>
+<stop offset="1" stop-color="#FFD963"/>
+</linearGradient>
+</defs>
+</svg>
