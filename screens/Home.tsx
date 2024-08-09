@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
-import { Button, ButtonText, ButtonIcon, AddIcon } from "@gluestack-ui/themed";
-import { useRoute } from "@react-navigation/native";
-import { logout } from "../redux/actions";
+import { format } from "date-fns";
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -15,6 +13,9 @@ import {
   useFonts,
   PressStart2P_400Regular,
 } from "@expo-google-fonts/press-start-2p";
+import {
+  Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic
+} from "@expo-google-fonts/kufam";
 
 type RootStackParamList = {
   Home: undefined;
@@ -23,6 +24,7 @@ type RootStackParamList = {
 
 import OngoingEvent from "../assets/SVGs/home/ongoing_event.svg"
 import Background from "../assets/SVGs/home/home_bg.svg"
+import Bar from "../assets/SVGs/home/bar_6.svg"
 import Token from "../assets/SVGs/home/token.svg"
 
 import { getCurrentOrNext } from "../api/getCurrentNextEvent";
@@ -35,7 +37,8 @@ type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const Home: React.FC = ({}) => {
   let [fontsLoaded] = useFonts({
-    PressStart2P_400Regular
+    PressStart2P_400Regular,
+    Kufam_700Bold
   });
   const token = useAppSelector((state: RootState) => state.token);
   const [currNextEvent, setCurrNextEvent] = useState(null);
@@ -56,8 +59,8 @@ const Home: React.FC = ({}) => {
   return (
     <SafeAreaView style = {{flex: 1, position: 'relative'}}>
       <Background width={width} height={height} style={{position: 'absolute'}}/>
-      <View style={{position: 'relative', width:'100%', height:'100%'}}>
-        <OngoingEvent style={{position: 'absolute', top:'25%', left:'10%'}} />
+      <View style={{position: 'relative', width:'100%', height:'80%'}}>
+        <OngoingEvent width={0.9 * width} height={0.5 * height} style={{position: 'absolute', left: '5%'}} />
         {currNextEvent && token ? (
           <View style={styles.eventDataContainer}>
             <View style={styles.tabValue}>
@@ -73,10 +76,12 @@ const Home: React.FC = ({}) => {
               </View>
               <View style={styles.infoItem}>
                 <EvilIcons name="clock" size={26} color={Colors.WHITE} />
-                <Text style={styles.infoText}>{currNextEvent.time}</Text>
+                <Text style={styles.infoText}>
+                  {format(new Date(currNextEvent.startTime), 'MMM d, yyyy h:mm a')}
+                </Text>
               </View>
               <View style={styles.infoItem}>
-                <Token width={30} height={30} style={{marginRight: 5, marginLeft: 40}}/>
+                <Token width={20} height={30} style={{marginRight: 5}}/>
                 <Text style={styles.badgeText}>x{50}</Text>
               </View>
             </View>
@@ -84,6 +89,7 @@ const Home: React.FC = ({}) => {
         ): (
           <Text>loading...</Text>
         )}
+        <Bar width={0.8 * width} height={height} style={{position:'absolute', left:'10%'}}/>
       </View>
     </SafeAreaView>
   );
@@ -92,15 +98,15 @@ const Home: React.FC = ({}) => {
 const styles = StyleSheet.create({
   eventDataContainer: {
     position: 'absolute',
-    top: '25%', // Adjust according to the layout of the SVG
-    left: '10%', // Adjust according to the layout of the SVG
+    top: '23%',
+    left: '5%', // Adjust according to the layout of the SVG
   },
   tabValue: {
-    marginTop: 10,
-    marginLeft: 25
+    marginTop: 7,
+    marginLeft: 27
   },
   tabText: {
-    fontSize: 12,
+    fontSize: 13,
     color: Colors.DARK_BLUE,
     fontFamily: "PressStart2P_400Regular"
   },
@@ -108,8 +114,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems:'center',
-    marginTop: 35,
-    marginLeft: 20
+    marginTop: 37,
+    marginLeft: 20,
+    fontFamily: "Kufam_700Bold_Italic",
+    fontSize: 15
   },
   title: {
     fontSize: 25,
@@ -126,12 +134,12 @@ const styles = StyleSheet.create({
   infoItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginRight: 15,
+    marginRight: 35,
   },
   infoText: {
     marginLeft: 4,
     color: Colors.WHITE,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
   },
   badge: {
