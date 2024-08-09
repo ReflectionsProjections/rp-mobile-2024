@@ -8,13 +8,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "plugins": [
-      [
-        "expo-camera",
-        {
-          "cameraPermission": "Allow R|P 2024 to access your camera",
-          "recordAudioAndroid": false
-        }
-      ]
+      "expo-font"
     ],
     "splash": {
       "image": "./assets/splash.png",

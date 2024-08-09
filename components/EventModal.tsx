@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     // marginLeft: 20,
     color: "black",
     fontFamily: "Kufam_700Bold",
+    paddingRight: 25
   },
   info: {
     flexDirection: "row",

@@ -23,7 +23,7 @@ const CustomModal = ({
       animationOut="fadeOut"
     >
       <Pressable style={styles.overlay} onPress={onClose}>
-        <View style={styles.content}>
+        <View>
           <EventModal
             title={title}
             location={location}
