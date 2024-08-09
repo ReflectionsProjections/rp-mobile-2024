@@ -16,6 +16,11 @@ import {
 import {
   Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic
 } from "@expo-google-fonts/kufam";
+import {
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_700Bold,
+} from "@expo-google-fonts/inter";
 
 type RootStackParamList = {
   Home: undefined;
@@ -28,7 +33,7 @@ import Bar from "../assets/SVGs/home/bar_6.svg"
 import Token from "../assets/SVGs/home/token.svg"
 
 import { getCurrentOrNext } from "../api/getCurrentNextEvent";
-import { getEvents } from "../api/getEvents";
+import AppLoading from "expo-app-loading";
 
 
 
@@ -36,10 +41,7 @@ const {width, height} = Dimensions.get("window")
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
 const Home: React.FC = ({}) => {
-  let [fontsLoaded] = useFonts({
-    PressStart2P_400Regular,
-    Kufam_700Bold
-  });
+  
   const token = useAppSelector((state: RootState) => state.token);
   const [currNextEvent, setCurrNextEvent] = useState(null);
 
@@ -56,6 +58,16 @@ const Home: React.FC = ({}) => {
     fetchCurrNext();
   }, [token]);
 
+  let [fontsLoaded] = useFonts({
+    PressStart2P_400Regular,
+    Kufam_700Bold,
+    Inter_700Bold
+  });
+
+  if (!fontsLoaded)  {
+    return <AppLoading/>
+  }
+
   return (
     <SafeAreaView style = {{flex: 1, position: 'relative'}}>
       <Background width={width} height={height} style={{position: 'absolute'}}/>
@@ -71,17 +83,17 @@ const Home: React.FC = ({}) => {
             </View>
             <View style={styles.info}>
               <View style={styles.infoItem}>
-                <EvilIcons name="location" size={26} color={Colors.WHITE} />
-                <Text style={styles.infoText}>{currNextEvent.location}</Text>
+                <EvilIcons name="location" size={26} color={Colors.WHITE}/>
+                <Text style={styles.infoText}>{"Siebel Center"}</Text>
               </View>
               <View style={styles.infoItem}>
-                <EvilIcons name="clock" size={26} color={Colors.WHITE} />
+                <EvilIcons name="clock" size={26} color={Colors.WHITE}/>
                 <Text style={styles.infoText}>
-                  {format(new Date(currNextEvent.startTime), 'MMM d, yyyy h:mm a')}
+                  {format(new Date(currNextEvent.startTime), 'MMM d h:mm a')}
                 </Text>
               </View>
               <View style={styles.infoItem}>
-                <Token width={20} height={30} style={{marginRight: 5}}/>
+                <Token width={20} height={30} style={{marginRight: 5, marginLeft: 5}}/>
                 <Text style={styles.badgeText}>x{50}</Text>
               </View>
             </View>
@@ -114,30 +126,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems:'center',
-    marginTop: 37,
-    marginLeft: 20,
-    fontFamily: "Kufam_700Bold_Italic",
-    fontSize: 15
+    marginTop: 40,
+    marginLeft: 15,
   },
   title: {
     fontSize: 25,
     color: Colors.WHITE,
-    fontFamily: "Kufam_700Bold_Italic",
+    fontFamily: "Kufam_700Bold",
   },
   info: {
     flexDirection: "row",
     marginTop: 10,
-    marginLeft: 15,
+    marginLeft: 10,
     justifyContent: "flex-start",
     flexWrap: "wrap",
   },
   infoItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginRight: 35,
+    marginRight: 12,
   },
   infoText: {
-    marginLeft: 4,
+    marginLeft: 2,
     color: Colors.WHITE,
     fontSize: 14,
     fontWeight: "bold",
