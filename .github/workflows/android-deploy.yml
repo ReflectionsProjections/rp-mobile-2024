@@ -1,8 +1,8 @@
 name: Deploy Android Build
 on: 
-  push: 
-    branches:
-      - main
+  release:
+    types: [published]
+
 jobs:
   Deploy:
     name: Build & Deploy
@@ -18,19 +18,29 @@ jobs:
         run: npm install -g eas-cli
 
       - name: Authenticate with EAS
-        run: eas login --token ${{ secrets.EAS_TOKEN }}
+        run: eas login --token ${{ secrets.EXPO_TOKEN }}
 
       - name: Build Android APK
         run: eas build --platform android --profile development --non-interactive
 
-      - name: Create service_account.json
-        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+      - name: Find APK Path
+        id: find-apk
+        run: |
+          APK_PATH=$(find . -name "*.apk" -print -quit)
+          echo "APK_PATH=$APK_PATH" >> $GITHUB_ENV
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: ${{ env.APK_PATH }}
 
       - name: Upload to Google Play Store
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJson: service_account.json
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
           packageName: 'com.package'
-          releaseFile: './builds/*.apk'
+          releaseFile: ${{ env.APK_PATH }}
+          track: production
           status: inProgress
           inAppUpdatePriority: 3
