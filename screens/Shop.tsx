@@ -7,7 +7,9 @@ import {
 } from "@expo-google-fonts/press-start-2p";
 import AppLoading from "expo-app-loading";
 
-import ProgressBar from "../assets/progressBar.svg";
+import VerticalProgressBar from '../Components/VerticalProgressBar';
+
+let userPoints = 20;
 
 const Shop: React.FC = () => {
   let [fontsLoaded] = useFonts({
@@ -30,7 +32,7 @@ const Shop: React.FC = () => {
             source={require("../assets/token.png")}
             style={styles.tokenImage}
           />
-          <Text style={styles.points}>x{20}</Text>
+          <Text style={styles.points}>x{userPoints}</Text>
         </View>
         <View style={styles.photoContainer}>
           <View style={styles.leftSide}>
@@ -68,12 +70,9 @@ const Shop: React.FC = () => {
               <Text style={styles.points}>x{25}</Text>
             </View>
           </View>
-          <View style={styles.progressBarContainer}>
-            <ProgressBar
-              style={styles.progressBar}
-              preserveAspectRatio="none"
-              height={450}
-              width={100}
+          <View style={styles.rightSide}>
+            <VerticalProgressBar
+              userPoints={userPoints}
             />
           </View>
         </View>
@@ -117,12 +116,14 @@ const styles = StyleSheet.create({
   photoContainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
+    // backgroundColor: 'green'
   },
   leftSide: {
     flex: 1,
-    justifyContent: "space-between",
-    marginLeft: 10
+    justifyContent: "space-around",
+    marginLeft: 10,
+    // backgroundColor: 'blue',
+    flexGrow: 1
   },
   photoWithPoints: {
     flexDirection: "row",
@@ -130,18 +131,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   smallPhoto: {
-    width: 100,
-    height: 100,
+    width: 150,
+    height: 150,
     marginRight: 20,
   },
-  progressBarContainer: {
-    flex: 1,
-    alignItems: 'flex-end',
-    // paddingHorizontal: 10, // Add padding if needed
+  rightSide: {
+    marginVertical: 50,
+    // backgroundColor: 'red'
   },
   progressBar: {
-    flex: 1,
-    width: "100%",
+    width: 30, // Set a fixed width for the progress bar
+    flex: 1, // Allow it to take up the full height of its container
   },
 });
 
