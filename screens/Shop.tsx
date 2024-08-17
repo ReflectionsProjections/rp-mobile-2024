@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
 import {
@@ -9,12 +9,33 @@ import AppLoading from "expo-app-loading";
 
 import VerticalProgressBar from '../Components/VerticalProgressBar';
 
-let userPoints = 20;
-
 const Shop: React.FC = () => {
+  const [userPoints, setUserPoints] = useState(0); // Initialize points to 0
+
   let [fontsLoaded] = useFonts({
     PressStart2P_400Regular,
   });
+
+  const eventsURL = "https://api.reflectionsprojections.org/attendee/points";
+
+  useEffect(() => {
+    const fetchUserPoints = async () => {
+      try {
+        const response = await fetch(eventsURL); // Adjust the endpoint based on your backend URL
+        
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setUserPoints(data.points);
+      } catch (error) {
+        console.error("Failed to fetch user points:", error);
+      }
+    };
+
+    fetchUserPoints(); // Fetch points when component mounts
+  }, []); // Empty dependency array means this effect runs once on mount
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -70,10 +91,8 @@ const Shop: React.FC = () => {
               <Text style={styles.points}>x{25}</Text>
             </View>
           </View>
-          <View style={styles.rightSide}>
-            <VerticalProgressBar
-              userPoints={userPoints}
-            />
+          <View style={styles.progressBarContainer}>
+            <VerticalProgressBar userPoints={userPoints} />
           </View>
         </View>
       </View>
@@ -116,14 +135,13 @@ const styles = StyleSheet.create({
   photoContainer: {
     flex: 1,
     flexDirection: "row",
-    // backgroundColor: 'green'
+    // backgroundColor: 'green',
   },
   leftSide: {
-    flex: 1,
+    flex: 1, // Take up the remaining space
     justifyContent: "space-around",
     marginLeft: 10,
     // backgroundColor: 'blue',
-    flexGrow: 1
   },
   photoWithPoints: {
     flexDirection: "row",
@@ -131,13 +149,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   smallPhoto: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     marginRight: 20,
   },
-  rightSide: {
+  progressBarContainer: {
+    width: 30, // Width matches the progress bar
+    alignItems: "flex-end",
+    justifyContent: "center",
     marginVertical: 50,
-    // backgroundColor: 'red'
+    // backgroundColor: 'red',
   },
   progressBar: {
     width: 30, // Set a fixed width for the progress bar
