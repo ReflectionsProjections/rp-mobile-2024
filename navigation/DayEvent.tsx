@@ -28,7 +28,7 @@ const DayEvent = ({ day, events }) => (
           key={event.id}
           name={event.name}
           time={formatTime(event.startTime)}
-          location={"location"}
+          location={event.location}
           description={event.description}
           points={event.points}
         />

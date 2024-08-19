@@ -1210,6 +1210,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@expo-google-fonts/press-start-2p@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@expo-google-fonts/press-start-2p@npm:0.2.3"
+  checksum: 95431bd3209052754cd3a64fe2b49fd7a4cfcdb44b9e03aa8d1f2efbd363c3ecd89b2c073b846577290f5f7b7e6c681b1252024482e923818e229f0500a9f1fc
+  languageName: node
+  linkType: hard
+
 "@expo/bunyan@npm:^4.0.0":
   version: 4.0.0
   resolution: "@expo/bunyan@npm:4.0.0"
@@ -10885,9 +10892,6 @@ __metadata:
 "react-native-pager-view@npm:6.3.0":
   version: 6.3.0
   resolution: "react-native-pager-view@npm:6.3.0"
-"react-native-pager-view@npm:6.3.0":
-  version: 6.3.0
-  resolution: "react-native-pager-view@npm:6.3.0"
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -11503,6 +11507,7 @@ __metadata:
     "@babel/core": ^7.20.0
     "@expo-google-fonts/inter": ^0.2.3
     "@expo-google-fonts/kufam": ^0.2.3
+    "@expo-google-fonts/press-start-2p": ^0.2.3
     "@expo/ngrok": ^4.1.0
     "@gluestack-style/react": ^1.0.52
     "@gluestack-ui/config": ^1.1.18
