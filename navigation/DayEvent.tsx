@@ -3,7 +3,7 @@ import { Text, View, ScrollView, StyleSheet } from "react-native";
 import EventCard from "../Components/EventCard";
 import Colors from "../constants/Colors";
 
-const formatTime = (timestamp) => {
+export const formatTime = (timestamp) => {
   const date = new Date(timestamp); // Create a Date object from the timestamp string
   let hours = date.getUTCHours();
   let minutes = date.getUTCMinutes();
@@ -17,25 +17,27 @@ const formatTime = (timestamp) => {
   return formattedTime;
 };
 
-const DayEvent = ({ day, events }) => (
-  <View style={styles.container}>
-    <ScrollView
-      style={styles.scrollView}
-      contentContainerStyle={styles.contentContainer}
-    >
-      {events.map((event) => (
-        <EventCard
-          key={event.id}
-          name={event.name}
-          time={formatTime(event.startTime)}
-          location={"location"}
-          description={event.description}
-          points={event.points}
-        />
-      ))}
-    </ScrollView>
-  </View>
-);
+const DayEvent = ({ day, events }) => {
+  return (
+    <View style={styles.container}>
+      <ScrollView
+        style={styles.scrollView}
+        contentContainerStyle={styles.contentContainer}
+      >
+        {events.map((event) => (
+          <EventCard
+            key={event.id}
+            name={event.name}
+            time={formatTime(event.startTime)}
+            location={"location"}
+            description={event.description}
+            points={event.points}
+          />
+        ))}
+      </ScrollView>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
