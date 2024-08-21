@@ -21,7 +21,7 @@ const Shop: React.FC = () => {
   useEffect(() => {
     const fetchUserPoints = async () => {
       try {
-        const response = await fetch(eventsURL); // Adjust the endpoint based on your backend URL
+        const response = await fetch(eventsURL);
         
         if (!response.ok) {
           throw new Error("Network response was not ok");

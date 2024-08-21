@@ -8,7 +8,14 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "plugins": [
-      "expo-font"
+      "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow R|P 2024 to access your camera",
+          "recordAudioAndroid": false
+        }
+      ]
     ],
     "splash": {
       "image": "./assets/splash.png",
