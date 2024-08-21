@@ -106,8 +106,6 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginTop: 30,
     maxWidth: 320,
-    // backgroundColor: 'red',
-    // alignItems: 'center',
   },
   name: {
     fontSize: 20,
