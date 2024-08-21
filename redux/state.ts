@@ -4,7 +4,7 @@ import { AuthActionTypes, SET_TOKEN, SET_ROLES, SET_ATTENDEE, SET_QRCODE, LOGOUT
 const initialState: State = {
   user_id: null,
   token: null,
-  roles: null,
+  roles: [],
   attendee: null,
   qrCodeURL: null,
   isAuthenticated: false,
