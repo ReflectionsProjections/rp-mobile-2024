@@ -10896,9 +10896,6 @@ __metadata:
 "react-native-pager-view@npm:6.3.0":
   version: 6.3.0
   resolution: "react-native-pager-view@npm:6.3.0"
-"react-native-pager-view@npm:6.3.0":
-  version: 6.3.0
-  resolution: "react-native-pager-view@npm:6.3.0"
   peerDependencies:
     react: "*"
     react-native: "*"

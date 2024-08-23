@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginLeft: 15,
     marginTop: 30,
-    maxWidth: Dimensions.get("window").width * 0.8,
+    maxWidth: 320,
   },
   name: {
     fontSize: 20,
