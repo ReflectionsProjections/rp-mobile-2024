@@ -24,7 +24,6 @@ const Home: React.FC = () => {
       try {
         const event = await getCurrentOrNext(token);
         setCurrNextEvent(event);
-        console.log("NEXT/CURRENT EVENT", event);
       } catch (error) {
         console.error("error fetching current/next event:", error);
       } finally {

@@ -97,9 +97,6 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: "100%",
     height: 120,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // position: 'relative',
   },
   eventDetails: {
     position: "absolute",
@@ -114,23 +111,20 @@ const styles = StyleSheet.create({
   },
   info: {
     flexDirection: "row",
-    // justifyContent: "space-evenly",
   },
   infoItem: {
     flexDirection: "row",
     alignItems: "center",
-    // justifyContent: "space-evenly",
     marginHorizontal: 8,
   },
   infoText: {
-    // marginLeft: 4,
     color: Colors.DARK_BLUE,
     fontSize: 16,
     fontWeight: "bold",
   },
   tokenImage: {
-    width: 20, // Adjust the width as needed
-    height: 20, // Adjust the height as needed
+    width: 20, 
+    height: 20,
   },
   description: {
     fontSize: 14,

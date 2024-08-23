@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
   },
   info: {
     flexDirection: "row",
-    // justifyContent: "space-evenly",
   },
   infoItem: {
     flexDirection: "row",
@@ -78,7 +77,6 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   infoText: {
-    // marginLeft: 4,
     color: Colors.DARK_BLUE,
     fontSize: 16,
     fontWeight: "bold",
