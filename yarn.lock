@@ -1210,6 +1210,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@expo-google-fonts/press-start-2p@npm:^0.2.3":
+  version: 0.2.3
+  resolution: "@expo-google-fonts/press-start-2p@npm:0.2.3"
+  checksum: 95431bd3209052754cd3a64fe2b49fd7a4cfcdb44b9e03aa8d1f2efbd363c3ecd89b2c073b846577290f5f7b7e6c681b1252024482e923818e229f0500a9f1fc
+  languageName: node
+  linkType: hard
+
 "@expo/bunyan@npm:^4.0.0":
   version: 4.0.0
   resolution: "@expo/bunyan@npm:4.0.0"
@@ -7098,10 +7105,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-json-utils@npm:~0.13.0":
-  version: 0.13.1
-  resolution: "expo-json-utils@npm:0.13.1"
-  checksum: 6e8312c1d7070edd47e1b5f9c7473f0c48f24df26292f9030f002d7aa12b0ece685090f5ec8a7ac446efbf58be54396827b951f28f76b75dc0e1b1d1f9fb73d1
+"expo-font@npm:~12.0.9":
+  version: 12.0.9
+  resolution: "expo-font@npm:12.0.9"
+  dependencies:
+    fontfaceobserver: ^2.1.0
+  peerDependencies:
+    expo: "*"
+  checksum: adad225ed6002d5d527808b8f463bc59a1a1626fb2ff34918dcbd2172757977c056101f737ed9523f6d55e0aa88a64988002eb9b6d22f379d5956883f7451379
   languageName: node
   linkType: hard
 
@@ -10885,9 +10896,6 @@ __metadata:
 "react-native-pager-view@npm:6.3.0":
   version: 6.3.0
   resolution: "react-native-pager-view@npm:6.3.0"
-"react-native-pager-view@npm:6.3.0":
-  version: 6.3.0
-  resolution: "react-native-pager-view@npm:6.3.0"
   peerDependencies:
     react: "*"
     react-native: "*"
@@ -11503,6 +11511,7 @@ __metadata:
     "@babel/core": ^7.20.0
     "@expo-google-fonts/inter": ^0.2.3
     "@expo-google-fonts/kufam": ^0.2.3
+    "@expo-google-fonts/press-start-2p": ^0.2.3
     "@expo/ngrok": ^4.1.0
     "@gluestack-style/react": ^1.0.52
     "@gluestack-ui/config": ^1.1.18
@@ -11528,7 +11537,7 @@ __metadata:
     expo: latest
     expo-app-loading: ^2.1.1
     expo-camera: ^15.0.11
-    expo-dev-client: ^4.0.20
+    expo-font: ~12.0.9
     expo-linking: ^6.3.1
     expo-splash-screen: ~0.27.5
     expo-status-bar: ~1.12.1
