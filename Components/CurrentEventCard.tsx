@@ -15,15 +15,24 @@ import {
 } from "@expo-google-fonts/kufam";
 import CustomModal from "./CustomModal"; // Import the custom modal
 
-import AppLoading from "expo-app-loading";
+// import AppLoading from "expo-app-loading";
 import Colors from "../constants/Colors";
+
+import {formatTime} from "../navigation/DayEvent";
 
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 
-import EventsCard from "../assets/eventsCard.svg";
-// import Token from "../assets/token.svg"
+import OngoingEventCard from "../assets/currentEventCard.svg";
+import NextEventCard from "../assets/nextEventCard.svg";
 
-const EventCard = ({ name, time, location, description, points }) => {
+const CurrentEventCard = ({
+  name,
+  startTime,
+  endTime,
+  location,
+  description,
+  points,
+}) => {
   const [showModal, setShowModal] = useState(false);
 
   let [fontsLoaded] = useFonts({
@@ -32,15 +41,28 @@ const EventCard = ({ name, time, location, description, points }) => {
     Kufam_700Bold_Italic,
   });
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+  //   if (!fontsLoaded) {
+  //     return <AppLoading />;
+  //   }
+
+  // Get the current time
+  const currentTime = new Date();
+
+  // Convert startTime and endTime to Date objects
+  const start = new Date(startTime);
+  const end = new Date(endTime);
+
+//   console.log("CURRENT", currentTime);
+//   console.log("START", start);
+//   console.log("END", end);
+  // Check if current time is within the event's duration
+  const isOngoing = currentTime >= start && currentTime <= end;
 
   return (
     <View style={styles.card}>
       <Pressable onPress={() => setShowModal(true)} style={styles.pressable}>
         <View style={styles.imageContainer}>
-          <EventsCard></EventsCard>
+          {isOngoing ? <OngoingEventCard /> : <NextEventCard />}
           <View style={styles.eventDetails}>
             <Text style={styles.name} numberOfLines={1} ellipsizeMode="tail">
               {name}{" "}
@@ -52,7 +74,7 @@ const EventCard = ({ name, time, location, description, points }) => {
               </View>
               <View style={styles.infoItem}>
                 <EvilIcons name="clock" size={26} color={Colors.DARK_BLUE} />
-                <Text style={styles.infoText}>{time}</Text>
+                <Text style={styles.infoText}>{formatTime(start)}</Text>
               </View>
               <View style={styles.infoItem}>
                 <Image
@@ -77,7 +99,7 @@ const EventCard = ({ name, time, location, description, points }) => {
         onClose={() => setShowModal(false)}
         title={name}
         location={location}
-        time={time}
+        time={formatTime(start)}
         points={points}
         description={description}
       />
@@ -101,8 +123,9 @@ const styles = StyleSheet.create({
   eventDetails: {
     position: "absolute",
     marginLeft: 15,
-    marginTop: 30,
+    marginTop: 60,
     maxWidth: 320,
+    // backgroundColor: 'red'
   },
   name: {
     fontSize: 20,
@@ -123,7 +146,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   tokenImage: {
-    width: 20, 
+    width: 20,
     height: 20,
   },
   description: {
@@ -135,4 +158,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EventCard;
+export default CurrentEventCard;
