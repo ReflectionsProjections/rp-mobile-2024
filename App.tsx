@@ -41,8 +41,7 @@ const App = () => {
     const handleDeepLink = (event: { url: string; }) => {
       console.log("handling deep link:", event.url);
       const searchParams = new URL(event.url).searchParams;
-      const token_old = searchParams.get('token');
-      const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyMTAzOTM0NTQ5MTI3NDQ0OTQyNzU5Iiwicm9sZXMiOlsiQURNSU4iXSwiZGlzcGxheU5hbWUiOiJBcnlhbiBCYWhsIiwiaWF0IjoxNzIzMTc3MTE1LCJleHAiOjE3MjMyNjM1MTV9.HnF9mMJg_Qo6dJyw6759c1MAd8QVBPDRKxEgPsbkfgQ";
+      const token = searchParams.get('token');
       if (token) {
         dispatch(setToken(token))
         const decoded = decodeToken(token);
