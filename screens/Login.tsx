@@ -34,7 +34,8 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
   }, [token, navigation]);
 
   const handleLoginPress = () => {
-    //navigation.navigate("Main");
+    navigation.navigate("Main");
+    /*
     WebBrowser.openAuthSessionAsync(
       `${authUrl}?redirect_uri=${redirectURL}`,
         redirectURL
@@ -47,7 +48,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
     .catch((err) => {
       console.error("Failed to open URL:", err.message);
       alert("Failed to open URL");
-    });
+    });*/
   };
 
   return (

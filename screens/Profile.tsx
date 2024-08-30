@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
+import { StyleSheet } from "react-native";
 import { GluestackUIProvider, Text, Box, View, Image } from "@gluestack-ui/themed";
 // import { Button, ButtonText, ButtonIcon, AddIcon } from "@gluestack-ui/themed";
 import { Heading, Center } from "@gluestack-ui/themed"
@@ -17,7 +18,7 @@ import FoodWaveSVG from "../Components/FoodWaveSVG"
 import { Dimensions } from "react-native";
 
 import QRFrame from '../assets/SVGs/qrcode/qr_frame.svg'
-import Background from '../assets/SVGs/profile/profile_bg.svg'
+import Background from '../assets/SVGs/home/home_bg.svg'
 
 const {width, height} = Dimensions.get("window")
 
@@ -27,7 +28,8 @@ const Profile: React.FC = () => {
   const token = useAppSelector((state: RootState) => state.token);
   console.log("profile token:", token);
   const attendee = useAppSelector((state: RootState) => state.attendee);
-  const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
+  //const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
+  const qrcode = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyMTAzOTM0NTQ5MTI3NDQ0OTQyNzU5Iiwicm9sZXMiOlsiQURNSU4iXSwiZGlzcGxheU5hbWUiOiJBcnlhbiBCYWhsIiwiaWF0IjoxNzIzNzYyMDg0LCJleHAiOjE3MjM4NDg0ODR9.mvPVnrjSbzTpX3Dl8S8oOqr6Nu5Hz-r-gukcxjcFK4c"
   console.log("qrcode string:", qrcode);
 
 
@@ -51,29 +53,63 @@ const Profile: React.FC = () => {
     return () => clearInterval(interval);
   }, [token, dispatch]);
 
+  const qrCodeSize = 0.5 * width;
+  
+  const styles = StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      position: 'relative',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: width,
+      height: height
+    },
+    background: {
+      position: 'absolute',
+      zIndex: -1,
+    },
+    qrContainer: {
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      bottom: '15%',
+    },
+    qrFrameContainer: {
+      position: 'relative',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    qrFrame: {
+      height: qrCodeSize * 3,
+    },
+    qrCodeStyle: {
+      position: 'absolute',
+      width: qrCodeSize,
+      height: qrCodeSize,
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: -1,
+    },
+    profileText: {
+      marginTop: '5%', // Responsive margin
+    },
+  });
+
   return (
-    <SafeAreaView style = {{flex: 1, position: 'relative', justifyContent: 'center', alignItems: 'center'}}>
-      <Background style={{position: 'absolute', width: width, height: height}}/>
-      {attendee && qrcode &&
-      <View justifyContent="space-between" alignItems="center" paddingVertical={200}>
-        <View style ={{position: 'relative', alignItems: 'center', justifyContent: 'center'}}>
-          <QRFrame width={250} height={300}/>
-          <View style={{
-            position: 'absolute',
-            width: 200,  // Match the QR code size
-            height: 200, // Match the QR code size
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}>
+    <SafeAreaView style={styles.safeArea}>
+      <Background style={styles.background} height={height} width={width} preserveAspectRatio="none"/>
+      <View style={styles.qrContainer}>
+        <View style={styles.qrFrameContainer}>
+          <QRFrame style={styles.qrFrame} height={qrCodeSize * 1.1} width={qrCodeSize * 1.4}/>
+          <View style={styles.qrCodeStyle}>
             <QRCode
-              value={qrcode}
-              size={0.5 * width}
+              value="Sample QR Code Value"
+              size={qrCodeSize}
             />
           </View>
         </View>
-        <StyledText variant="profileText" color={Colors.WHITE} marginBottom={10}>{attendee.name}</StyledText>
-        <FoodWaveSVG foodWave = {attendee.foodWave}/>
-      </View>}
+        <StyledText variant="profileText" color={Colors.WHITE} style={styles.profileText}>{"Aryan Bahl"}</StyledText>
+        <FoodWaveSVG foodWave={4} />
+      </View>
     </SafeAreaView>
   );
 };

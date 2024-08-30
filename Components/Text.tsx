@@ -12,7 +12,7 @@ const StyledText = styled(Text,
                     textAlign: 'center'
                 }, 
                 profileText: {
-                    fontSize: 50,
+                    fontSize: 40,
                     fontWeight: "$bold",
                     textAlign: 'center',
                     fontFamily: "Kufam_700Bold"
