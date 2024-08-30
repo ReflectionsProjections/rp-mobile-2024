@@ -1,105 +1,71 @@
-import React, {useEffect, useState} from "react";
-import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
-import { format } from "date-fns";
-import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Dimensions, View, StyleSheet } from 'react-native'
-import { RootState } from "../redux/store";
-import EvilIcons from "@expo/vector-icons/EvilIcons";
-import Colors from "../constants/Colors";
-import {
-  useFonts,
-  PressStart2P_400Regular,
-} from "@expo-google-fonts/press-start-2p";
-import {
-  Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic
-} from "@expo-google-fonts/kufam";
-import {
-  Inter_400Regular,
-  Inter_500Medium,
-  Inter_700Bold,
-} from "@expo-google-fonts/inter";
-
-type RootStackParamList = {
-  Home: undefined;
-  Login: undefined;
-};
-
-import OngoingEvent from "../assets/SVGs/home/ongoing_event.svg"
-import Background from "../assets/SVGs/profile/profile_bg.svg"
-import Bar from "../assets/SVGs/home/bar_6.svg"
-import Token from "../assets/SVGs/home/token.svg"
-
+import { Dimensions, View, StyleSheet, ActivityIndicator } from "react-native";
+import { useFonts, PressStart2P_400Regular } from "@expo-google-fonts/press-start-2p";
+import { useAppSelector } from "../redux/hooks";
+import PacmanBackground from "../assets/SVGs/home/PacmanBackground.svg";
 import { getCurrentOrNext } from "../api/getCurrentNextEvent";
-import AppLoading from "expo-app-loading";
+import { RootState } from "../redux/store";
+import CurrentEventCard from "../Components/CurrentEventCard";
+import Colors from "../constants/Colors";
 
+const { width, height } = Dimensions.get("window");
 
-
-const {width, height} = Dimensions.get("window")
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
-
-const Home: React.FC = ({}) => {
-  
+const Home: React.FC = () => {
+  let [fontsLoaded] = useFonts({
+    PressStart2P_400Regular,
+  });
   const token = useAppSelector((state: RootState) => state.token);
   const [currNextEvent, setCurrNextEvent] = useState(null);
+  const [loading, setLoading] = useState(true); // To track loading state
 
   useEffect(() => {
-    const fetchCurrNext = async() => {
+    const fetchCurrNext = async () => {
       try {
         const event = await getCurrentOrNext(token);
         setCurrNextEvent(event);
       } catch (error) {
-        console.error('error fetching current/next event:', error);
+        console.error("error fetching current/next event:", error);
+      } finally {
+        setLoading(false); // Stop loading once the fetch is complete
       }
     };
 
     fetchCurrNext();
   }, [token]);
 
-  let [fontsLoaded] = useFonts({
-    PressStart2P_400Regular,
-    Kufam_700Bold,
-    Inter_700Bold
-  });
-
-  if (!fontsLoaded)  {
-    return <AppLoading/>
+  if (loading) {
+    return (
+      <View style={[styles.container, styles.loadingContainer]}>
+        <ActivityIndicator size="large" color={Colors.WHITE} />
+      </View>
+    );
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, position: 'relative', justifyContent: 'center', alignItems: 'center'}}>
-      <Background width={width} height={height} style={{ position: 'absolute' }} preserveAspectRatio="none"/>
-      <View style={{ position: 'relative', width: '100%', height: '100%' }}>
-        <OngoingEvent width={0.9 * width} height={0.7 * height} style={{ position: 'absolute', left: '5%' }} />
-        {currNextEvent && token ? (
-          <View style={styles.eventDataContainer}>
-            <View style={styles.tabValue}>
-              <Text style={styles.tabText}>ONGOING</Text>
-            </View>
-            <View style={styles.header}>
-              <Text style={styles.title}>{currNextEvent.name}</Text>
-            </View>
-            <View style={styles.info}>
-              <View style={styles.infoItem}>
-                <EvilIcons name="location" size={26} color={Colors.WHITE} />
-                <Text style={styles.infoText}>{"Siebel Center"}</Text>
-              </View>
-              <View style={styles.infoItem}>
-                <EvilIcons name="clock" size={26} color={Colors.WHITE} />
-                <Text style={styles.infoText}>
-                  {format(new Date(currNextEvent.startTime), 'MMM d h:mm a')}
-                </Text>
-              </View>
-              <View style={styles.infoItem}>
-                <Token width={20} height={30} style={{ marginRight: 5, marginLeft: 5 }} />
-                <Text style={styles.badgeText}>x{50}</Text>
-              </View>
-            </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.imageContainer}>
+        <PacmanBackground
+          width={width}
+          height={height}
+          style={styles.image}
+          preserveAspectRatio="none"
+        />
+        {currNextEvent ? (
+          <View style={styles.cardContainer}>
+            <CurrentEventCard
+              name={currNextEvent.name}
+              startTime={currNextEvent.startTime}
+              endTime={currNextEvent.endTime}
+              location={currNextEvent.location}
+              description={currNextEvent.description}
+              points={currNextEvent.points}
+            />
           </View>
         ) : (
-          <Text>loading...</Text>
+          <View style={styles.noEventContainer}>
+            <Text style={styles.noEventText}>No current or upcoming events</Text>
+          </View>
         )}
         <Bar width={0.8 * width} height={1.05 * height} style={{ position: 'absolute', left: '10%' }} />
       </View>
@@ -108,65 +74,37 @@ const Home: React.FC = ({}) => {
 };
 
 const styles = StyleSheet.create({
-  eventDataContainer: {
-    position: 'absolute',
-    top: '27%',
-    left: '5%', // Adjust according to the layout of the SVG
-  },
-  tabValue: {
-    marginTop: 0,
-    marginLeft: 25
-  },
-  tabText: {
-    fontSize: 11,
-    color: Colors.DARK_BLUE,
-    fontFamily: "PressStart2P_400Regular"
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems:'center',
-    marginTop: 30,
-    marginLeft: 15,
-  },
-  title: {
-    fontSize: 24,
-    color: Colors.WHITE,
-    fontFamily: "Kufam_700Bold",
-  },
-  info: {
-    flexDirection: "row",
-    marginTop: 10,
-    marginLeft: 10,
-    justifyContent: "flex-start",
-    flexWrap: "wrap",
-  },
-  infoItem: {
-    flexDirection: "row",
+  container: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    marginRight: 12,
+    backgroundColor: Colors.DARK_BLUE,
   },
-  infoText: {
-    marginLeft: 2,
-    color: Colors.WHITE,
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-  badge: {
-    flexDirection: 'row',
+  loadingContainer: {
     justifyContent: "center",
     alignItems: "center",
   },
-  tokenImage: {
-    width: 2,
-    height: 2,
-    marginRight: 15
+  imageContainer: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    position: "relative",
   },
-  badgeText: {
-    fontSize: 15,
-    marginRight: 20,
-    fontFamily: "PressStart2P_400Regular",
-    color: Colors.YELLOW,
+  image: {
+    position: "absolute",
   },
-})
+  cardContainer: {
+    top: "22%",
+    zIndex: 10,
+  },
+  noEventContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  noEventText: {
+    color: Colors.WHITE,
+    fontSize: 18,
+  },
+});
+
 export default Home;

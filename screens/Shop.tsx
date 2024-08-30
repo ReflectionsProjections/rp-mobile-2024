@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
 import {
@@ -7,12 +7,35 @@ import {
 } from "@expo-google-fonts/press-start-2p";
 import AppLoading from "expo-app-loading";
 
-import ProgressBar from "../assets/progressBar.svg";
+import VerticalProgressBar from '../Components/VerticalProgressBar';
 
 const Shop: React.FC = () => {
+  const [userPoints, setUserPoints] = useState(0); // Initialize points to 0
+
   let [fontsLoaded] = useFonts({
     PressStart2P_400Regular,
   });
+
+  const eventsURL = "https://api.reflectionsprojections.org/attendee/points";
+
+  useEffect(() => {
+    const fetchUserPoints = async () => {
+      try {
+        const response = await fetch(eventsURL);
+        
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setUserPoints(data.points);
+      } catch (error) {
+        console.error("Failed to fetch user points:", error);
+      }
+    };
+
+    fetchUserPoints(); // Fetch points when component mounts
+  }, []); // Empty dependency array means this effect runs once on mount
 
   if (!fontsLoaded) {
     return <AppLoading />;
@@ -30,7 +53,7 @@ const Shop: React.FC = () => {
             source={require("../assets/token.png")}
             style={styles.tokenImage}
           />
-          <Text style={styles.points}>x{20}</Text>
+          <Text style={styles.points}>x{userPoints}</Text>
         </View>
         <View style={styles.photoContainer}>
           <View style={styles.leftSide}>
@@ -69,12 +92,7 @@ const Shop: React.FC = () => {
             </View>
           </View>
           <View style={styles.progressBarContainer}>
-            <ProgressBar
-              style={styles.progressBar}
-              preserveAspectRatio="none"
-              height={450}
-              width={100}
-            />
+            <VerticalProgressBar userPoints={userPoints} />
           </View>
         </View>
       </View>
@@ -117,12 +135,13 @@ const styles = StyleSheet.create({
   photoContainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between",
+    // backgroundColor: 'green',
   },
   leftSide: {
-    flex: 1,
-    justifyContent: "space-between",
-    marginLeft: 10
+    flex: 1, // Take up the remaining space
+    justifyContent: "space-around",
+    marginLeft: 10,
+    // backgroundColor: 'blue',
   },
   photoWithPoints: {
     flexDirection: "row",
@@ -135,13 +154,15 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   progressBarContainer: {
-    flex: 1,
-    alignItems: 'flex-end',
-    // paddingHorizontal: 10, // Add padding if needed
+    width: 30, // Width matches the progress bar
+    alignItems: "flex-end",
+    justifyContent: "center",
+    marginVertical: 50,
+    // backgroundColor: 'red',
   },
   progressBar: {
-    flex: 1,
-    width: "100%",
+    width: 30, // Set a fixed width for the progress bar
+    flex: 1, // Allow it to take up the full height of its container
   },
 });
 

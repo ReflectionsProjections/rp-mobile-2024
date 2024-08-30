@@ -58,19 +58,21 @@ const styles = StyleSheet.create({
   },
   eventDetails: {
     position: "absolute",
-    marginLeft: 25,
+    marginLeft: 20,
+    width: 300,
     marginTop: 50,
+    // backgroundColor: 'green'
   },
   name: {
     fontSize: 20,
     // marginLeft: 20,
+    paddingRight: 25,
     color: "black",
     fontFamily: "Kufam_700Bold",
     paddingRight: 25
   },
   info: {
     flexDirection: "row",
-    // justifyContent: "space-evenly",
   },
   infoItem: {
     flexDirection: "row",
@@ -79,7 +81,6 @@ const styles = StyleSheet.create({
     marginRight: 16,
   },
   infoText: {
-    // marginLeft: 4,
     color: Colors.DARK_BLUE,
     fontSize: 16,
     fontWeight: "bold",
