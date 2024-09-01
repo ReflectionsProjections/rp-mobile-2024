@@ -29,7 +29,7 @@ jobs:
       # - name: Build Android APK
       #   run: eas build --platform android --profile development --non-interactive
 
-      name: Setup Expo and EAS
+      - name: Setup Expo and EAS
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
