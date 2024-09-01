@@ -1,8 +1,10 @@
 name: Deploy Android Build
 on: 
+  push:
+    branches:
+      - dev/sdagg9/deploy
   release:
     types: [published]
-  workflow_dispatch:
 
 jobs:
   Deploy:
