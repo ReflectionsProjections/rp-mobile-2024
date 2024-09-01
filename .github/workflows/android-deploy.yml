@@ -2,6 +2,7 @@ name: Deploy Android Build
 on: 
   release:
     types: [published]
+  workflow_dispatch:
 
 jobs:
   Deploy:
@@ -34,6 +35,16 @@ jobs:
         with:
           name: app-release
           path: ${{ env.APK_PATH }}
+
+      # - name: Sign APK
+      #   id: sign-apk
+      #   uses: r0adkll/sign-android-release@v1
+      #   with:
+      #     releaseDirectory: ${{ env.APK_PATH }}
+      #     signingKeyBase64: ${{ secrets.KEYSTORE_BASE64 }}
+      #     alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+      #     keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
+      #     keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
 
       - name: Upload to Google Play Store
         uses: r0adkll/upload-google-play@v1
