@@ -26,12 +26,8 @@ const Profile: React.FC = () => {
   
   const dispatch = useAppDispatch();
   const token = useAppSelector((state: RootState) => state.token);
-  console.log("profile token:", token);
   const attendee = useAppSelector((state: RootState) => state.attendee);
-  //const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
-  const qrcode = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJ1c2VyMTAzOTM0NTQ5MTI3NDQ0OTQyNzU5Iiwicm9sZXMiOlsiQURNSU4iXSwiZGlzcGxheU5hbWUiOiJBcnlhbiBCYWhsIiwiaWF0IjoxNzIzNzYyMDg0LCJleHAiOjE3MjM4NDg0ODR9.mvPVnrjSbzTpX3Dl8S8oOqr6Nu5Hz-r-gukcxjcFK4c"
-  console.log("qrcode string:", qrcode);
-
+  const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
 
   useEffect(() => {
     if (token && !attendee) {
@@ -97,6 +93,7 @@ const Profile: React.FC = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <Background style={styles.background} height={height} width={width} preserveAspectRatio="none"/>
+      {attendee && qrcode &&
       <View style={styles.qrContainer}>
         <View style={styles.qrFrameContainer}>
           <QRFrame style={styles.qrFrame} height={qrCodeSize * 1.1} width={qrCodeSize * 1.4}/>
@@ -107,9 +104,9 @@ const Profile: React.FC = () => {
             />
           </View>
         </View>
-        <StyledText variant="profileText" color={Colors.WHITE} style={styles.profileText}>{"Aryan Bahl"}</StyledText>
-        <FoodWaveSVG foodWave={4} />
-      </View>
+        <StyledText variant="profileText" color={Colors.WHITE} style={styles.profileText}>{attendee.name}</StyledText>
+        <FoodWaveSVG foodWave={attendee.foodWave} />
+      </View>}
     </SafeAreaView>
   );
 };

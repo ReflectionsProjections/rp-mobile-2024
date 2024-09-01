@@ -8,6 +8,7 @@ import { getCurrentOrNext } from "../api/getCurrentNextEvent";
 import { RootState } from "../redux/store";
 import CurrentEventCard from "../Components/CurrentEventCard";
 import Colors from "../constants/Colors";
+import { Text } from "@gluestack-ui/themed";
 
 const { width, height } = Dimensions.get("window");
 
@@ -67,7 +68,7 @@ const Home: React.FC = () => {
             <Text style={styles.noEventText}>No current or upcoming events</Text>
           </View>
         )}
-        <Bar width={0.8 * width} height={1.05 * height} style={{ position: 'absolute', left: '10%' }} />
+        
       </View>
     </SafeAreaView>
   );
