@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { RootState } from "../redux/store";
+import { useAppSelector } from "../redux/hooks";
 import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
 import {
@@ -8,34 +10,26 @@ import {
 import AppLoading from "expo-app-loading";
 
 import VerticalProgressBar from '../Components/VerticalProgressBar';
+import { getPoints } from "../api/getPoints";
 
 const Shop: React.FC = () => {
   const [userPoints, setUserPoints] = useState(0); // Initialize points to 0
-
+  const token = useAppSelector((state: RootState) => state.token);
   let [fontsLoaded] = useFonts({
     PressStart2P_400Regular,
   });
 
-  const eventsURL = "https://api.reflectionsprojections.org/attendee/points";
-
   useEffect(() => {
     const fetchUserPoints = async () => {
       try {
-        const response = await fetch(eventsURL);
-        
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-
-        const data = await response.json();
-        setUserPoints(data.points);
+        const points = await getPoints(token);
+        setUserPoints(points.points);
       } catch (error) {
-        console.error("Failed to fetch user points:", error);
+        console.error("error fetching points for user:", error);
       }
-    };
-
+    }
     fetchUserPoints(); // Fetch points when component mounts
-  }, []); // Empty dependency array means this effect runs once on mount
+  }, [token]); // Empty dependency array means this effect runs once on mount
 
   if (!fontsLoaded) {
     return <AppLoading />;

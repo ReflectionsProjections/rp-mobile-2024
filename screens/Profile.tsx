@@ -16,15 +16,26 @@ import Colors from "../constants/Colors";
 import { useFonts, Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic } from "@expo-google-fonts/kufam";
 import FoodWaveSVG from "../Components/FoodWaveSVG"
 import { Dimensions } from "react-native";
+import { logout } from "../redux/actions";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 import QRFrame from '../assets/SVGs/qrcode/qr_frame.svg'
 import Background from '../assets/SVGs/home/home_bg.svg'
+import Logout from '../assets/SVGs/profile/logout.svg'
 
 const {width, height} = Dimensions.get("window")
+type RootStackParamList = {
+  Profile: undefined;
+  Login: undefined;
+};
+
+type ProfileScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Profile'>;
 
 const Profile: React.FC = () => {
   
   const dispatch = useAppDispatch();
+  const navigation = useNavigation<ProfileScreenNavigationProp>();
   const token = useAppSelector((state: RootState) => state.token);
   const attendee = useAppSelector((state: RootState) => state.attendee);
   const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
@@ -49,6 +60,12 @@ const Profile: React.FC = () => {
     return () => clearInterval(interval);
   }, [token, dispatch]);
 
+  const handleLogOut = () => {
+    console.log("logging out")
+    dispatch(logout());
+    navigation.navigate('Login');
+  }
+
   const qrCodeSize = 0.5 * width;
   
   const styles = StyleSheet.create({
@@ -63,6 +80,11 @@ const Profile: React.FC = () => {
     background: {
       position: 'absolute',
       zIndex: -1,
+    },
+    logout: {
+      position: 'absolute',
+      top: '7%',
+      right: '1%',
     },
     qrContainer: {
       justifyContent: 'space-between',
@@ -93,6 +115,7 @@ const Profile: React.FC = () => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <Background style={styles.background} height={height} width={width} preserveAspectRatio="none"/>
+      <Logout style={styles.logout} width={'35%'} height={'5%'} preserveAspectRatio="none" onPress={handleLogOut}/>
       {attendee && qrcode &&
       <View style={styles.qrContainer}>
         <View style={styles.qrFrameContainer}>
