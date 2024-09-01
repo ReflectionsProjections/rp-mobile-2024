@@ -20,8 +20,8 @@ jobs:
       # - name: Install EAS CLI
       #   run: npm install -g eas-cli
 
-      - name: Verify EAS CLI Installation
-        run: eas --version  
+      # - name: Verify EAS CLI Installation
+      #   run: eas --version  
 
       # - name: Authenticate with EAS
       #   run: eas login --token ${{ secrets.EXPO_TOKEN }}
