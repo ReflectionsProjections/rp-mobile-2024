@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const getCurrentOrNext = async (token: string) => {
+export const getPoints = async (token: string) => {
     try{
-        const response = await axios.get('https://api.reflectionsprojections.org/events/currentOrNext/', {
+        const response = await axios.get('https://api.reflectionsprojections.org/attendee/points/', {
             headers: {
-                
+                Authorization: token
             }
         });
         return response.data;
