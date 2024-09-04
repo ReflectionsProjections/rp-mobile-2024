@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThunkAction } from 'redux-thunk';
 import { RootState } from './store'; // Assuming you have a store.ts defining the RootState
 import { Attendee } from './types';
+import * as AuthSession from 'expo-auth-session';
 
 // Action Types
 export const SET_TOKEN = 'SET_TOKEN';

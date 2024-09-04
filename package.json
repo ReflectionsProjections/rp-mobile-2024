@@ -29,6 +29,7 @@
     "date-fns": "^3.6.0",
     "expo": "latest",
     "expo-app-loading": "^1.1.2",
+    "expo-auth-session": "^5.5.2",
     "expo-camera": "^15.0.11",
     "expo-dev-client": "~4.0.25",
     "expo-font": "~12.0.9",

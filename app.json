@@ -12,7 +12,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow R|P 2024 to access your camera",
+          "cameraPermission": "Allow access to camera to help you scan into R|P 2024 events and collect points.",
           "recordAudioAndroid": false
         }
       ]
