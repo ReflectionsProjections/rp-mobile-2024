@@ -2,6 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { FontAwesome } from "@expo/vector-icons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { View } from "react-native";
 import Home from "../screens/Home";
 import Events from "../screens/Events";
@@ -36,8 +37,8 @@ const AppNavigator: React.FC = () => {
           switch (route.name) {
             case "Home":
               return (
-                <FontAwesome
-                  name="home"
+                <MaterialCommunityIcons
+                  name="home-variant"
                   color={focused ? ACTIVE_COLOR : INACTIVE_COLOR}
                   size={35}
                   solid
@@ -45,44 +46,41 @@ const AppNavigator: React.FC = () => {
               );
             case "Events":
               return (
-                <FontAwesome
+                <MaterialCommunityIcons
                   name="calendar"
                   color={focused ? ACTIVE_COLOR : INACTIVE_COLOR}
                   size={35}
-                  solid
+                  
                 />
               );
             case "Camera":
               return (
-                <FontAwesome
-                  name="camera"
-                  color={focused ? ACTIVE_COLOR : INACTIVE_COLOR}
+                <MaterialCommunityIcons
+                  name="qrcode-scan"
                   size={35}
-                  solid
+                  color={focused ? ACTIVE_COLOR : INACTIVE_COLOR}
                 />
               );
             case "AdminScanner":
               return (
-                <FontAwesome
+                <MaterialCommunityIcons
                   name="camera"
                   color={focused ? ACTIVE_COLOR : INACTIVE_COLOR}
                   size={35}
-                  solid
                 />
               );
             case "Shop":
               return (
-                <FontAwesome
-                  name="shopping-cart"
+                <MaterialCommunityIcons
+                  name="shopping-outline"
                   color={focused ? ACTIVE_COLOR : INACTIVE_COLOR}
                   size={35}
-                  solid
                 />
               );
             case "Profile":
               return (
-                <FontAwesome
-                  name="user"
+                <MaterialCommunityIcons
+                  name="account"
                   color={focused ? ACTIVE_COLOR : INACTIVE_COLOR}
                   size={35}
                   solid
