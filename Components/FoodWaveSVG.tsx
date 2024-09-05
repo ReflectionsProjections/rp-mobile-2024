@@ -18,11 +18,7 @@ const FoodWaveSVG: React.FC<FoodWaveSVGProps> = ({ foodWave }) => {
             case 1:
                 return <Foodwave1/>;
             case 2:
-                return <Foodwave2/>;
-            case 3:
                 return <Foodwave3/>;
-            case 4:
-                return <Foodwave4/>;
             default:
                 return <Text>No SVG available</Text>
         }

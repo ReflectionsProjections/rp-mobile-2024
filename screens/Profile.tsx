@@ -20,9 +20,11 @@ import { logout } from "../redux/actions";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import QRFrame from '../assets/SVGs/qrcode/qr_frame.svg'
+import QRFrame from '../assets/SVGs/qrcode/QRFrame1.svg'
+import QRFrame2 from '../assets/SVGs/qrcode/qr_frame.svg'
 import Background from '../assets/SVGs/home/home_bg.svg'
 import Logout from '../assets/SVGs/profile/logout.svg'
+import { getFoodWave } from "../api/getFoodWave";
 
 const {width, height} = Dimensions.get("window")
 type RootStackParamList = {
@@ -40,6 +42,8 @@ const Profile: React.FC = () => {
   const attendee = useAppSelector((state: RootState) => state.attendee);
   const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
 
+  const [foodWave, setFoodWave] = useState(null);
+
   useEffect(() => {
     if (token && !attendee) {
       dispatch(getAttendee(token));
@@ -48,6 +52,14 @@ const Profile: React.FC = () => {
       dispatch(getQRCode(token));
     }
   }, [token, attendee, qrcode, dispatch]);
+
+  useEffect(() => {
+    const fetchFoodWave = async () => {
+      const foodwave = await getFoodWave(token);
+      setFoodWave(foodwave.foodwave);
+    }
+    fetchFoodWave();
+  }, [token])
 
   useEffect(() => {
     const fetchQRCode = async() => {
@@ -119,16 +131,20 @@ const Profile: React.FC = () => {
       {attendee && qrcode &&
       <View style={styles.qrContainer}>
         <View style={styles.qrFrameContainer}>
-          <QRFrame style={styles.qrFrame} height={qrCodeSize * 1.1} width={qrCodeSize * 1.4}/>
+          {foodWave == 1 ? (
+            <QRFrame style={styles.qrFrame} height={qrCodeSize * 1.1} width={qrCodeSize * 1.4}/>
+          ) : (
+            <QRFrame2 style={styles.qrFrame} height={qrCodeSize * 1.1} width={qrCodeSize * 1.4}/>
+          )}
           <View style={styles.qrCodeStyle}>
             <QRCode
-              value="Sample QR Code Value"
+              value={qrcode}
               size={qrCodeSize}
             />
           </View>
         </View>
         <StyledText variant="profileText" color={Colors.WHITE} style={styles.profileText}>{attendee.name}</StyledText>
-        <FoodWaveSVG foodWave={attendee.foodWave} />
+        <FoodWaveSVG foodWave={foodWave} />
       </View>}
     </SafeAreaView>
   );
