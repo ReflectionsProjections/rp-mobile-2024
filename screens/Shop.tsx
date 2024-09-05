@@ -9,6 +9,10 @@ import {
 } from "@expo-google-fonts/press-start-2p";
 import AppLoading from "expo-app-loading";
 
+import Question1 from "../assets/SVGs/question_1.svg"
+import Question2 from "../assets/SVGs/purple-question_1.svg"
+import Question3 from "../assets/SVGs/pink-question_1.svg"
+
 import VerticalProgressBar from '../Components/VerticalProgressBar';
 import { getPoints } from "../api/getPoints";
 
@@ -47,14 +51,18 @@ const Shop: React.FC = () => {
             source={require("../assets/token.png")}
             style={styles.tokenImage}
           />
-          <Text style={styles.points}>x{userPoints}</Text>
+          <Text style={styles.myPoints}>x{userPoints}</Text>
         </View>
         <View style={styles.photoContainer}>
           <View style={styles.leftSide}>
             <View style={styles.photoWithPoints}>
-              <Image
-                source={{ uri: "https://via.placeholder.com/150" }}
+              {/* <Image
+                source={{ uri: "https://via.placeholder.com/100" }}
                 style={styles.smallPhoto}
+              /> */}
+              <Question1 //might have to consolidate this into single component
+                width={100}
+                height={100}
               />
               <Image
                 source={require("../assets/token.png")}
@@ -63,9 +71,9 @@ const Shop: React.FC = () => {
               <Text style={styles.points}>x{50}</Text>
             </View>
             <View style={styles.photoWithPoints}>
-              <Image
-                source={{ uri: "https://via.placeholder.com/150" }}
-                style={styles.smallPhoto}
+              <Question2
+                width={100}
+                height={100}
               />
               <Image
                 source={require("../assets/token.png")}
@@ -74,9 +82,9 @@ const Shop: React.FC = () => {
               <Text style={styles.points}>x{35}</Text>
             </View>
             <View style={styles.photoWithPoints}>
-              <Image
-                source={{ uri: "https://via.placeholder.com/150" }}
-                style={styles.smallPhoto}
+            <Question3
+              width={100}
+              height={100}
               />
               <Image
                 source={require("../assets/token.png")}
@@ -105,9 +113,9 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 15,
-    marginBottom: 10,
+    marginBottom: 20,
     fontFamily: "PressStart2P_400Regular",
-    color: Colors.YELLOW,
+    color: Colors.WHITE,
   },
   pointsContainer: {
     flexDirection: "row",
@@ -116,7 +124,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   points: {
-    fontSize: 15,
+    fontSize: 17,
+    marginRight: 10,
+    fontFamily: "PressStart2P_400Regular",
+    color: Colors.WHITE,
+  },
+  myPoints: {
+    fontSize: 30,
     marginRight: 10,
     fontFamily: "PressStart2P_400Regular",
     color: Colors.YELLOW,
@@ -134,13 +148,14 @@ const styles = StyleSheet.create({
   leftSide: {
     flex: 1, // Take up the remaining space
     justifyContent: "space-around",
-    marginLeft: 10,
+    // marginLeft: 10,
     // backgroundColor: 'blue',
   },
   photoWithPoints: {
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
+    // backgroundColor: 'red'
   },
   smallPhoto: {
     width: 100,
@@ -152,6 +167,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "center",
     marginVertical: 50,
+    marginRight: 20,
     // backgroundColor: 'red',
   },
   progressBar: {
