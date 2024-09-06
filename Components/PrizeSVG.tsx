@@ -26,9 +26,9 @@ const FoodWaveSVG: React.FC<PrizeSVGProps> = ({
     if (token) {
       // Map SVGs based on prizeNum and attendeePoints
       const svgMap: { [key: number]: JSX.Element } = {
-        1: <Button width={size} height={size}/>,
-        2: attendeePoints >= 20 ? <ToteBag width={size} height={size}/> : <Question2 width={size} height={size}/>,
-        3: attendeePoints >= 35 ? <Cap width={size} height={size}/> : <Question3 width={size} height={size}/>,
+        1: attendeePoints >= 20 ? <Button width={size} height={size}/> : <Question1 width={size} height={size}/>,
+        2: attendeePoints >= 35 ? <ToteBag width={size} height={size}/> : <Question2 width={size} height={size}/>,
+        3: attendeePoints >= 50 ? <Cap width={size} height={size}/> : <Question3 width={size} height={size}/>,
       };
       return svgMap[prizeNum] || <Text>No SVG available</Text>;
     } else {
