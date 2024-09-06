@@ -36,6 +36,8 @@ const Shop: React.FC = () => {
   if (!fontsLoaded) {
     return <AppLoading />;
   }
+  
+  console.log(require("../assets/pixel.png"))
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -46,7 +48,7 @@ const Shop: React.FC = () => {
         <View style={styles.pointsContainer}>
           <Text style={styles.points}>Your Points:</Text>
           <Image
-            source={require("../assets/token.png")}
+            source={require("../assets/pixel.png")}
             style={styles.tokenImage}
           />
           <Text style={styles.myPoints}>x{userPoints}</Text>
@@ -54,47 +56,37 @@ const Shop: React.FC = () => {
         <View style={styles.photoContainer}>
           <View style={styles.leftSide}>
             <View style={styles.photoWithPoints}>
-              {/* <Image
-                source={{ uri: "https://via.placeholder.com/100" }}
-                style={styles.smallPhoto}
-              /> */}
-              {/* <Question1 //might have to consolidate this into single component
-                width={100}
-                height={100}
-              /> */}
               <PrizeSVG
                 prizeNum={3}
                 attendeePoints={userPoints}
                 token={token}
               />
               <Image
-                source={require("../assets/token.png")}
+                source={require("../assets/pixel.png")}
                 style={styles.tokenImage}
               />
               <Text style={styles.points}>x{50}</Text>
             </View>
             <View style={styles.photoWithPoints}>
-              {/* <Question2 width={100} height={100} /> */}
               <PrizeSVG
                 prizeNum={2}
                 attendeePoints={userPoints}
                 token={token}
               />
               <Image
-                source={require("../assets/token.png")}
+                source={require("../assets/pixel.png")}
                 style={styles.tokenImage}
               />
               <Text style={styles.points}>x{35}</Text>
             </View>
             <View style={styles.photoWithPoints}>
-              {/* <Question3 width={100} height={100} /> */}
               <PrizeSVG
                 prizeNum={1}
                 attendeePoints={userPoints}
                 token={token}
               />
               <Image
-                source={require("../assets/token.png")}
+                source={require("../assets/pixel.png")}
                 style={styles.tokenImage}
               />
               <Text style={styles.points}>x{25}</Text>

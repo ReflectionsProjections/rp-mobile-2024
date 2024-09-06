@@ -35,7 +35,7 @@ const EventModal = ({ title, location, time, points, description }) => {
             </View> */}
           <View style={styles.infoItem}>
             <Image
-              source={require("../assets/token.png")}
+              source={require("../assets/pixel.png")}
               style={styles.tokenImage}
             ></Image>
             <Text style={styles.infoText}> x{points}</Text>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     paddingRight: 25,
     color: "black",
     fontFamily: "Kufam_700Bold",
-    paddingRight: 25
+    paddingRight: 25,
   },
   info: {
     flexDirection: "row",

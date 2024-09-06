@@ -56,7 +56,7 @@ const EventCard = ({ name, time, location, description, points }) => {
               </View>
               <View style={styles.infoItem}>
                 <Image
-                  source={require("../assets/token.png")}
+                  source={require("../assets/pixel.png")}
                   style={styles.tokenImage}
                 ></Image>
                 <Text style={styles.infoText}> x{points}</Text>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   tokenImage: {
-    width: 20, 
+    width: 20,
     height: 20,
   },
   description: {
