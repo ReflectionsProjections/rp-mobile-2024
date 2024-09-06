@@ -37,8 +37,6 @@ const Shop: React.FC = () => {
     return <AppLoading />;
   }
   
-  console.log(require("../assets/pixel.png"))
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -89,7 +87,7 @@ const Shop: React.FC = () => {
                 source={require("../assets/pixel.png")}
                 style={styles.tokenImage}
               />
-              <Text style={styles.points}>x{25}</Text>
+              <Text style={styles.points}>x{20}</Text>
             </View>
           </View>
           <View style={styles.progressBarContainer}>

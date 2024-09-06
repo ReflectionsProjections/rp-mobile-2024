@@ -5,8 +5,7 @@ import { StyledText } from "./Text";
 import Question1 from "../assets/SVGs/myRP/blue-question.svg";
 import Question2 from "../assets/SVGs/myRP/purple-question.svg";
 import Question3 from "../assets/SVGs/myRP/pink-question.svg";
-import Diamond from "../assets/SVGs/myRP/diamond.svg";
-import Sticker from "../assets/SVGs/myRP/sticker.svg";
+import Button from "../assets/SVGs/myRP/button.svg";
 import ToteBag from "../assets/SVGs/myRP/tote-bag.svg";
 import Cap from "../assets/SVGs/myRP/cap.svg";
 
@@ -27,8 +26,8 @@ const FoodWaveSVG: React.FC<PrizeSVGProps> = ({
     if (token) {
       // Map SVGs based on prizeNum and attendeePoints
       const svgMap: { [key: number]: JSX.Element } = {
-        1: <Sticker width={size} height={size}/>,
-        2: attendeePoints >= 25 ? <ToteBag width={size} height={size}/> : <Question2 width={size} height={size}/>,
+        1: <Button width={size} height={size}/>,
+        2: attendeePoints >= 20 ? <ToteBag width={size} height={size}/> : <Question2 width={size} height={size}/>,
         3: attendeePoints >= 35 ? <Cap width={size} height={size}/> : <Question3 width={size} height={size}/>,
       };
       return svgMap[prizeNum] || <Text>No SVG available</Text>;
