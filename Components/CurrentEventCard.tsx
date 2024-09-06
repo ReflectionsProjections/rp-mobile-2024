@@ -18,7 +18,7 @@ import CustomModal from "./CustomModal"; // Import the custom modal
 // import AppLoading from "expo-app-loading";
 import Colors from "../constants/Colors";
 
-import {formatTime} from "../navigation/DayEvent";
+import { formatTime } from "../navigation/DayEvent";
 
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 
@@ -52,9 +52,9 @@ const CurrentEventCard = ({
   const start = new Date(startTime);
   const end = new Date(endTime);
 
-//   console.log("CURRENT", currentTime);
-//   console.log("START", start);
-//   console.log("END", end);
+  //   console.log("CURRENT", currentTime);
+  //   console.log("START", start);
+  //   console.log("END", end);
   // Check if current time is within the event's duration
   const isOngoing = currentTime >= start && currentTime <= end;
 
@@ -78,7 +78,7 @@ const CurrentEventCard = ({
               </View>
               <View style={styles.infoItem}>
                 <Image
-                  source={require("../assets/token.png")}
+                  source={require("../assets/pixel.png")}
                   style={styles.tokenImage}
                 ></Image>
                 <Text style={styles.infoText}> x{points}</Text>

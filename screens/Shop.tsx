@@ -9,11 +9,9 @@ import {
 } from "@expo-google-fonts/press-start-2p";
 import AppLoading from "expo-app-loading";
 
-import Question1 from "../assets/SVGs/question_1.svg"
-import Question2 from "../assets/SVGs/purple-question_1.svg"
-import Question3 from "../assets/SVGs/pink-question_1.svg"
+import PrizeSVG from "../Components/PrizeSVG";
 
-import VerticalProgressBar from '../Components/VerticalProgressBar';
+import VerticalProgressBar from "../Components/VerticalProgressBar";
 import { getPoints } from "../api/getPoints";
 
 const Shop: React.FC = () => {
@@ -31,14 +29,14 @@ const Shop: React.FC = () => {
       } catch (error) {
         console.error("error fetching points for user:", error);
       }
-    }
+    };
     fetchUserPoints(); // Fetch points when component mounts
   }, [token]); // Empty dependency array means this effect runs once on mount
 
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-
+  
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
@@ -48,7 +46,7 @@ const Shop: React.FC = () => {
         <View style={styles.pointsContainer}>
           <Text style={styles.points}>Your Points:</Text>
           <Image
-            source={require("../assets/token.png")}
+            source={require("../assets/pixel.png")}
             style={styles.tokenImage}
           />
           <Text style={styles.myPoints}>x{userPoints}</Text>
@@ -56,41 +54,40 @@ const Shop: React.FC = () => {
         <View style={styles.photoContainer}>
           <View style={styles.leftSide}>
             <View style={styles.photoWithPoints}>
-              {/* <Image
-                source={{ uri: "https://via.placeholder.com/100" }}
-                style={styles.smallPhoto}
-              /> */}
-              <Question1 //might have to consolidate this into single component
-                width={100}
-                height={100}
+              <PrizeSVG
+                prizeNum={3}
+                attendeePoints={userPoints}
+                token={token}
               />
               <Image
-                source={require("../assets/token.png")}
+                source={require("../assets/pixel.png")}
                 style={styles.tokenImage}
               />
               <Text style={styles.points}>x{50}</Text>
             </View>
             <View style={styles.photoWithPoints}>
-              <Question2
-                width={100}
-                height={100}
+              <PrizeSVG
+                prizeNum={2}
+                attendeePoints={userPoints}
+                token={token}
               />
               <Image
-                source={require("../assets/token.png")}
+                source={require("../assets/pixel.png")}
                 style={styles.tokenImage}
               />
               <Text style={styles.points}>x{35}</Text>
             </View>
             <View style={styles.photoWithPoints}>
-            <Question3
-              width={100}
-              height={100}
+              <PrizeSVG
+                prizeNum={1}
+                attendeePoints={userPoints}
+                token={token}
               />
               <Image
-                source={require("../assets/token.png")}
+                source={require("../assets/pixel.png")}
                 style={styles.tokenImage}
               />
-              <Text style={styles.points}>x{25}</Text>
+              <Text style={styles.points}>x{20}</Text>
             </View>
           </View>
           <View style={styles.progressBarContainer}>
@@ -155,7 +152,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginBottom: 10,
-    // backgroundColor: 'red'
+    // backgroundColor: 'green'
   },
   smallPhoto: {
     width: 100,
