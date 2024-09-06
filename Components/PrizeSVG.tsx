@@ -15,7 +15,7 @@ interface PrizeSVGProps {
   token: string;
 }
 
-const FoodWaveSVG: React.FC<PrizeSVGProps> = ({
+const PrizeSVG: React.FC<PrizeSVGProps> = ({
   prizeNum,
   attendeePoints,
   token,
@@ -44,4 +44,4 @@ const FoodWaveSVG: React.FC<PrizeSVGProps> = ({
   return getSVG();
 };
 
-export default FoodWaveSVG;
+export default PrizeSVG;
