@@ -26,9 +26,10 @@ const { width, height } = Dimensions.get("window");
 
 const Login: React.FC<LoginProps> = ({ navigation }) => {
   const token = useAppSelector((state: RootState) => state.token);
-
+  const roles = useAppSelector((state: RootState) => state.roles);
+  
   useEffect(() => {
-    if (token) {
+    if (token && roles.includes('USER')) {
       navigation.navigate("Main");
     }
   }, [token, navigation]);
