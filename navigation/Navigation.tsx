@@ -103,7 +103,7 @@ const AppNavigator: React.FC = () => {
         component={Events}
         options={{ tabBarLabel: () => null }}
       />
-      {roles.includes('STAFF') ? (
+      {roles.includes('STAFF') || roles.includes('ADMIN') ? (
         <Tab.Screen
         name="AdminScanner"
         component={AdminScanner}
