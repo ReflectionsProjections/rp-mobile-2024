@@ -68,7 +68,6 @@ const App = (props) => {
       const searchParams = new URL(event.url).searchParams;
       const token = searchParams.get('token');
       if (token) {
-        dispatch(setToken(token))
         const decoded = decodeToken(token);
         console.log(decoded.roles);
         
@@ -82,6 +81,7 @@ const App = (props) => {
           setDeepLinkHandled(false);
         } else {
           console.log('dispatched')
+          dispatch(setToken(token));
           dispatch(setRoles(decoded.roles));
           setDeepLinkHandled(true);
         }
