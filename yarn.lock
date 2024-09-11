@@ -11637,6 +11637,15 @@ expo@latest:
   languageName: node
   linkType: hard
 
+"react-icons@npm:^5.3.0":
+  version: 5.3.0
+  resolution: "react-icons@npm:5.3.0"
+  peerDependencies:
+    react: "*"
+  checksum: 3aa5f50e05aafc6d31e0d995fe0d98560069aa88717b24ce8aaa082a7e7b20ca95e1e19d847ed6e52d658a5a30e15826af20d7554bf993a743edd55586db62e3
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.12.0 || ^17.0.0 || ^18.0.0, react-is@npm:^18.0.0":
   version: 18.3.1
   resolution: "react-is@npm:18.3.1"
@@ -11821,6 +11830,16 @@ expo@latest:
     react-native: "*"
     react-native-pager-view: "*"
   checksum: bd287e5543881aa662ee55418a3bd5dacb25033425a9fcb0fff21c3a3b96f956af1a77cd9bab4e7a8e94590080a5d8e3cb99cfa8613b19bf6da24bfc9b4942d4
+  languageName: node
+  linkType: hard
+
+"react-native-toast-message@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "react-native-toast-message@npm:2.2.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: b286b8d5ca0f21737c2e0a8e9c2d6dab2c06a3895335aa541c69eeb42d526cc6f3951069e59d8d346d3e6cafb8feaa450c35b0efe7c3d51ff81351d1477e71eb
   languageName: node
   linkType: hard
 
@@ -12403,6 +12422,7 @@ expo@latest:
     jwt-decode: ^4.0.0
     lucide-react-native: ^0.381.0
     react: 18.2.0
+    react-icons: ^5.3.0
     react-native: 0.74.2
     react-native-gesture-handler: ^2.16.0
     react-native-modal: ^13.0.1
@@ -12416,6 +12436,7 @@ expo@latest:
     react-native-svg-transformer: ^1.5.0
     react-native-svg-uri: ^0.0.1
     react-native-tab-view: ^3.5.2
+    react-native-toast-message: ^2.2.0
     react-native-webview: ^13.12.0
     react-navigation: ^5.0.0
     react-redux: ^9.1.2
