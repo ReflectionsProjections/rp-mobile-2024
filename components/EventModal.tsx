@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   infoItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 5,
     marginRight: 8,
     // backgroundColor: 'red'
   },

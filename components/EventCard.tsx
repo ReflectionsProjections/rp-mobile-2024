@@ -114,7 +114,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     // backgroundColor: 'red',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    marginTop: 2
   },
   infoItem: {
     flexDirection: "row",
