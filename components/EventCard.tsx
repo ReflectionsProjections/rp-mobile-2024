@@ -47,7 +47,7 @@ const EventCard = ({ name, time, location, description, points }) => {
             </Text>
             <View style={styles.info}>
               <View style={styles.infoItem}>
-                <EvilIcons name="location" size={26} color={Colors.DARK_BLUE} />
+                <EvilIcons name="location" size={26} color={Colors.DARK_BLUE} style={{ margin: 0, padding: 0}} />
                 <Text style={styles.infoText}>{location}</Text>
               </View>
               <View style={styles.infoItem}>
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginTop: 30,
     maxWidth: 320,
+    // backgroundColor: 'green'
   },
   name: {
     fontSize: 20,
@@ -110,12 +111,16 @@ const styles = StyleSheet.create({
     fontFamily: "Kufam_700Bold",
   },
   info: {
+    flex: 1,
     flexDirection: "row",
+    // backgroundColor: 'red',
+    flexWrap: 'wrap'
   },
   infoItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginHorizontal: 8,
+    marginRight: 10,
+    // backgroundColor: 'purple'
   },
   infoText: {
     color: Colors.DARK_BLUE,

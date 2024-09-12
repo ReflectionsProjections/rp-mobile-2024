@@ -15,7 +15,7 @@ import {
 } from "@expo-google-fonts/kufam";
 import CustomModal from "./CustomModal"; // Import the custom modal
 
-// import AppLoading from "expo-app-loading";
+import AppLoading from "expo-app-loading";
 import Colors from "../constants/Colors";
 
 import { formatTime } from "../navigation/DayEvent";
@@ -41,9 +41,9 @@ const CurrentEventCard = ({
     Kufam_700Bold_Italic,
   });
 
-  //   if (!fontsLoaded) {
-  //     return <AppLoading />;
-  //   }
+    if (!fontsLoaded) {
+      return <AppLoading />;
+    }
 
   // Get the current time
   const currentTime = new Date();
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   infoItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginHorizontal: 8,
+    marginRight: 10,
   },
   infoText: {
     color: Colors.DARK_BLUE,

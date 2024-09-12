@@ -35,12 +35,14 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
   }, [token, navigation]);
 
   const handleLoginPress = () => {
+    navigation.navigate("Main");
     WebBrowser.openAuthSessionAsync(
       `${authUrl}?redirect_uri=${redirectURL}`,
       redirectURL
     )
       .then((result) => {
         if (result.type === "success") {
+          console.log("opening url for log in ")
           Linking.openURL(result.url);
         }
       })

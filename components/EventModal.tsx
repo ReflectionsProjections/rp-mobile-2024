@@ -28,11 +28,6 @@ const EventModal = ({ title, location, time, points, description }) => {
             <EvilIcons name="clock" size={26} color={Colors.DARK_BLUE} />
             <Text style={styles.infoText}>{time}</Text>
           </View>
-          {/* <View style={styles.infoItem}>
-              <View style={styles.badge}>
-                <Text style={styles.badgeText}>{points} pts</Text>
-              </View>
-            </View> */}
           <View style={styles.infoItem}>
             <Image
               source={require("../assets/pixel.png")}
@@ -66,19 +61,21 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 20,
     // marginLeft: 20,
-    paddingRight: 25,
+    // paddingRight: 25,
     color: "black",
     fontFamily: "Kufam_700Bold",
-    paddingRight: 25,
   },
   info: {
     flexDirection: "row",
+    // backgroundColor: 'green',
+    flexWrap: 'wrap'
   },
   infoItem: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 10,
-    marginRight: 16,
+    marginRight: 8,
+    // backgroundColor: 'red'
   },
   infoText: {
     color: Colors.DARK_BLUE,
