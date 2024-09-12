@@ -19,6 +19,14 @@ export const formatTime = (timestamp) => {
   return formattedTime;
 };
 
+export const formatLocation = (location) => {
+  if (location.includes("Atrium")) {
+    const locationWords = location.split(' ');
+    return `${locationWords[1]} ${locationWords[2]}`
+  }
+  return location
+}
+
 const DayEvent = ({ day, events }) => {
   return (
     <View style={styles.container}>
@@ -31,7 +39,7 @@ const DayEvent = ({ day, events }) => {
             key={event.id}
             name={event.name}
             time={formatTime(event.startTime)}
-            location={event.location}
+            location={formatLocation(event.location)}
             description={event.description}
             points={event.points}
           />
