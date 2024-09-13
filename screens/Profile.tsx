@@ -48,6 +48,9 @@ const Profile: React.FC = () => {
     if (token && !attendee) {
       dispatch(getAttendee(token));
     }
+    if (token && !qrcode) {
+      getQRCode(token, setQRCode);
+    }
   }, [token, attendee, dispatch]);
 
   useFocusEffect(() => {
@@ -61,7 +64,7 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(async () => {await getQRCode(token, setQRCode)}, 18000 + (Math.random() * 5000));
     //return () => clearInterval(interval);
-  }, [token]);
+  });
 
   const handleLogOut = () => {
     console.log("logging out")
