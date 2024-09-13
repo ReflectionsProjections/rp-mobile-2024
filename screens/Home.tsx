@@ -9,6 +9,7 @@ import { RootState } from "../redux/store";
 import CurrentEventCard from "../Components/CurrentEventCard";
 import Colors from "../constants/Colors";
 import { Text } from "@gluestack-ui/themed";
+import Notification from "../Notification";
 
 const { width, height } = Dimensions.get("window");
 
@@ -70,6 +71,7 @@ const Home: React.FC = () => {
         )}
         
       </View>
+      <Notification/>
     </SafeAreaView>
   );
 };
