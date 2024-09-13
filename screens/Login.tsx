@@ -17,7 +17,7 @@ import { useState } from "react";
 import ScreenImage from "../assets/SVGs/login/LoginScreen.svg";
 
 const authUrl = "https://api.reflectionsprojections.org/auth/login/mobile/";
-const redirectURL = "reflectionsprojections://Main";
+const redirectURL = "reflectionsprojections://--/Main";
 
 interface LoginProps {
   navigation: NavigationProp<ParamListBase>;
@@ -32,7 +32,10 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
   
   useEffect(() => {
     if (token && roles.includes('USER')) {
+      console.log("logging in again")
       setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
     }
   }, [token, roles, navigation]);
 
@@ -47,6 +50,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
         .then((result) => {
           if (result.type === "success") {
             Linking.openURL(result.url);
+            navigation.navigate("Main");
           }
         })
         .catch((err) => {

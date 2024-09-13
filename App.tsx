@@ -91,7 +91,7 @@ const App = (props) => {
             type: "error",
             text1: "No user found!",
             text2: "Please register on the R|P website!",
-            topOffset: 30,
+            topOffset: 50,
           });
           setDeepLinkHandled(false);
         } else {
