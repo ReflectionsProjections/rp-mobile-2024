@@ -69,9 +69,11 @@ const Home: React.FC = () => {
             <Text style={styles.noEventText}>No current or upcoming events</Text>
           </View>
         )}
-        
-      </View>
-      <Notification/>
+
+        <View style={styles.cardContainer}>
+          <Notification/>
+        </View>
+        </View>
     </SafeAreaView>
   );
 };
