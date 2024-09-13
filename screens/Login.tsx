@@ -41,6 +41,7 @@ const Login: React.FC<LoginProps> = ({ navigation }) => {
     )
       .then((result) => {
         if (result.type === "success") {
+          console.log("opening url for log in ")
           Linking.openURL(result.url);
         }
       })
