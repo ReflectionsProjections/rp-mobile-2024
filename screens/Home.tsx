@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Dimensions, View, StyleSheet, ActivityIndicator } from "react-native";
 import { useFonts, PressStart2P_400Regular } from "@expo-google-fonts/press-start-2p";
@@ -21,20 +21,29 @@ const Home: React.FC = () => {
   const [currNextEvent, setCurrNextEvent] = useState(null);
   const [loading, setLoading] = useState(true); // To track loading state
 
-  useFocusEffect(() => {
-    const fetchCurrNext = async () => {
-      try {
-        const event = await getCurrentOrNext(token);
-        setCurrNextEvent(event);
-      } catch (error) {
-        console.error("error fetching current/next event:", error);
-      } finally {
-        setLoading(false); // Stop loading once the fetch is complete
-      }
-    };
+  const loaded = useRef(false)
 
-    fetchCurrNext();
-  });
+  useFocusEffect(
+    useCallback(() => {
+      if (!loaded.current) {
+        const fetchEvents = async () => {
+          try {
+            const event = await getCurrentOrNext(token);
+            setCurrNextEvent(event); // Update eventsData state with fetched data
+          } catch (error) {
+            console.error("Error fetching events:", error);
+          } finally {
+            setLoading(false)
+          }
+        };
+        fetchEvents();
+        loaded.current = true;
+      }
+      return () => {
+        loaded.current = false;
+      }
+    }, [])
+  ); // Empty dependency array ensures useEffect runs only once
 
   if (loading) {
     return (

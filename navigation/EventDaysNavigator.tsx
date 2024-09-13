@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import DayEvent from "./DayEvent";
 import Colors from "../constants/Colors";
@@ -16,23 +16,31 @@ const WeekTab = createMaterialTopTabNavigator();
 
 const EventDaysNavigator = () => {
   const [eventsData, setEventsData] = useState([]);
+  const loaded = useRef(false)
 
-  useFocusEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch(eventsURL);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setEventsData(data); // Update eventsData state with fetched data
-      } catch (error) {
-        console.error("Error fetching events:", error);
+  useFocusEffect(
+    useCallback(() => {
+      if (!loaded.current) {
+        const fetchEvents = async () => {
+          try {
+            const response = await fetch(eventsURL);
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            const data = await response.json();
+            setEventsData(data); // Update eventsData state with fetched data
+          } catch (error) {
+            console.error("Error fetching events:", error);
+          }
+        };
+        fetchEvents();
+        loaded.current = true;
       }
-    };
-
-    fetchEvents();
-  }); // Empty dependency array ensures useEffect runs only once
+      return () => {
+        loaded.current = false;
+      }
+    }, [])
+  ); // Empty dependency array ensures useEffect runs only once
 
   const filterEventsByDay = (day) => {
     return eventsData.filter((event) => {

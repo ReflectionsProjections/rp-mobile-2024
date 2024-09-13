@@ -59,7 +59,7 @@ const Profile: React.FC = () => {
   })
 
   useEffect(() => {
-    const interval = setInterval(async () => {await getQRCode(token, setQRCode)}, 20000);
+    const interval = setInterval(async () => {await getQRCode(token, setQRCode)}, 18000 + (Math.random() * 5000));
     //return () => clearInterval(interval);
   }, [token]);
 
