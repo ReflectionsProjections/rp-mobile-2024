@@ -62,9 +62,8 @@ const Profile: React.FC = () => {
   })
 
   useEffect(() => {
-    const interval = setInterval(async () => {await getQRCode(token, setQRCode)}, 18000 + (Math.random() * 5000));
-    //return () => clearInterval(interval);
-  });
+    setInterval(async () => {await getQRCode(token, setQRCode)}, 18000 + (Math.random() * 5000));
+  }, []);
 
   const handleLogOut = () => {
     console.log("logging out")
