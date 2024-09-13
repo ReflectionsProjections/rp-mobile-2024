@@ -128,7 +128,7 @@ const Profile: React.FC = () => {
     <SafeAreaView style={styles.safeArea}>
       <Background style={styles.background} height={height} width={width} preserveAspectRatio="none"/>
       <Logout style={styles.logout} width={'35%'} height={'5%'} preserveAspectRatio="none" onPress={handleLogOut}/>
-      {attendee && qrcode &&
+      {(attendee && qrcode) ? (
       <View style={styles.qrContainer}>
         <View style={styles.qrFrameContainer}>
           {foodWave == 1 ? (
@@ -145,7 +145,12 @@ const Profile: React.FC = () => {
         </View>
         <StyledText variant="profileText" color={Colors.WHITE} style={styles.profileText}>{attendee.name}</StyledText>
         <FoodWaveSVG foodWave={foodWave} />
-      </View>}
+      </View>):
+      (
+        <View style={styles.qrContainer}>
+          <StyledText variant="profileText" color={Colors.WHITE} fontSize={24}>Please register on the R|P Website!</StyledText>
+        </View>
+      )}
     </SafeAreaView>
   );
 };

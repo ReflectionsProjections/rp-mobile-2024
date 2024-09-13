@@ -3,7 +3,7 @@ import axios from "axios";
 export const postCheckIn = async(token, eventId, qrCode) => {
     const payload = { eventId, qrCode }
     try {
-        const response = await axios.post('https://api.reflectionsprojections.org/staff/scan/', payload, {
+        const response = await axios.post('https://api.reflectionsprojections.org/scan/staff/', payload, {
             headers: {
                 Authorization: token
             }

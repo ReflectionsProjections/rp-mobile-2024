@@ -47,7 +47,7 @@ const Shop: React.FC = () => {
           <Text style={styles.points}>Your Points:</Text>
           <Image
             source={require("../assets/pixel.png")}
-            style={styles.tokenImage}
+            style={styles.tokenImage2}
           />
           <Text style={styles.myPoints}>x{userPoints}</Text>
         </View>
@@ -119,6 +119,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 20,
+    
   },
   points: {
     fontSize: 17,
@@ -132,10 +133,16 @@ const styles = StyleSheet.create({
     fontFamily: "PressStart2P_400Regular",
     color: Colors.YELLOW,
   },
+  tokenImage2: {
+    width: 30,
+    height: 30,
+    marginRight: 5,
+  },
   tokenImage: {
     width: 30,
     height: 30,
     marginRight: 5,
+    marginLeft: 10
   },
   photoContainer: {
     flex: 1,
