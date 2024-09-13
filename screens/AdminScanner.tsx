@@ -67,10 +67,8 @@ const AdminScanner: React.FC = () => {
                              <ButtonText color={Colors.WHITE}>Scanned!</ButtonText>
                             </StyledButton> 
                         ) : (
-                            <StyledButton styleVariant="scan"
-                            onPress={() => setScanned(true)}
-                            >
-                            <ButtonText color={Colors.WHITE}>Tap to Scan Again </ButtonText>
+                            <StyledButton styleVariant="scan">
+                            <ButtonText color={Colors.WHITE}>Ready to Scan Again </ButtonText>
                             </StyledButton> 
                         ) 
                         }

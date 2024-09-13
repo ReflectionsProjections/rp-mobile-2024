@@ -24,7 +24,7 @@ const EventDropdown: React.FC<EventDropdownProps> = ({ token, onEventSelect }) =
         const eventData = await getEvents(token);
         setEvents([{
           eventId: 'checkin',
-          name: 'checkin'
+          name: 'Check In'
         }, ...eventData]);
       } catch (error) {
         console.error('Error fetching events:', error);
