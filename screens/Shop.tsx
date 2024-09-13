@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { RootState } from "../redux/store";
 import { useAppSelector } from "../redux/hooks";
 import { SafeAreaView, View, Text, Image, StyleSheet } from "react-native";
@@ -21,7 +22,7 @@ const Shop: React.FC = () => {
     PressStart2P_400Regular,
   });
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const fetchUserPoints = async () => {
       try {
         const points = await getPoints(token);
@@ -30,8 +31,9 @@ const Shop: React.FC = () => {
         console.error("error fetching points for user:", error);
       }
     };
+    console.log("points")
     fetchUserPoints(); // Fetch points when component mounts
-  }, [token]); // Empty dependency array means this effect runs once on mount
+  }); // Empty dependency array means this effect runs once on mount
 
   if (!fontsLoaded) {
     return <AppLoading />;

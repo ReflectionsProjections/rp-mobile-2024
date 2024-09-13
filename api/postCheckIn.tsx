@@ -8,7 +8,7 @@ export const postCheckIn = async(token, eventId, qrCode) => {
                 Authorization: token
             }
         });
-        console.log('post CheckIn:', response.data)
+        //console.log('post CheckIn:', response.data)
     } catch (error) {
         console.log('Error posting check in:', error)
         alert(`Error with scanning QR Code!`);

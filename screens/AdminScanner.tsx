@@ -55,12 +55,19 @@ const AdminScanner: React.FC = () => {
                         barcodeScannerSettings={{barcodeTypes: ["qr"]}}
                     />
                     <View style={styles.buttonContainer}>
-                        {scanned && 
-                            <StyledButton styleVariant="scan"
+                        {(scanned) ? (
+                             <StyledButton styleVariant="scan_green"
                                 onPress={() => setScanned(false)}
                             >
-                                <ButtonText color={Colors.WHITE}>Tap to Scan Again </ButtonText>
+                             <ButtonText color={Colors.WHITE}>Scanned!</ButtonText>
                             </StyledButton> 
+                        ) : (
+                            <StyledButton styleVariant="scan"
+                            onPress={() => setScanned(true)}
+                            >
+                            <ButtonText color={Colors.WHITE}>Tap to Scan Again </ButtonText>
+                            </StyledButton> 
+                        ) 
                         }
                     </View>
                 </View>

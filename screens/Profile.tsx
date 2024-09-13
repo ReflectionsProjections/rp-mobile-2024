@@ -40,16 +40,16 @@ const Profile: React.FC = () => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
   const token = useAppSelector((state: RootState) => state.token);
   const attendee = useAppSelector((state: RootState) => state.attendee);
-  const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
 
   const [foodWave, setFoodWave] = useState(null);
+  const [qrcode, setQRCode] = useState(null);
 
   useEffect(() => {
     if (token && !attendee) {
       dispatch(getAttendee(token));
     }
     if (token && !qrcode) {
-      dispatch(getQRCode(token));
+      getQRCode(token, setQRCode);
     }
   }, [token, attendee, qrcode, dispatch]);
 
@@ -62,15 +62,9 @@ const Profile: React.FC = () => {
   }, [token])
 
   useEffect(() => {
-    const fetchQRCode = async() => {
-      if (token) {
-        await(dispatch(getQRCode(token)));
-      }
-    };
-    fetchQRCode();
-    const interval = setInterval(getQRCode, 20000);
-    return () => clearInterval(interval);
-  }, [token, dispatch]);
+    const interval = setInterval(async () => {await getQRCode(token, setQRCode)}, 20000);
+    //return () => clearInterval(interval);
+  }, [token]);
 
   const handleLogOut = () => {
     console.log("logging out")
