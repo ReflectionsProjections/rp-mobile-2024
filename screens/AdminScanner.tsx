@@ -12,6 +12,7 @@ import { postCheckIn } from "../api/postCheckIn";
 import { StyledButton } from "../Components/Buttons";
 import axios from "axios";
 import Colors from "../constants/Colors";
+import { postRPCheckIn } from "../api/postRPCheckIn";
 
 // import { Button, ButtonText, ButtonIcon, AddIcon } from "@gluestack-ui/themed";
 
@@ -31,7 +32,11 @@ const AdminScanner: React.FC = () => {
 
 	const handleBarCodeScanned = ({type, data}) => {
         setScanned(true);
-		postCheckIn(token, selectedEvent, data)
+        if (selectedEvent == 'checkin') {
+            postRPCheckIn(token, selectedEvent, data)
+        } else {
+            postCheckIn(token, selectedEvent, data)
+        }
 	};
 
     const handleSelectedEvent = (event) => {

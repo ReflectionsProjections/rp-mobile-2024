@@ -8,6 +8,7 @@ import {
   Inter_500Medium,
   Inter_700Bold,
 } from "@expo-google-fonts/inter";
+import { useFocusEffect } from "@react-navigation/native";
 
 const eventsURL = "https://api.reflectionsprojections.org/events/";
 
@@ -16,7 +17,7 @@ const WeekTab = createMaterialTopTabNavigator();
 const EventDaysNavigator = () => {
   const [eventsData, setEventsData] = useState([]);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await fetch(eventsURL);
@@ -31,7 +32,7 @@ const EventDaysNavigator = () => {
     };
 
     fetchEvents();
-  }, []); // Empty dependency array ensures useEffect runs only once
+  }); // Empty dependency array ensures useEffect runs only once
 
   const filterEventsByDay = (day) => {
     return eventsData.filter((event) => {

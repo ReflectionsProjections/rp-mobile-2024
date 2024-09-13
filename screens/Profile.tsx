@@ -17,7 +17,7 @@ import { useFonts, Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic } from 
 import FoodWaveSVG from "../Components/FoodWaveSVG"
 import { Dimensions } from "react-native";
 import { logout } from "../redux/actions";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 import QRFrame from '../assets/SVGs/qrcode/QRFrame1.svg'
@@ -48,18 +48,15 @@ const Profile: React.FC = () => {
     if (token && !attendee) {
       dispatch(getAttendee(token));
     }
-    if (token && !qrcode) {
-      getQRCode(token, setQRCode);
-    }
-  }, [token, attendee, qrcode, dispatch]);
+  }, [token, attendee, dispatch]);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const fetchFoodWave = async () => {
       const foodwave = await getFoodWave(token);
       setFoodWave(foodwave.foodwave);
     }
     fetchFoodWave();
-  }, [token])
+  })
 
   useEffect(() => {
     const interval = setInterval(async () => {await getQRCode(token, setQRCode)}, 20000);
