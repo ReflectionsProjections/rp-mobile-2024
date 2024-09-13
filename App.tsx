@@ -19,7 +19,7 @@ import { State } from "react-native-gesture-handler";
 import Toast, { ErrorToast } from "react-native-toast-message";
 
 const prefix = Linking.createURL("/");
-console.log(prefix);
+// console.log(prefix);
 
 type RootStackParamList = {
   Login: undefined,
@@ -69,6 +69,7 @@ const App = (props) => {
       const token = searchParams.get('token');
       if (token) {
         const decoded = decodeToken(token);
+        console.log("token", token, "decoded token", decoded);
         console.log(decoded.roles);
         
         if(!decoded.roles.includes('USER')) {
