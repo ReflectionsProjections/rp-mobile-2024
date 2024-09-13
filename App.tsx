@@ -2,16 +2,29 @@ import React, { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 import { GluestackUIProvider, Text, Box } from "@gluestack-ui/themed";
 import { config } from "@gluestack-ui/config"; // Optional if you want to use default theme
-import { NavigationContainer, useNavigation, useNavigationContainerRef } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  useNavigation,
+  useNavigationContainerRef,
+} from "@react-navigation/native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigation from "./navigation/Navigation";
 import Home from "./screens/Home";
 import * as Linking from "expo-linking";
 import Login from "./screens/Login";
-import { createStackNavigator, StackNavigationProp } from "@react-navigation/stack";
+import {
+  createStackNavigator,
+  StackNavigationProp,
+} from "@react-navigation/stack";
 import store, { RootState } from "./redux/store";
-import { Provider, useDispatch } from 'react-redux';
-import { setToken, clearTokens, AuthActionTypes, setRoles } from './redux/actions';
+import { Provider, useDispatch } from "react-redux";
+import {
+  setToken,
+  clearTokens,
+  AuthActionTypes,
+  setRoles,
+  setUserID,
+} from "./redux/actions";
 import { Dispatch } from "@reduxjs/toolkit";
 import { decodeToken } from "./api/decodeToken";
 import { useAppSelector } from "./redux/hooks";
@@ -22,9 +35,9 @@ const prefix = Linking.createURL("/");
 // console.log(prefix);
 
 type RootStackParamList = {
-  Login: undefined,
-  Main: undefined
-}
+  Login: undefined;
+  Main: undefined;
+};
 
 const Stack = createStackNavigator<RootStackParamList>();
 const { width, height } = Dimensions.get("window");
@@ -36,8 +49,8 @@ const App = (props) => {
   const dispatch = useDispatch<Dispatch<AuthActionTypes>>();
   const navigationRef = useNavigationContainerRef<RootStackParamList>();
   const linking = {
-    prefixes:[prefix],
-    config:{
+    prefixes: [prefix],
+    config: {
       screens: {
         Login: "Login",
         Main: "Main",
@@ -45,55 +58,57 @@ const App = (props) => {
         Camera: "camera",
         Events: "events",
         Profile: "profile",
-        Shop: "shop"
-      }
-    }
-  }
+        Shop: "shop",
+      },
+    },
+  };
   const toastConfig = {
     error: (props) => (
-      <ErrorToast {...props}
-        text1Style ={{
-          fontSize: 20
+      <ErrorToast
+        {...props}
+        text1Style={{
+          fontSize: 20,
         }}
         text2Style={{
-          fontSize: 15
+          fontSize: 15,
         }}
       />
-    )
-  }
-    
+    ),
+  };
+
   useEffect(() => {
-    const handleDeepLink = (event: { url: string; }) => {
+    const handleDeepLink = (event: { url: string }) => {
       console.log("handling deep link:", event.url);
       const searchParams = new URL(event.url).searchParams;
-      const token = searchParams.get('token');
+      const token = searchParams.get("token");
       if (token) {
         const decoded = decodeToken(token);
         console.log("token", token, "decoded token", decoded);
         console.log(decoded.roles);
-        
-        if(!decoded.roles.includes('USER')) {
+
+        if (!decoded.roles.includes("USER")) {
           Toast.show({
-            type: 'error',
-            text1: 'No user found!',
-            text2: 'Please register on the R|P website!',
-            topOffset: 30
-          })
+            type: "error",
+            text1: "No user found!",
+            text2: "Please register on the R|P website!",
+            topOffset: 30,
+          });
           setDeepLinkHandled(false);
         } else {
           console.log('dispatched')
           dispatch(setToken(token));
           dispatch(setRoles(decoded.roles));
+          dispatch(setUserID(decoded.userId));
           setDeepLinkHandled(true);
         }
       }
-    }
+    };
 
-    async function getInitialURL() {      
+    async function getInitialURL() {
       const initialURL = await Linking.getInitialURL();
       console.log("getting initial URL:", initialURL);
-      if (initialURL) handleDeepLink({url: initialURL});
-	  }
+      if (initialURL) handleDeepLink({ url: initialURL });
+    }
 
     getInitialURL();
     const listener = Linking.addEventListener("url", handleDeepLink);
@@ -101,37 +116,40 @@ const App = (props) => {
   }, [dispatch]);
 
   useEffect(() => {
-    if(isReady && deepLinkHandled) {
-      console.log('navigating');
-      navigationRef.navigate('Main');
+    if (isReady && deepLinkHandled) {
+      console.log("navigating");
+      navigationRef.navigate("Main");
     }
-  }, [isReady, deepLinkHandled])
+  }, [isReady, deepLinkHandled]);
 
   return (
     <>
       <GluestackUIProvider config={config}>
         <SafeAreaProvider>
-          <NavigationContainer 
+          <NavigationContainer
             linking={linking}
             ref={navigationRef}
             onReady={() => setIsReady(true)}
           >
-            <Stack.Navigator screenOptions={{ headerShown: false}} initialRouteName="Login">
-              <Stack.Screen name="Login" component={Login}/>
-              <Stack.Screen name="Main" component={Navigation}/>
+            <Stack.Navigator
+              screenOptions={{ headerShown: false }}
+              initialRouteName="Login"
+            >
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Main" component={Navigation} />
             </Stack.Navigator>
-          </NavigationContainer> 
+          </NavigationContainer>
         </SafeAreaProvider>
       </GluestackUIProvider>
-      <Toast config={toastConfig}/>
+      <Toast config={toastConfig} />
     </>
   );
-}
+};
 
 export default function AppWrapper() {
-    return (
-      <Provider store={store}>
-        <App />
-      </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 }
