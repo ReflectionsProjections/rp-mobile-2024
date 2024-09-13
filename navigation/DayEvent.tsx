@@ -4,18 +4,28 @@ import EventCard from "../Components/EventCard";
 import Colors from "../constants/Colors";
 
 export const formatTime = (timestamp) => {
-  const date = new Date(timestamp); // Create a Date object from the timestamp string
-  let hours = date.getUTCHours();
-  let minutes = date.getUTCMinutes();
-  const ampm = hours >= 12 ? "PM" : "AM"; // Determine if it's AM or PM
+  const date = new Date(timestamp);
 
-  hours = hours % 12;
-  hours = hours ? hours : 12; // Handle midnight (0 hours)
-  let minuteStr = minutes < 10 ? "0" + minutes : minutes; // Add leading zero for single digit minutes
+  // Format the time for 'America/Chicago' (Central Time) using the Intl API
+  const options = {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+    timeZone: "America/Chicago",
+  };
 
-  const formattedTime = hours + ":" + minuteStr + ampm; // Concatenate hours, minutes, and AM/PM
+  const formattedTime = new Intl.DateTimeFormat("en-US", options).format(date);
+
   return formattedTime;
 };
+
+export const formatLocation = (location) => {
+  if (location.includes("Atrium")) {
+    const locationWords = location.split(' ');
+    return `${locationWords[1]} ${locationWords[2]}`
+  }
+  return location
+}
 
 const DayEvent = ({ day, events }) => {
   return (
@@ -29,7 +39,7 @@ const DayEvent = ({ day, events }) => {
             key={event.id}
             name={event.name}
             time={formatTime(event.startTime)}
-            location={"location"}
+            location={formatLocation(event.location)}
             description={event.description}
             points={event.points}
           />

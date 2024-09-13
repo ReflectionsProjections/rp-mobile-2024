@@ -32,7 +32,7 @@ import { State } from "react-native-gesture-handler";
 import Toast, { ErrorToast } from "react-native-toast-message";
 
 const prefix = Linking.createURL("/");
-console.log(prefix);
+// console.log(prefix);
 
 type RootStackParamList = {
   Login: undefined;
@@ -82,8 +82,8 @@ const App = (props) => {
       const searchParams = new URL(event.url).searchParams;
       const token = searchParams.get("token");
       if (token) {
-        dispatch(setToken(token));
         const decoded = decodeToken(token);
+        console.log("token", token, "decoded token", decoded);
         console.log(decoded.roles);
 
         if (!decoded.roles.includes("USER")) {
@@ -95,7 +95,8 @@ const App = (props) => {
           });
           setDeepLinkHandled(false);
         } else {
-          console.log("dispatched");
+          console.log('dispatched')
+          dispatch(setToken(token));
           dispatch(setRoles(decoded.roles));
           dispatch(setUserID(decoded.userId));
           setDeepLinkHandled(true);

@@ -12,6 +12,7 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import { useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
 import Colors from "../constants/Colors";
+import { useState } from "react";
 
 import ScreenImage from "../assets/SVGs/login/LoginScreen.svg";
 
@@ -27,27 +28,32 @@ const { width, height } = Dimensions.get("window");
 const Login: React.FC<LoginProps> = ({ navigation }) => {
   const token = useAppSelector((state: RootState) => state.token);
   const roles = useAppSelector((state: RootState) => state.roles);
+  const [loggedIn, setLoggedIn] = useState(false);
   
   useEffect(() => {
     if (token && roles.includes('USER')) {
-      navigation.navigate("Main");
+      setLoggedIn(true);
     }
-  }, [token, navigation]);
+  }, [token, roles, navigation]);
 
   const handleLoginPress = () => {
-    WebBrowser.openAuthSessionAsync(
-      `${authUrl}?redirect_uri=${redirectURL}`,
-      redirectURL
-    )
-      .then((result) => {
-        if (result.type === "success") {
-          Linking.openURL(result.url);
-        }
-      })
-      .catch((err) => {
-        console.error("Failed to open URL:", err.message);
-        alert("Failed to open URL");
-      });
+    if(loggedIn) {
+      navigation.navigate("Main");
+    } else {
+      WebBrowser.openAuthSessionAsync(
+        `${authUrl}?redirect_uri=${redirectURL}`,
+        redirectURL
+      )
+        .then((result) => {
+          if (result.type === "success") {
+            Linking.openURL(result.url);
+          }
+        })
+        .catch((err) => {
+          console.error("Failed to open URL:", err.message);
+          alert("Failed to open URL");
+        });
+    }
   };
 
   return (

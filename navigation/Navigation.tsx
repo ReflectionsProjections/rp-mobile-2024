@@ -64,7 +64,7 @@ const AppNavigator: React.FC = () => {
             case "AdminScanner":
               return (
                 <MaterialCommunityIcons
-                  name="camera"
+                  name="qrcode-scan"
                   color={focused ? ACTIVE_COLOR : INACTIVE_COLOR}
                   size={35}
                 />

@@ -15,10 +15,10 @@ import {
 } from "@expo-google-fonts/kufam";
 import CustomModal from "./CustomModal"; // Import the custom modal
 
-// import AppLoading from "expo-app-loading";
+import AppLoading from "expo-app-loading";
 import Colors from "../constants/Colors";
 
-import { formatTime } from "../navigation/DayEvent";
+import { formatTime, formatLocation } from "../navigation/DayEvent";
 
 import EvilIcons from "@expo/vector-icons/EvilIcons";
 
@@ -41,9 +41,9 @@ const CurrentEventCard = ({
     Kufam_700Bold_Italic,
   });
 
-  //   if (!fontsLoaded) {
-  //     return <AppLoading />;
-  //   }
+    if (!fontsLoaded) {
+      return <AppLoading />;
+    }
 
   // Get the current time
   const currentTime = new Date();
@@ -70,7 +70,7 @@ const CurrentEventCard = ({
             <View style={styles.info}>
               <View style={styles.infoItem}>
                 <EvilIcons name="location" size={26} color={Colors.DARK_BLUE} />
-                <Text style={styles.infoText}>{location}</Text>
+                <Text style={styles.infoText}>{formatLocation(location)}</Text>
               </View>
               <View style={styles.infoItem}>
                 <EvilIcons name="clock" size={26} color={Colors.DARK_BLUE} />
@@ -98,7 +98,7 @@ const CurrentEventCard = ({
         visible={showModal}
         onClose={() => setShowModal(false)}
         title={name}
-        location={location}
+        location={formatLocation(location)}
         time={formatTime(start)}
         points={points}
         description={description}
@@ -134,11 +134,12 @@ const styles = StyleSheet.create({
   },
   info: {
     flexDirection: "row",
+    marginTop: 2
   },
   infoItem: {
     flexDirection: "row",
     alignItems: "center",
-    marginHorizontal: 8,
+    marginRight: 10,
   },
   infoText: {
     color: Colors.DARK_BLUE,
