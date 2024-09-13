@@ -34,6 +34,9 @@ const AdminScanner: React.FC = () => {
 		postCheckIn(token, selectedEvent, data)
 	};
 
+    const handleSelectedEvent = (event) => {
+        setSelectedEvent(event);
+    }
 	// mute={true} is used to mute the camera so we dont need mic permissions
 	// https://github.com/expo/expo/issues/27984 of course it is undocumented <333
 
@@ -43,7 +46,7 @@ const AdminScanner: React.FC = () => {
                 <View style = {styles.cameraContainer}>
                     {token && (
                         <View style = {styles.dropdownContainer}>
-                            <EventDropdown token={token} onEventSelect={setSelectedEvent}/>
+                            <EventDropdown token={token} onEventSelect={handleSelectedEvent}/>
                         </View>
                     )}
                     <CameraView 
