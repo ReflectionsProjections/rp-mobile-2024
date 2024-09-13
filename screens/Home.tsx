@@ -9,7 +9,7 @@ import { RootState } from "../redux/store";
 import CurrentEventCard from "../Components/CurrentEventCard";
 import Colors from "../constants/Colors";
 import { Text } from "@gluestack-ui/themed";
-import Notification from "../Notification";
+import { useFocusEffect } from "@react-navigation/native";
 
 const { width, height } = Dimensions.get("window");
 
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
   const [currNextEvent, setCurrNextEvent] = useState(null);
   const [loading, setLoading] = useState(true); // To track loading state
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const fetchCurrNext = async () => {
       try {
         const event = await getCurrentOrNext(token);
@@ -34,7 +34,7 @@ const Home: React.FC = () => {
     };
 
     fetchCurrNext();
-  }, [token]);
+  });
 
   if (loading) {
     return (
@@ -71,7 +71,6 @@ const Home: React.FC = () => {
         )}
         
       </View>
-      <Notification/>
     </SafeAreaView>
   );
 };

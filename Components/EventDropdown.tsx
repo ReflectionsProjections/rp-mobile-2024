@@ -22,7 +22,10 @@ const EventDropdown: React.FC<EventDropdownProps> = ({ token, onEventSelect }) =
     const fetchEvents = async () => {
       try {
         const eventData = await getEvents(token);
-        setEvents(eventData);
+        setEvents([{
+          eventId: 'checkin',
+          name: 'checkin'
+        }, ...eventData]);
       } catch (error) {
         console.error('Error fetching events:', error);
       }
@@ -43,7 +46,7 @@ const EventDropdown: React.FC<EventDropdownProps> = ({ token, onEventSelect }) =
           value: event.eventId,
         }))}
         style={pickerSelectStyles}
-        placeholder={{ label: 'Select an event...', value: null}}
+        placeholder={{ label: 'Select an event...', value: null }}
       />
     </View>
   );
@@ -83,7 +86,7 @@ const pickerSelectStyles = StyleSheet.create({
     color: Colors.WHITE,
     fontFamily: "Inter_500Medium",
     paddingRight: 12, // to ensure the text is never behind the icon
-    
+
   },
   inputAndroid: {
     fontSize: 20,

@@ -12,6 +12,7 @@ import { postCheckIn } from "../api/postCheckIn";
 import { StyledButton } from "../Components/Buttons";
 import axios from "axios";
 import Colors from "../constants/Colors";
+import { postRPCheckIn } from "../api/postRPCheckIn";
 
 // import { Button, ButtonText, ButtonIcon, AddIcon } from "@gluestack-ui/themed";
 
@@ -31,9 +32,16 @@ const AdminScanner: React.FC = () => {
 
 	const handleBarCodeScanned = ({type, data}) => {
         setScanned(true);
-		postCheckIn(token, selectedEvent, data)
+        if (selectedEvent == 'checkin') {
+            postRPCheckIn(token, selectedEvent, data)
+        } else {
+            postCheckIn(token, selectedEvent, data)
+        }
 	};
 
+    const handleSelectedEvent = (event) => {
+        setSelectedEvent(event);
+    }
 	// mute={true} is used to mute the camera so we dont need mic permissions
 	// https://github.com/expo/expo/issues/27984 of course it is undocumented <333
 
@@ -43,7 +51,7 @@ const AdminScanner: React.FC = () => {
                 <View style = {styles.cameraContainer}>
                     {token && (
                         <View style = {styles.dropdownContainer}>
-                            <EventDropdown token={token} onEventSelect={setSelectedEvent}/>
+                            <EventDropdown token={token} onEventSelect={handleSelectedEvent}/>
                         </View>
                     )}
                     <CameraView 
@@ -52,12 +60,19 @@ const AdminScanner: React.FC = () => {
                         barcodeScannerSettings={{barcodeTypes: ["qr"]}}
                     />
                     <View style={styles.buttonContainer}>
-                        {scanned && 
-                            <StyledButton styleVariant="scan"
+                        {(scanned) ? (
+                             <StyledButton styleVariant="scan_green"
                                 onPress={() => setScanned(false)}
                             >
-                                <ButtonText color={Colors.WHITE}>Tap to Scan Again </ButtonText>
+                             <ButtonText color={Colors.WHITE}>Scanned!</ButtonText>
                             </StyledButton> 
+                        ) : (
+                            <StyledButton styleVariant="scan"
+                            onPress={() => setScanned(true)}
+                            >
+                            <ButtonText color={Colors.WHITE}>Tap to Scan Again </ButtonText>
+                            </StyledButton> 
+                        ) 
                         }
                     </View>
                 </View>

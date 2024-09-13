@@ -16,6 +16,9 @@ const StyledButton = styled(Button,
                 }, 
                 scan: {
                     bg: Colors.DARK_BLUE
+                },
+                scan_green: {
+                    bg: "$green"
                 }
             },
         },

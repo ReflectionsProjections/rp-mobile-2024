@@ -17,7 +17,7 @@ import { useFonts, Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic } from 
 import FoodWaveSVG from "../Components/FoodWaveSVG"
 import { Dimensions } from "react-native";
 import { logout } from "../redux/actions";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 import QRFrame from '../assets/SVGs/qrcode/QRFrame1.svg'
@@ -40,37 +40,28 @@ const Profile: React.FC = () => {
   const navigation = useNavigation<ProfileScreenNavigationProp>();
   const token = useAppSelector((state: RootState) => state.token);
   const attendee = useAppSelector((state: RootState) => state.attendee);
-  const qrcode = useAppSelector((state: RootState) => state.qrCodeURL);
 
   const [foodWave, setFoodWave] = useState(null);
+  const [qrcode, setQRCode] = useState(null);
 
   useEffect(() => {
     if (token && !attendee) {
       dispatch(getAttendee(token));
     }
-    if (token && !qrcode) {
-      dispatch(getQRCode(token));
-    }
-  }, [token, attendee, qrcode, dispatch]);
+  }, [token, attendee, dispatch]);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     const fetchFoodWave = async () => {
       const foodwave = await getFoodWave(token);
       setFoodWave(foodwave.foodwave);
     }
     fetchFoodWave();
-  }, [token])
+  })
 
   useEffect(() => {
-    const fetchQRCode = async() => {
-      if (token) {
-        await(dispatch(getQRCode(token)));
-      }
-    };
-    fetchQRCode();
-    const interval = setInterval(getQRCode, 20000);
-    return () => clearInterval(interval);
-  }, [token, dispatch]);
+    const interval = setInterval(async () => {await getQRCode(token, setQRCode)}, 20000);
+    //return () => clearInterval(interval);
+  }, [token]);
 
   const handleLogOut = () => {
     console.log("logging out")
