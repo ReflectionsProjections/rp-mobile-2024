@@ -12,6 +12,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { Linking } from "react-native";
 import { redeemMerch } from "../api/redeemMerch";
 import { useAppSelector } from "../redux/hooks";
+import { RootState } from "../redux/store";
 
 // import { Button, ButtonText, ButtonIcon, AddIcon } from "@gluestack-ui/themed";
 
@@ -35,7 +36,7 @@ const CameraScanner: React.FC = () => {
     if (data != url) {
       alert(`Bar code with type ${type} and data ${data} has been scanned!`);
       setUrl(data);
-      const response = await redeemMerch(token, data, user_id);
+      redeemMerch(token, data, user_id);
       setScanned(true);
     }
   };
