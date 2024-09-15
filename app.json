@@ -3,7 +3,7 @@
     "scheme": "reflectionsprojections",
     "name": "rp-mobile-2024",
     "slug": "rp-mobile-2024",
-    "runtimeVersion": "1.6.0",
+    "runtimeVersion": "1.6.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -26,10 +26,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "org.reflectionsprojections.app"
     },
     "android": {
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
