@@ -31,7 +31,7 @@ export const formatLocation = (location) => {
 const DayEvent = ({ day, events }) => {
   return (
     <View style={styles.container}>
-      {!events ? (
+      {events ? (
         <ScrollView
           style={styles.scrollView}
           contentContainerStyle={styles.contentContainer}
