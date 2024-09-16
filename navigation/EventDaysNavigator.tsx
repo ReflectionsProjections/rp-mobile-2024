@@ -34,7 +34,7 @@ const EventDaysNavigator = () => {
             setEventsData(data); // Update eventsData state with fetched data
           } catch (error) {
             console.error("Error fetching events:", error);
-            setEventsData(null);
+            setEventsData([]);
           }
         };
         fetchEvents();
