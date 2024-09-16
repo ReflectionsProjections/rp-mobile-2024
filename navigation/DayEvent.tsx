@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, ScrollView, StyleSheet } from "react-native";
 import EventCard from "../Components/EventCard";
 import Colors from "../constants/Colors";
+import { StyledText } from "../Components/Text";
 
 export const formatTime = (timestamp) => {
   const date = new Date(timestamp);
@@ -30,10 +31,11 @@ export const formatLocation = (location) => {
 const DayEvent = ({ day, events }) => {
   return (
     <View style={styles.container}>
-      <ScrollView
-        style={styles.scrollView}
-        contentContainerStyle={styles.contentContainer}
-      >
+      {!events ? (
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.contentContainer}
+        >
         {events.map((event) => (
           <EventCard
             key={event.id}
@@ -44,7 +46,11 @@ const DayEvent = ({ day, events }) => {
             points={event.points}
           />
         ))}
+        <StyledText variant="footerText" color={Colors.WHITE} fontSize={16}>No more events for the day!</StyledText>
       </ScrollView>
+      ) : (
+        <StyledText variant="profileText" color={Colors.WHITE} fontSize={30} marginTop={30}>No events on this day</StyledText>
+      )}
     </View>
   );
 };
