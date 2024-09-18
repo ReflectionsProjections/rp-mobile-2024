@@ -14,6 +14,7 @@ import { RootState } from "../redux/store";
 import Colors from "../constants/Colors";
 import * as Linking from "expo-linking"
 import { StyledText } from "../Components/Text";
+import { useFonts, Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic, Kufam_600SemiBold } from "@expo-google-fonts/kufam";
 
 const authUrl = "https://api.reflectionsprojections.org/auth/login/mobile/";
 const redirectURL = "reflectionsprojections://--/Main";
@@ -26,7 +27,10 @@ const GuestLogin: React.FC<LoginProps> = ({ navigation }) => {
   const token = useAppSelector((state: RootState) => state.token);
   const roles = useAppSelector((state: RootState) => state.roles);
   const [loggedIn, setLoggedIn] = useState(false);
-  
+  let [fontsLoaded] = useFonts({
+    Kufam_600SemiBold,
+    Kufam_700Bold
+  });
   useEffect(() => {
     if (token && roles.includes('USER')) {
       setLoggedIn(true);
@@ -62,14 +66,14 @@ const GuestLogin: React.FC<LoginProps> = ({ navigation }) => {
           onPress={() => navigation.navigate("Main")}
           style={styles.button}
         >
-            <ButtonText color={Colors.DARK_BLUE} fontWeight={"bold"} fontSize={20}>Login as Guest</ButtonText>
+            <ButtonText color={Colors.DARK_BLUE} fontWeight={"bold"} fontSize={20} fontFamily="Kufam_600SemiBold">Login as Guest</ButtonText>
         </Button>
         <StyledText variant="footerText" color={Colors.WHITE} fontSize={16}>OR</StyledText>
         <Button 
           onPress={() => WebBrowser.openBrowserAsync('https://reflectionsprojections.org')}
           style={styles.button}
         >
-            <ButtonText color={Colors.DARK_BLUE} fontWeight={"bold"} fontSize={20}>Register!</ButtonText>
+            <ButtonText color={Colors.DARK_BLUE} fontWeight={"bold"} fontSize={20} fontFamily="Kufam_600SemiBold">Register!</ButtonText>
         </Button>
         <View style={styles.spacing} />
         <StyledText variant="footerText" color={Colors.WHITE} fontSize={32} marginBottom={-10}>Already registered?</StyledText>
@@ -77,7 +81,7 @@ const GuestLogin: React.FC<LoginProps> = ({ navigation }) => {
           onPress={handleLoginPress}
           style={styles.button}
         >
-            <ButtonText color={Colors.DARK_BLUE} fontWeight={"bold"} fontSize={20}>Login</ButtonText>
+            <ButtonText color={Colors.DARK_BLUE} fontWeight={"bold"} fontSize={20} fontFamily="Kufam_600SemiBold">Login</ButtonText>
         </Button>
       </View>
     </SafeAreaView>
