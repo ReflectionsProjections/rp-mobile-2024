@@ -9,13 +9,11 @@ export const getAttendee = (token: string) => {
               Authorization: token
             },
           });
-          
-          clone = response.clone();
 
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
-
+          
           const data = await response.json();
           dispatch(setAttendee(data));
         } catch (error) {

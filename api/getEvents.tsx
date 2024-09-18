@@ -4,7 +4,7 @@ export const getEvents = async (token: string) => {
     try{
         const response = await axios.get('https://api.reflectionsprojections.org/events/', {
             headers: {
-                Authorization: token
+                
             }
         });
         return response.data;
