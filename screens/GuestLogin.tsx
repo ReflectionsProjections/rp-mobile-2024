@@ -66,7 +66,7 @@ const GuestLogin: React.FC<LoginProps> = ({ navigation }) => {
           onPress={() => navigation.navigate("Main")}
           style={styles.button}
         >
-            <ButtonText color={Colors.DARK_BLUE} fontWeight={"bold"} fontSize={20} fontFamily="Kufam_600SemiBold">Login as Guest</ButtonText>
+            <ButtonText color={Colors.DARK_BLUE} fontWeight={"bold"} fontSize={20} fontFamily="Kufam_600SemiBold" >Login as Guest</ButtonText>
         </Button>
         <StyledText variant="footerText" color={Colors.WHITE} fontSize={16}>OR</StyledText>
         <Button 
