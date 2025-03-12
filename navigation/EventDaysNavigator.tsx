@@ -8,6 +8,9 @@ import {
   Inter_500Medium,
   Inter_700Bold,
 } from "@expo-google-fonts/inter";
+
+import { Kufam_400Regular, Kufam_700Bold, Kufam_700Bold_Italic, Kufam_600SemiBold } from "@expo-google-fonts/kufam";
+
 import { useFocusEffect } from "@react-navigation/native";
 
 const eventsURL = "https://api.reflectionsprojections.org/events/";
@@ -17,7 +20,7 @@ const WeekTab = createMaterialTopTabNavigator();
 const EventDaysNavigator = () => {
   const [eventsData, setEventsData] = useState([]);
   const loaded = useRef(false)
-
+  
   useFocusEffect(
     useCallback(() => {
       if (!loaded.current) {
@@ -31,6 +34,7 @@ const EventDaysNavigator = () => {
             setEventsData(data); // Update eventsData state with fetched data
           } catch (error) {
             console.error("Error fetching events:", error);
+            setEventsData([]);
           }
         };
         fetchEvents();
@@ -71,6 +75,8 @@ const EventDaysNavigator = () => {
     Inter_400Regular,
     Inter_500Medium,
     Inter_700Bold,
+    Kufam_600SemiBold,
+    Kufam_700Bold
   });
 
   if (!fontsLoaded) {

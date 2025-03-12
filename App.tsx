@@ -12,6 +12,7 @@ import Navigation from "./navigation/Navigation";
 import Home from "./screens/Home";
 import * as Linking from "expo-linking";
 import Login from "./screens/Login";
+import GuestLogin from "./screens/GuestLogin";
 import {
   createStackNavigator,
   StackNavigationProp,
@@ -36,6 +37,7 @@ const prefix = Linking.createURL("/");
 
 type RootStackParamList = {
   Login: undefined;
+  Guest: undefined;
   Main: undefined;
 };
 
@@ -53,6 +55,7 @@ const App = (props) => {
     config: {
       screens: {
         Login: "Login",
+        Guest: "Guest",
         Main: "Main",
         Home: "home",
         Camera: "camera",
@@ -78,13 +81,13 @@ const App = (props) => {
 
   useEffect(() => {
     const handleDeepLink = (event: { url: string }) => {
-      console.log("handling deep link:", event.url);
+      // console.log("handling deep link:", event.url);
       const searchParams = new URL(event.url).searchParams;
       const token = searchParams.get("token");
       if (token) {
         const decoded = decodeToken(token);
-        console.log("token", token, "decoded token", decoded);
-        console.log(decoded.roles);
+        //console.log("token", token, "decoded token", decoded);
+        //console.log(decoded.roles);
 
         if (!decoded.roles.includes("USER")) {
           Toast.show({
@@ -106,7 +109,7 @@ const App = (props) => {
 
     async function getInitialURL() {
       const initialURL = await Linking.getInitialURL();
-      console.log("getting initial URL:", initialURL);
+      //console.log("getting initial URL:", initialURL);
       if (initialURL) handleDeepLink({ url: initialURL });
     }
 
@@ -117,7 +120,7 @@ const App = (props) => {
 
   useEffect(() => {
     if (isReady && deepLinkHandled) {
-      console.log("navigating");
+      //console.log("navigating");
       navigationRef.navigate("Main");
     }
   }, [isReady, deepLinkHandled]);
@@ -136,6 +139,7 @@ const App = (props) => {
               initialRouteName="Login"
             >
               <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Guest" component={GuestLogin} />
               <Stack.Screen name="Main" component={Navigation} />
             </Stack.Navigator>
           </NavigationContainer>

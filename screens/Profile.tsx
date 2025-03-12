@@ -58,11 +58,15 @@ const Profile: React.FC = () => {
       const foodwave = await getFoodWave(token);
       setFoodWave(foodwave.foodwave);
     }
-    fetchFoodWave();
-  })
+    if (token) {
+      fetchFoodWave();
+    }
+  });
 
   useEffect(() => {
-    setInterval(async () => {await getQRCode(token, setQRCode)}, 18000 + (Math.random() * 5000));
+    if (token) {
+      setInterval(async () => {await getQRCode(token, setQRCode)}, 18000 + (Math.random() * 5000));
+    }
   }, []);
 
   const handleLogOut = () => {

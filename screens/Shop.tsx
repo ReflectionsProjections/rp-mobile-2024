@@ -31,8 +31,9 @@ const Shop: React.FC = () => {
         console.error("error fetching points for user:", error);
       }
     };
-    console.log("points")
-    fetchUserPoints(); // Fetch points when component mounts
+    if (token) {
+      fetchUserPoints();
+    }
   }); // Empty dependency array means this effect runs once on mount
 
   if (!fontsLoaded) {
